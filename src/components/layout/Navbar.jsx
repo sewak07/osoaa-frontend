@@ -57,7 +57,7 @@ export const Navbar = () => {
           <div className="flex items-center lg:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-brand-navy focus:outline-none"
+              className="p-2 text-slate-700 hover:text-black focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -67,12 +67,12 @@ export const Navbar = () => {
           {/* Brand Logo & Slogan */}
           <Link to="/" className="flex flex-col items-start group">
             <div className="flex items-center gap-1.5">
-              <span className="font-display font-black text-2xl sm:text-3xl tracking-wider text-brand-navy">
+              <span className="font-display font-black text-2xl sm:text-3xl tracking-wider text-black">
                 {brandName}
               </span>
               <span className="inline-block w-2 h-2 rounded-full bg-orange-500"></span>
             </div>
-            <span className="text-[10px] sm:text-xs text-brand-navy/80 font-semibold tracking-widest uppercase group-hover:text-orange-600 transition">
+            <span className="text-[10px] sm:text-xs text-black/80 font-semibold tracking-widest uppercase group-hover:text-orange-600 transition">
               {tagline}
             </span>
           </Link>
@@ -108,8 +108,8 @@ export const Navbar = () => {
               Creatine
             </Link>
             <Link
-              to="/shop?category=pre-workout"
-              className={`text-sm font-semibold transition pb-1 border-b-2 ${location.search.includes('category=pre-workout') ? 'text-orange-500 border-orange-500' : 'text-slate-700 border-transparent hover:text-orange-500'
+              to="/blog"
+              className={`text-sm font-semibold transition pb-1 border-b-2 ${location.pathname === '/blog' ? 'text-orange-500 border-orange-500' : 'text-slate-700 border-transparent hover:text-orange-500'
                 }`}
             >
               Blog & Recipes
@@ -183,7 +183,7 @@ export const Navbar = () => {
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center gap-2 p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 transition"
                 >
-                  <div className="w-7 h-7 rounded-full bg-brand-navy text-white font-bold flex items-center justify-center text-xs">
+                  <div className="w-7 h-7 rounded-full bg-black text-white font-bold flex items-center justify-center text-xs">
                     {user.name?.charAt(0).toUpperCase()}
                   </div>
                   <ChevronDown className="w-3.5 h-3.5 text-slate-600" />
@@ -191,7 +191,7 @@ export const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-navy hover:bg-navy-700 text-white text-xs font-bold shadow-sm transition"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold shadow-sm transition"
                 >
                   <User className="w-3.5 h-3.5" />
                   <span>Login</span>
@@ -214,7 +214,7 @@ export const Navbar = () => {
                     <Link
                       to="/admin"
                       onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm text-brand-navy hover:bg-slate-50 transition font-bold"
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-black hover:bg-slate-50 transition font-bold"
                     >
                       <LayoutDashboard className="w-4 h-4 text-orange-500" />
                       Admin Dashboard

@@ -94,7 +94,7 @@ export const ProductDetailPage = () => {
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4 bg-white">
-        <h2 className="text-2xl font-bold text-brand-navy">Product Not Found</h2>
+        <h2 className="text-2xl font-bold text-black">Product Not Found</h2>
         <p className="text-sm text-slate-500">The supplement or product you are looking for may have been removed.</p>
         <Link to="/shop" className="inline-block px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-xs shadow-orange-sm">
           Return to Shop
@@ -209,12 +209,12 @@ export const ProductDetailPage = () => {
         {/* Right Column: Buying Controls */}
         <div className="lg:col-span-6 space-y-6">
           <div>
-            <div className="flex items-center justify-between text-xs text-brand-navy font-bold uppercase tracking-wider mb-2">
+            <div className="flex items-center justify-between text-xs text-black font-bold uppercase tracking-wider mb-2">
               <span>{product.category?.name || 'OSOAA'}</span>
               <span className="text-slate-400 font-mono text-[11px]">SKU: {selectedVariant?.sku || product.sku}</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black text-brand-navy leading-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-black leading-tight">
               {product.name}
             </h1>
 
@@ -239,7 +239,7 @@ export const ProductDetailPage = () => {
 
           {/* Pricing in NPR */}
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-baseline gap-3">
-            <span className="text-3xl font-black text-brand-navy">
+            <span className="text-3xl font-black text-black">
               {formatNpr(currentPrice)}
             </span>
             {currentCompareAtPrice > currentPrice && (
@@ -272,7 +272,7 @@ export const ProductDetailPage = () => {
                     onClick={() => setSelectedVariant(v)}
                     className={`px-4 py-2.5 rounded-xl text-xs font-bold border transition ${
                       selectedVariant?._id === v._id
-                        ? 'bg-brand-navy border-brand-navy text-white shadow-sm'
+                        ? 'bg-black border-black text-white shadow-sm'
                         : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                     }`}
                   >
@@ -343,7 +343,7 @@ export const ProductDetailPage = () => {
             <button
               onClick={handleBuyNow}
               disabled={isOutOfStock}
-              className="w-full py-3.5 bg-brand-navy hover:bg-navy-700 text-white font-bold text-sm rounded-xl transition shadow-sm"
+              className="w-full py-3.5 bg-black hover:bg-gray-800 text-white font-bold text-sm rounded-xl transition shadow-sm"
             >
               Buy Now with 1-Click
             </button>
@@ -403,7 +403,7 @@ export const ProductDetailPage = () => {
         {activeTab === 'nutrition' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <h3 className="text-base font-bold text-brand-navy">Nutrition Information</h3>
+              <h3 className="text-base font-bold text-black">Nutrition Information</h3>
               {product.nutritionInformation?.length > 0 ? (
                 <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
                   <table className="w-full text-xs text-left">
@@ -431,7 +431,7 @@ export const ProductDetailPage = () => {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-base font-bold text-brand-navy">Ingredients</h3>
+              <h3 className="text-base font-bold text-black">Ingredients</h3>
               {product.ingredients?.length > 0 ? (
                 <ul className="space-y-2 text-xs text-slate-700 list-disc list-inside bg-slate-50 p-4 rounded-2xl border border-slate-200">
                   {product.ingredients.map((ing, idx) => (
@@ -448,7 +448,7 @@ export const ProductDetailPage = () => {
         {/* Tab 3: Usage */}
         {activeTab === 'usage' && (
           <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 max-w-2xl text-xs sm:text-sm text-slate-700 leading-relaxed">
-            <h3 className="text-base font-bold text-brand-navy">Recommended Usage & Directions</h3>
+            <h3 className="text-base font-bold text-black">Recommended Usage & Directions</h3>
             <p>{product.usageInstructions || 'Mix 1 scoop with 200-250ml cold water or beverage of choice in a shaker bottle. Consume post-workout or as recommended by your certified trainer.'}</p>
           </div>
         )}
@@ -458,7 +458,7 @@ export const ProductDetailPage = () => {
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-bold text-brand-navy">Verified Customer Reviews</h3>
+                <h3 className="text-lg font-bold text-black">Verified Customer Reviews</h3>
                 <p className="text-xs text-slate-500">Real feedback from athletes and buyers across Nepal</p>
               </div>
 
@@ -514,7 +514,7 @@ export const ProductDetailPage = () => {
       {isReviewModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
           <div className="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl space-y-4">
-            <h3 className="text-lg font-bold text-brand-navy">Write a Review</h3>
+            <h3 className="text-lg font-bold text-black">Write a Review</h3>
             <p className="text-xs text-slate-500">Share your genuine experience with this product.</p>
 
             {reviewSuccess ? (
@@ -594,7 +594,7 @@ export const ProductDetailPage = () => {
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <div className="space-y-6 pt-12 border-t border-slate-200">
-          <h2 className="text-xl sm:text-2xl font-black text-brand-navy">Frequently Bought Together</h2>
+          <h2 className="text-xl sm:text-2xl font-black text-black">Frequently Bought Together</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map((relProd) => (
               <ProductCard key={relProd._id} product={relProd} />

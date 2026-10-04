@@ -7,19 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Core Brand Navy (#1B3A6B)
+        // Core Brand Navy (#000000 / Neutral Greys)
         navy: {
-          50: '#F0F4FA',
-          100: '#E0EAF6',
-          200: '#C2D5ED',
-          300: '#94B6E1',
-          400: '#5F90D0',
-          500: '#2C5DA0',
-          600: '#1B3A6B', // CORE BRAND NAVY
-          700: '#162F56',
-          800: '#122646',
-          900: '#0E1C33',
-          950: '#070E1A',
+          50: '#F3F4F6',
+          100: '#E5E7EB',
+          200: '#D1D5DB',
+          300: '#9CA3AF',
+          400: '#6B7280',
+          500: '#374151',
+          600: '#1F2937',
+          700: '#111827',
+          800: '#0F172A',
+          900: '#000000',
+          950: '#000000',
         },
         // Core Brand Action Orange (#F97316)
         orange: {
@@ -37,10 +37,10 @@ export default {
         },
         // Brand Semantic Tokens
         brand: {
-          navy: '#1B3A6B',
-          'navy-dark': '#122646',
-          'navy-light': '#2C5DA0',
-          'navy-subtle': '#F0F4FA',
+          navy: '#000000',
+          'navy-dark': '#000000',
+          'navy-light': '#1F2937',
+          'navy-subtle': '#E5E7EB',
           orange: '#F97316',
           'orange-hover': '#EA580C',
           'orange-dark': '#C2410C',
@@ -60,8 +60,8 @@ export default {
         display: ['Outfit', 'Inter', 'sans-serif'],
       },
       boxShadow: {
-        'brand': '0 4px 20px -2px rgba(27, 58, 107, 0.08)',
-        'brand-lg': '0 10px 30px -4px rgba(27, 58, 107, 0.12)',
+        'brand': '0 4px 20px -2px rgba(0, 0, 0, 0.08)',
+        'brand-lg': '0 10px 30px -4px rgba(0, 0, 0, 0.12)',
         'orange-sm': '0 2px 10px rgba(249, 115, 22, 0.20)',
         'orange-md': '0 4px 18px rgba(249, 115, 22, 0.28)',
       }

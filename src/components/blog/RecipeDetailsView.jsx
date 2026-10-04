@@ -39,7 +39,7 @@ export const RecipeDetailsView = ({ post }) => {
       <div className="bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-transparent border border-orange-200/80 rounded-3xl p-6 sm:p-8">
         <div className="flex items-center gap-2 mb-6">
           <ChefHat className="w-6 h-6 text-orange-500" />
-          <h3 className="font-display font-bold text-xl text-brand-navy">
+          <h3 className="font-display font-bold text-xl text-black">
             Recipe Overview & Timings
           </h3>
         </div>
@@ -84,7 +84,7 @@ export const RecipeDetailsView = ({ post }) => {
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <Play className="w-5 h-5 text-orange-500" />
-            <h3 className="font-display font-bold text-xl text-brand-navy">
+            <h3 className="font-display font-bold text-xl text-black">
               Video Preparation Guide
             </h3>
           </div>
@@ -104,8 +104,8 @@ export const RecipeDetailsView = ({ post }) => {
       {hasNutrition && (
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Activity className="w-5 h-5 text-brand-navy" />
-            <h3 className="font-display font-bold text-lg text-brand-navy">
+            <Activity className="w-5 h-5 text-black" />
+            <h3 className="font-display font-bold text-lg text-black">
               Macro & Nutrition Profile (Per Serving)
             </h3>
           </div>
@@ -148,7 +148,7 @@ export const RecipeDetailsView = ({ post }) => {
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
               <div className="flex items-center gap-2">
                 <Utensils className="w-5 h-5 text-orange-500" />
-                <h3 className="font-display font-bold text-lg text-brand-navy">
+                <h3 className="font-display font-bold text-lg text-black">
                   Ingredients
                 </h3>
               </div>
@@ -198,7 +198,7 @@ export const RecipeDetailsView = ({ post }) => {
           <div className={`${ingredients.length > 0 ? 'lg:col-span-7' : 'lg:col-span-12'} space-y-4`}>
             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-200">
               <ListOrdered className="w-5 h-5 text-orange-500" />
-              <h3 className="font-display font-bold text-lg text-brand-navy">
+              <h3 className="font-display font-bold text-lg text-black">
                 Preparation Instructions
               </h3>
             </div>

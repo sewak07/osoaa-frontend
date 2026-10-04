@@ -41,7 +41,7 @@ export const BlogCard = ({ post, featured = false }) => {
             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-brand-navy to-navy-900 flex items-center justify-center p-6 text-center">
+          <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-6 text-center">
             <div className="space-y-2">
               <span className="font-display font-black text-2xl text-white/30 tracking-wider">OSOAA</span>
               <p className="text-xs text-orange-400 font-semibold tracking-wider uppercase">{categoryMeta.label}</p>
@@ -139,7 +139,7 @@ export const BlogCard = ({ post, featured = false }) => {
         {/* Footer: Author & Action Button */}
         <div className="pt-6 mt-4 border-t border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-brand-navy/10 text-brand-navy font-bold flex items-center justify-center text-xs">
+            <div className="w-7 h-7 rounded-full bg-slate-100 text-black font-bold flex items-center justify-center text-xs">
               {post.author?.name ? post.author.name.charAt(0).toUpperCase() : 'O'}
             </div>
             <div className="text-left">

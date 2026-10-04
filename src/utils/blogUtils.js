@@ -28,15 +28,15 @@ export const getCategoryMeta = (category) => {
       return {
         label: 'नेपाली ब्लग',
         subLabel: 'Nepali Blog',
-        badgeClass: 'bg-navy-50 text-brand-navy border-navy-200',
-        accentColor: 'navy',
+        badgeClass: 'bg-slate-100 text-black border-slate-200',
+        accentColor: 'slate',
       };
     case 'english-blog':
       return {
         label: 'Nutrition & Fitness',
         subLabel: 'English Article',
-        badgeClass: 'bg-slate-100 text-brand-navy border-slate-200',
-        accentColor: 'navy',
+        badgeClass: 'bg-slate-100 text-black border-slate-200',
+        accentColor: 'slate',
       };
     case 'recipes':
       return {

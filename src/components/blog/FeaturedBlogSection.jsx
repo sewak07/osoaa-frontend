@@ -15,7 +15,7 @@ export const FeaturedBlogSection = ({ featuredPosts }) => {
             <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-brand-navy font-display">
+            <h2 className="text-xl sm:text-2xl font-black text-black font-display">
               Featured Stories & Highlights
             </h2>
             <p className="text-xs text-slate-500">

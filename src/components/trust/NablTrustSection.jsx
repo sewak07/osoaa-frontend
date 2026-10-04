@@ -21,7 +21,7 @@ export const NablTrustSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-brand-navy text-white relative overflow-hidden">
+    <section className="py-16 bg-[#E5E7EB] text-black relative overflow-hidden">
       
       {/* Background Subtle Accent */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -31,39 +31,39 @@ export const NablTrustSection = () => {
           
           {/* Left Text & Accreditation Description */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-gray-300 text-orange-600 text-xs font-bold uppercase tracking-wider shadow-sm">
               <FlaskConical className="w-4 h-4" />
               <span>Quality Assurance & Lab Standards</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-black tracking-tight leading-tight">
               Quality You Can Trust. <br />
-              <span className="text-orange-400">
+              <span className="text-orange-600">
                 Tested with NABL Accredited Facilities.
               </span>
             </h2>
 
-            <p className="text-sm sm:text-base text-navy-100 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
               {description}
             </p>
 
             {/* Factual Trust Bullet Points */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {badges.map((badge, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 p-3.5 rounded-xl bg-navy-800/80 border border-navy-700">
-                  <CheckCircle2 className="w-4 h-4 text-orange-400 shrink-0" />
-                  <span className="text-xs font-semibold text-white">{badge}</span>
+                <div key={idx} className="flex items-center gap-2.5 p-3.5 rounded-xl bg-white border border-gray-300 shadow-sm">
+                  <CheckCircle2 className="w-4 h-4 text-orange-600 shrink-0" />
+                  <span className="text-xs font-semibold text-black">{badge}</span>
                 </div>
               ))}
             </div>
 
             {/* Official Lab Info Footer */}
-            <div className="p-4 rounded-xl bg-navy-900 border border-navy-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="p-4 rounded-xl bg-gray-200 border border-gray-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <p className="text-xs text-orange-400 font-bold uppercase tracking-wider">Partner Facility</p>
-                <p className="text-sm font-semibold text-white">{labName}</p>
+                <p className="text-xs text-orange-600 font-bold uppercase tracking-wider">Partner Facility</p>
+                <p className="text-sm font-semibold text-black">{labName}</p>
                 {certNumber && (
-                  <p className="text-[11px] text-navy-200 font-mono mt-0.5">Cert Ref: {certNumber}</p>
+                  <p className="text-[11px] text-gray-600 font-mono mt-0.5">Cert Ref: {certNumber}</p>
                 )}
               </div>
 
@@ -81,11 +81,11 @@ export const NablTrustSection = () => {
               
               <div className="flex items-center justify-between border-b border-slate-100 pb-5">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 bg-brand-navy text-white rounded-2xl shadow-md">
+                  <div className="p-3 bg-black text-white rounded-2xl shadow-md">
                     <Award className="w-7 h-7 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-black text-brand-navy">Authenticity Seal</h3>
+                    <h3 className="text-lg font-black text-black">Authenticity Seal</h3>
                     <p className="text-xs text-slate-500">Nepal Wellness & Nutrition</p>
                   </div>
                 </div>
@@ -99,27 +99,27 @@ export const NablTrustSection = () => {
                   <div className="p-1 rounded bg-orange-50 text-orange-600 mt-0.5">
                     <Check className="w-3.5 h-3.5" />
                   </div>
-                  <p><strong className="text-brand-navy">Protein Concentration Verification:</strong> Verified protein percentage matching label claims.</p>
+                  <p><strong className="text-black">Protein Concentration Verification:</strong> Verified protein percentage matching label claims.</p>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <div className="p-1 rounded bg-orange-50 text-orange-600 mt-0.5">
                     <Check className="w-3.5 h-3.5" />
                   </div>
-                  <p><strong className="text-brand-navy">Heavy Metals & Toxins Screening:</strong> Zero harmful lead, arsenic, or mercury contamination.</p>
+                  <p><strong className="text-black">Heavy Metals & Toxins Screening:</strong> Zero harmful lead, arsenic, or mercury contamination.</p>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <div className="p-1 rounded bg-orange-50 text-orange-600 mt-0.5">
                     <Check className="w-3.5 h-3.5" />
                   </div>
-                  <p><strong className="text-brand-navy">No Amino Spiking:</strong> Clean, non-spiked amino acid profile for clean lean muscle gains.</p>
+                  <p><strong className="text-black">No Amino Spiking:</strong> Clean, non-spiked amino acid profile for clean lean muscle gains.</p>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <span>Primary Market: <strong className="text-brand-navy">Nepal</strong></span>
-                <span>Currency: <strong className="text-brand-navy">NPR</strong></span>
+                <span>Primary Market: <strong className="text-black">Nepal</strong></span>
+                <span>Currency: <strong className="text-black">NPR</strong></span>
               </div>
 
             </div>

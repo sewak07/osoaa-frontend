@@ -37,7 +37,7 @@ export const CartDrawer = () => {
           <div className="p-6 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ShoppingBag className="w-5 h-5 text-orange-500" />
-              <h2 className="text-lg font-black text-brand-navy">Your Shopping Cart</h2>
+              <h2 className="text-lg font-black text-black">Your Shopping Cart</h2>
               <span className="text-xs bg-orange-100 text-orange-700 font-bold px-2 py-0.5 rounded-full">
                 {items.length} {items.length === 1 ? 'item' : 'items'}
               </span>
@@ -61,7 +61,7 @@ export const CartDrawer = () => {
             ) : (
               <div>
                 <p className="text-xs text-slate-700 mb-1.5">
-                  Add <strong className="text-orange-600 font-bold">{formatNpr(remainingForFreeDelivery)}</strong> more for <strong className="text-brand-navy">FREE Delivery</strong>
+                  Add <strong className="text-orange-600 font-bold">{formatNpr(remainingForFreeDelivery)}</strong> more for <strong className="text-black">FREE Delivery</strong>
                 </p>
                 <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                   <div 
@@ -125,13 +125,13 @@ export const CartDrawer = () => {
                       </div>
 
                       {item.variantName && (
-                        <p className="text-[11px] text-brand-navy mt-0.5 truncate font-semibold">
+                        <p className="text-[11px] text-black mt-0.5 truncate font-semibold">
                           {item.variantName}
                         </p>
                       )}
 
                       <div className="flex items-baseline gap-2 mt-1">
-                        <span className="text-sm font-black text-brand-navy">
+                        <span className="text-sm font-black text-black">
                           {formatNpr(item.price)}
                         </span>
                         {item.compareAtPrice > item.price && (
@@ -179,7 +179,7 @@ export const CartDrawer = () => {
             <div className="p-6 bg-slate-50 border-t border-slate-200 space-y-4">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-slate-500 font-medium">Subtotal</span>
-                <span className="text-lg font-black text-brand-navy">
+                <span className="text-lg font-black text-black">
                   {formatNpr(subtotal)}
                 </span>
               </div>

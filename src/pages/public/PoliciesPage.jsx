@@ -13,13 +13,13 @@ export const PoliciesPage = () => {
     content = (
       <div className="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
         <p>At OSOAA, we ensure prompt and secure delivery of your supplements across Nepal.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">1. Delivery Timelines</h3>
+        <h3 className="text-base font-bold text-black mt-4">1. Delivery Timelines</h3>
         <p>• Inside Kathmandu Valley: 1–2 business days.</p>
         <p>• Outside Kathmandu Valley (Major cities & districts across all 7 provinces): 2–4 business days.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">2. Shipping Charges</h3>
+        <h3 className="text-base font-bold text-black mt-4">2. Shipping Charges</h3>
         <p>• Standard Delivery Fee: Rs. 150</p>
         <p>• Orders above Rs. 3,500 automatically qualify for <strong className="text-orange-600">Free Nationwide Delivery</strong>.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">3. Packaging & Tamper-Proof Seals</h3>
+        <h3 className="text-base font-bold text-black mt-4">3. Packaging & Tamper-Proof Seals</h3>
         <p>All items are shipped in sturdy, tamper-evident packaging. Please inspect the outer seal before accepting Cash on Delivery parcels.</p>
       </div>
     );
@@ -35,11 +35,11 @@ export const PoliciesPage = () => {
           If you are not entirely satisfied with your purchase, we're here to help.
         </p>
 
-        <h3 className="text-base font-bold text-brand-navy mt-6">
+        <h3 className="text-base font-bold text-black mt-6">
           CANCELLATION POLICY
         </h3>
 
-        <h4 className="font-bold text-brand-navy mt-4">
+        <h4 className="font-bold text-black mt-4">
           Cancellation Before Dispatch
         </h4>
 
@@ -55,7 +55,7 @@ export const PoliciesPage = () => {
           processed by us.
         </p>
 
-        <h4 className="font-bold text-brand-navy mt-4">
+        <h4 className="font-bold text-black mt-4">
           Cancellation After Dispatch
         </h4>
 
@@ -65,7 +65,7 @@ export const PoliciesPage = () => {
           care team.
         </p>
 
-        <h4 className="font-bold text-brand-navy mt-4">
+        <h4 className="font-bold text-black mt-4">
           Discount Vouchers
         </h4>
 
@@ -74,7 +74,7 @@ export const PoliciesPage = () => {
           as such even if you cancel the order.
         </p>
 
-        <h3 className="text-base font-bold text-brand-navy mt-6">
+        <h3 className="text-base font-bold text-black mt-6">
           RETURNS
         </h3>
 
@@ -95,7 +95,7 @@ export const PoliciesPage = () => {
           Your item needs to have a receipt or proof of purchase.
         </p>
 
-        <h3 className="text-base font-bold text-brand-navy mt-6">
+        <h3 className="text-base font-bold text-black mt-6">
           REFUNDS
         </h3>
 
@@ -122,11 +122,11 @@ export const PoliciesPage = () => {
           may take additional time to reflect in your account.
         </p>
 
-        <h3 className="text-base font-bold text-brand-navy mt-6">
+        <h3 className="text-base font-bold text-black mt-6">
           SHIPPING
         </h3>
 
-        <h4 className="font-bold text-brand-navy mt-4">
+        <h4 className="font-bold text-black mt-4">
           Product Received in Good Condition
         </h4>
 
@@ -136,7 +136,7 @@ export const PoliciesPage = () => {
           condition and the return is not due to an error on the part of OSOAA.
         </p>
 
-        <h4 className="font-bold text-brand-navy mt-4">
+        <h4 className="font-bold text-black mt-4">
           Product Received in Bad Condition
         </h4>
 
@@ -145,7 +145,7 @@ export const PoliciesPage = () => {
           damaged or defective.
         </p>
 
-        <h4 className="font-bold text-brand-navy mt-4">
+        <h4 className="font-bold text-black mt-4">
           Wrong Product
         </h4>
 
@@ -154,7 +154,7 @@ export const PoliciesPage = () => {
           delivered.
         </p>
 
-        <h3 className="text-base font-bold text-brand-navy mt-6">
+        <h3 className="text-base font-bold text-black mt-6">
           CONTACT US
         </h3>
 
@@ -176,11 +176,11 @@ export const PoliciesPage = () => {
     content = (
       <div className="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
         <p>Your privacy is paramount. This policy outlines how OSOAA collects and protects your customer data.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">1. Data Collection</h3>
+        <h3 className="text-base font-bold text-black mt-4">1. Data Collection</h3>
         <p>We collect essential information required to fulfill deliveries, including name, delivery address, mobile phone number, and email address.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">2. Payment Data Security</h3>
+        <h3 className="text-base font-bold text-black mt-4">2. Payment Data Security</h3>
         <p>We never store customer eSewa passwords or banking PINs. All online payments are securely processed through official gateway integrations.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">3. Third-Party Sharing</h3>
+        <h3 className="text-base font-bold text-black mt-4">3. Third-Party Sharing</h3>
         <p>Customer contact details are shared strictly with our authorized delivery logistics partners to ensure delivery completion.</p>
       </div>
     );
@@ -189,9 +189,9 @@ export const PoliciesPage = () => {
     content = (
       <div className="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
         <p>Welcome to OSOAA Nepal. By using our website and purchasing our wellness products, you agree to the following terms.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">1. Pricing & NPR Currency</h3>
+        <h3 className="text-base font-bold text-black mt-4">1. Pricing & NPR Currency</h3>
         <p>All prices listed on OSOAA are in Nepalese Rupees (NPR / Rs.) and are subject to change without prior notice.</p>
-        <h3 className="text-base font-bold text-brand-navy mt-4">2. Product Usage & Consultation</h3>
+        <h3 className="text-base font-bold text-black mt-4">2. Product Usage & Consultation</h3>
         <p>Supplements should be consumed in accordance with stated label instructions. Consult a certified medical or fitness professional if you have pre-existing medical conditions.</p>
       </div>
     );
@@ -200,7 +200,7 @@ export const PoliciesPage = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 bg-white min-h-[75vh]">
       <div className="border-b border-slate-200 pb-4">
-        <h1 className="text-3xl font-black text-brand-navy">{title}</h1>
+        <h1 className="text-3xl font-black text-black">{title}</h1>
       </div>
       <div className="p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm">
         {content}

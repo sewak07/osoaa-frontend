@@ -27,7 +27,7 @@ export const WishlistPage = () => {
         <div className="w-14 h-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
           <Heart className="w-7 h-7" />
         </div>
-        <h2 className="text-lg font-bold text-brand-navy font-display">Your wishlist is empty</h2>
+        <h2 className="text-lg font-bold text-black font-display">Your wishlist is empty</h2>
         <p className="text-xs text-slate-500 max-w-sm mx-auto">
           Save high-purity whey protein, creatine, and fitness supplements you're interested in to purchase later.
         </p>

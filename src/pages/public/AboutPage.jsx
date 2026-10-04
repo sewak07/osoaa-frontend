@@ -9,7 +9,7 @@ export const AboutPage = () => {
       {/* Hero Intro */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">About OSOAA</span>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-navy tracking-tight">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black tracking-tight">
           A Journey of Wellness & Authentic Nutrition in Nepal.
         </h1>
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -23,7 +23,7 @@ export const AboutPage = () => {
           <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center">
             <ShieldCheck className="w-6 h-6" />
           </div>
-          <h3 className="text-lg font-bold text-brand-navy">100% Guaranteed Authenticity</h3>
+          <h3 className="text-lg font-bold text-black">100% Guaranteed Authenticity</h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             Every product batch is sealed, imported directly from authentic sources, and tracked with individual lot numbers to ensure zero adulteration.
           </p>
@@ -33,7 +33,7 @@ export const AboutPage = () => {
           <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center">
             <FlaskConical className="w-6 h-6" />
           </div>
-          <h3 className="text-lg font-bold text-brand-navy">NABL Tested Standards</h3>
+          <h3 className="text-lg font-bold text-black">NABL Tested Standards</h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             We collaborate with NABL-accredited testing facilities to verify protein content, heavy metals safety, and zero banned substance contamination.
           </p>
@@ -43,7 +43,7 @@ export const AboutPage = () => {
           <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center">
             <Target className="w-6 h-6" />
           </div>
-          <h3 className="text-lg font-bold text-brand-navy">Athlete-Centric Formulations</h3>
+          <h3 className="text-lg font-bold text-black">Athlete-Centric Formulations</h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             Designed for real human physiology with digestive enzymes to eliminate bloating and maximize protein bio-utilization.
           </p>

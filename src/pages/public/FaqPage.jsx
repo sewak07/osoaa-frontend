@@ -31,7 +31,7 @@ export const FaqPage = () => {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12 bg-white min-h-[75vh]">
       <div className="text-center space-y-3">
         <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">Help Center</span>
-        <h1 className="text-3xl sm:text-4xl font-black text-brand-navy">Frequently Asked Questions</h1>
+        <h1 className="text-3xl sm:text-4xl font-black text-black">Frequently Asked Questions</h1>
         <p className="text-xs sm:text-sm text-slate-500">Everything you need to know about purchasing and consuming authentic supplements with OSOAA.</p>
       </div>
 

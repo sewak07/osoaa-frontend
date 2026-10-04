@@ -34,17 +34,17 @@ export const AccountLayout = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 bg-white min-h-[75vh]">
-      
+
       {/* Header */}
       <div className="pb-6 border-b border-slate-200">
-        <h1 className="text-2xl sm:text-3xl font-black text-brand-navy">My Account</h1>
+        <h1 className="text-2xl sm:text-3xl font-black text-black">My Account</h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Welcome back, <strong className="text-brand-navy">{user.name}</strong> ({user.email})
+          Welcome back, <strong className="text-black">{user.name}</strong> ({user.email})
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
+
         {/* Account Sidebar Navigation */}
         <aside className="lg:col-span-3 space-y-2 bg-slate-50 border border-slate-200 rounded-3xl p-4 shadow-sm">
           {navLinks.map((link) => {
@@ -54,11 +54,10 @@ export const AccountLayout = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold transition ${
-                  isActive
-                    ? 'bg-orange-500 text-white shadow-orange-sm'
-                    : 'text-slate-700 hover:bg-white hover:text-orange-600 shadow-none'
-                }`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold transition ${isActive
+                  ? 'bg-black text-white shadow-sm'
+                  : 'text-slate-700 hover:bg-white hover:text-orange-600 shadow-none'
+                  }`}
               >
                 <Icon className="w-4 h-4" />
                 <span>{link.name}</span>

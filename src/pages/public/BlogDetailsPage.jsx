@@ -103,7 +103,7 @@ export const BlogDetailsPage = () => {
           <div className="w-14 h-14 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto">
             <BookOpen className="w-7 h-7" />
           </div>
-          <h2 className="text-xl font-black font-display text-brand-navy">Article Not Found</h2>
+          <h2 className="text-xl font-black font-display text-black">Article Not Found</h2>
           <p className="text-xs text-slate-500 leading-relaxed">
             {error || 'The requested article or recipe could not be found.'}
           </p>
@@ -198,7 +198,7 @@ export const BlogDetailsPage = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-display text-brand-navy leading-tight tracking-tight">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-display text-black leading-tight tracking-tight">
           {post.title}
         </h1>
 
@@ -212,7 +212,7 @@ export const BlogDetailsPage = () => {
         {/* Author & Publishing Meta Row */}
         <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-brand-navy text-white font-bold flex items-center justify-center text-sm shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-black text-white font-bold flex items-center justify-center text-sm shadow-sm">
               {post.author?.name ? post.author.name.charAt(0).toUpperCase() : 'O'}
             </div>
             <div>
@@ -299,7 +299,7 @@ export const BlogDetailsPage = () => {
         {/* Social Share Box */}
         <div className="mt-10 p-6 bg-slate-50 border border-slate-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <h4 className="font-bold text-sm text-brand-navy">Share this guide</h4>
+            <h4 className="font-bold text-sm text-black">Share this guide</h4>
             <p className="text-xs text-slate-500">Help friends and fellow athletes learn science-backed wellness</p>
           </div>
 
@@ -313,14 +313,14 @@ export const BlogDetailsPage = () => {
             </button>
             <button
               onClick={() => handleSocialShare('facebook')}
-              className="p-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition shadow-sm"
+              className="p-2.5 rounded-xl bg-gray-200 text-black hover:bg-orange-500 hover:text-white transition shadow-sm"
               title="Share on Facebook"
             >
               <Facebook className="w-4 h-4" />
             </button>
             <button
               onClick={() => handleSocialShare('twitter')}
-              className="p-2.5 rounded-xl bg-sky-500 text-white hover:bg-sky-600 transition shadow-sm"
+              className="p-2.5 rounded-xl bg-gray-200 text-black hover:bg-orange-500 hover:text-white transition shadow-sm"
               title="Share on Twitter"
             >
               <Twitter className="w-4 h-4" />
@@ -343,7 +343,7 @@ export const BlogDetailsPage = () => {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-2xl font-black font-display text-brand-navy">
+                <h3 className="text-2xl font-black font-display text-black">
                   Related Articles & Recipes
                 </h3>
                 <p className="text-xs text-slate-500">

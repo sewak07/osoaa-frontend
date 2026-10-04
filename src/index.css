@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --brand-navy: #1B3A6B;
+    --brand-navy: #000000;
     --brand-orange: #F97316;
     --brand-white: #FFFFFF;
   }
@@ -31,7 +31,7 @@
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #1B3A6B;
+    background: #000000;
   }
 }
 
@@ -49,11 +49,11 @@
   }
 
   .btn-navy {
-    @apply bg-brand-navy hover:bg-navy-700 text-white font-bold transition-all duration-200 shadow-sm active:scale-[0.98];
+    @apply bg-black hover:bg-gray-800 text-white font-bold transition-all duration-200 shadow-sm active:scale-[0.98];
   }
 
   .btn-outline-navy {
-    @apply border-2 border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white font-bold transition-all duration-200;
+    @apply border-2 border-black text-black hover:bg-black hover:text-white font-bold transition-all duration-200;
   }
 
   .btn-secondary {

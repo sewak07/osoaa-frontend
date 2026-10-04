@@ -126,19 +126,19 @@ export const BlogPage = () => {
     <div className="min-h-screen bg-slate-50/50 pb-20">
       
       {/* Hero Header */}
-      <section className="bg-brand-navy text-white pt-14 pb-16 relative overflow-hidden">
+      <section className="bg-[#E5E7EB] text-black pt-14 pb-16 relative overflow-hidden">
         {/* Subtle decorative background element */}
         <div className="absolute inset-0 bg-[radial-gradient(#F97316_1px,transparent_1px)] [background-size:24px_24px] opacity-10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-orange-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gray-300 text-orange-600 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
               <span>OSOAA Wellness & Nutrition Hub</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-black leading-tight">
               Science-Backed Nutrition, Fitness & Healthy Recipes
             </h1>
-            <p className="mt-4 text-sm sm:text-base text-navy-100 leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base text-gray-700 leading-relaxed">
               Explore authentic guides in Nepali & English, protein kitchen recipes, workout nutrition, and wellness wisdom curated for your fitness journey.
             </p>
           </div>
@@ -151,7 +151,7 @@ export const BlogPage = () => {
                 placeholder="Search nutrition tips, whey recipes, creatine guides, Nepali articles..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="w-full pl-12 pr-28 py-3.5 bg-white text-slate-900 placeholder-slate-400 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xl"
+                className="w-full pl-12 pr-28 py-3.5 bg-white text-slate-900 placeholder-slate-400 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-xl border border-gray-300"
               />
               <Search className="w-5 h-5 text-slate-400 absolute left-4 top-4" />
               <button
@@ -178,13 +178,13 @@ export const BlogPage = () => {
                 onClick={() => handleCategoryChange(cat.slug)}
                 className={`px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 ${
                   isActive
-                    ? 'bg-brand-navy text-white shadow-md'
+                    ? 'bg-black text-white shadow-md'
                     : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
                 {cat.slug === 'recipes' && <ChefHat className={`w-4 h-4 ${isActive ? 'text-orange-400' : 'text-orange-500'}`} />}
-                {cat.slug === 'nepali-blog' && <BookOpen className={`w-4 h-4 ${isActive ? 'text-orange-400' : 'text-brand-navy'}`} />}
-                {cat.slug === 'english-blog' && <HeartPulse className={`w-4 h-4 ${isActive ? 'text-orange-400' : 'text-brand-navy'}`} />}
+                {cat.slug === 'nepali-blog' && <BookOpen className={`w-4 h-4 ${isActive ? 'text-orange-400' : 'text-black'}`} />}
+                {cat.slug === 'english-blog' && <HeartPulse className={`w-4 h-4 ${isActive ? 'text-orange-400' : 'text-black'}`} />}
                 <span>{cat.label}</span>
               </button>
             );
@@ -224,7 +224,7 @@ export const BlogPage = () => {
         {/* Main Content Listing */}
         <div className="pt-10 space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl sm:text-2xl font-bold font-display text-brand-navy">
+            <h2 className="text-xl sm:text-2xl font-bold font-display text-black">
               {currentCategory === 'recipes' 
                 ? 'All Healthy Recipes' 
                 : currentCategory === 'nepali-blog' 
@@ -276,7 +276,7 @@ export const BlogPage = () => {
               <div className="w-14 h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center mx-auto">
                 <BookOpen className="w-7 h-7" />
               </div>
-              <h3 className="font-bold font-display text-brand-navy text-xl">
+              <h3 className="font-bold font-display text-black text-xl">
                 No Content Found
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">

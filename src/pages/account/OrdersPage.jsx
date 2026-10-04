@@ -34,7 +34,7 @@ export const OrdersPage = () => {
     return (
       <div className="p-12 bg-slate-50 border border-slate-200 rounded-3xl text-center space-y-4 shadow-sm">
         <Package className="w-12 h-12 text-slate-400 mx-auto" />
-        <h2 className="text-lg font-bold text-brand-navy">You haven't placed any orders yet.</h2>
+        <h2 className="text-lg font-bold text-black">You haven't placed any orders yet.</h2>
         <p className="text-xs text-slate-500">All your completed orders and real-time tracking will appear here.</p>
         <Link
           to="/shop"
@@ -61,11 +61,10 @@ export const OrdersPage = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                order.orderStatus === 'DELIVERED' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
-                order.orderStatus === 'CANCELLED' ? 'bg-rose-50 text-rose-700 border border-rose-200' :
-                'bg-orange-50 text-orange-700 border border-orange-200'
-              }`}>
+              <span className={`px-3 py-1 rounded-full text-xs font-bold ${order.orderStatus === 'DELIVERED' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
+                  order.orderStatus === 'CANCELLED' ? 'bg-rose-50 text-rose-700 border border-rose-200' :
+                    'bg-orange-50 text-orange-700 border border-orange-200'
+                }`}>
                 {order.orderStatus}
               </span>
               <span className="text-sm font-black text-brand-navy">

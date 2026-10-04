@@ -6,7 +6,7 @@ export const NotFoundPage = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-20 text-center bg-white">
       <div className="max-w-md space-y-6">
-        <div className="text-8xl font-black text-brand-navy font-display">404</div>
+        <div className="text-8xl font-black text-black font-display">404</div>
         <h1 className="text-2xl font-bold text-slate-900">Page Not Found</h1>
         <p className="text-xs sm:text-sm text-slate-500">
           The page you are looking for might have been moved, renamed, or is temporarily unavailable.

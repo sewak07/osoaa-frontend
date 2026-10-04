@@ -142,7 +142,7 @@ export const ContactPage = () => {
             <Sparkles className="w-3.5 h-3.5" />
             <span>Dedicated Customer Support</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-navy tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black tracking-tight">
             Contact OSOAA Wellness
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -159,7 +159,7 @@ export const ContactPage = () => {
           <aside className="lg:col-span-5 space-y-6">
             <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
               <div className="space-y-1">
-                <h2 className="text-lg font-black text-brand-navy flex items-center gap-2">
+                <h2 className="text-lg font-black text-black flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-orange-500" />
                   <span>Get In Touch</span>
                 </h2>
@@ -177,7 +177,7 @@ export const ContactPage = () => {
                         <MapPin className="w-4 h-4" />
                       </div>
                       <div className="space-y-0.5">
-                        <span className="text-xs font-bold text-brand-navy block">Official Address</span>
+                        <span className="text-xs font-bold text-black block">Official Address</span>
                         <p className="text-xs text-slate-600 leading-relaxed">{address}</p>
                         {mapsUrl && (
                           <a 
@@ -201,7 +201,7 @@ export const ContactPage = () => {
                         <Phone className="w-4 h-4" />
                       </div>
                       <div className="space-y-0.5">
-                        <span className="text-xs font-bold text-brand-navy block">Phone & WhatsApp</span>
+                        <span className="text-xs font-bold text-black block">Phone & WhatsApp</span>
                         <div className="text-xs text-slate-700 font-medium space-x-2">
                           {phone && (
                             <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-orange-600 transition">
@@ -226,7 +226,7 @@ export const ContactPage = () => {
                         <Mail className="w-4 h-4" />
                       </div>
                       <div className="space-y-0.5">
-                        <span className="text-xs font-bold text-brand-navy block">Support Email</span>
+                        <span className="text-xs font-bold text-black block">Support Email</span>
                         <a 
                           href={`mailto:${email}`} 
                           className="text-xs text-orange-600 hover:text-orange-700 font-semibold break-all hover:underline"
@@ -246,7 +246,7 @@ export const ContactPage = () => {
               {/* Social Channels if configured */}
               {(socialData.facebook || socialData.instagram || socialData.youtube) && (
                 <div className="pt-4 border-t border-slate-200">
-                  <span className="text-xs font-bold text-brand-navy block mb-2.5">Official Social Channels</span>
+                  <span className="text-xs font-bold text-black block mb-2.5">Official Social Channels</span>
                   <div className="flex items-center gap-2">
                     {socialData.facebook && (
                       <a 
@@ -286,12 +286,12 @@ export const ContactPage = () => {
               )}
 
               {/* Business Assurance Note */}
-              <div className="p-4 rounded-2xl bg-brand-navy text-white space-y-2">
-                <div className="flex items-center gap-2 text-xs font-bold text-orange-400">
+              <div className="p-4 rounded-2xl bg-[#E5E7EB] text-black border border-gray-300 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-bold text-orange-600">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Quality & Authenticity Guaranteed</span>
                 </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
+                <p className="text-[11px] text-gray-800 leading-relaxed">
                   Every batch of OSOAA supplements undergoes rigorous testing in accredited facilities for purity, potency, and zero banned substances.
                 </p>
               </div>
@@ -304,7 +304,7 @@ export const ContactPage = () => {
             <div className="p-6 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
               
               <div className="space-y-1">
-                <h2 id="contact-form-heading" className="text-xl font-black text-brand-navy">
+                <h2 id="contact-form-heading" className="text-xl font-black text-black">
                   Send Us a Message
                 </h2>
                 <p className="text-xs text-slate-500">
@@ -337,7 +337,7 @@ export const ContactPage = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <h3 className="text-xl font-black text-brand-navy">
+                    <h3 className="text-xl font-black text-black">
                       Message Received Successfully!
                     </h3>
                     <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
@@ -353,7 +353,7 @@ export const ContactPage = () => {
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="px-6 py-3 bg-brand-navy hover:bg-navy-700 text-white font-bold text-xs rounded-xl shadow-sm transition inline-flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                    className="px-6 py-3 bg-black hover:bg-gray-800 text-white font-bold text-xs rounded-xl shadow-sm transition inline-flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                   >
                     <span>Send Another Inquiry</span>
                   </button>

@@ -82,7 +82,7 @@ export const ShopPage = () => {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-brand-navy">
+          <h1 className="text-2xl sm:text-3xl font-black text-black">
             {categoryParam ? `Category: ${categoryParam.replace(/-/g, ' ')}` : keywordParam ? `Search: "${keywordParam}"` : 'All Products'}
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -124,7 +124,7 @@ export const ShopPage = () => {
           <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-6">
             
             <div className="flex items-center justify-between pb-4 border-b border-slate-200">
-              <h2 className="text-xs font-black text-brand-navy uppercase tracking-wider flex items-center gap-2">
+              <h2 className="text-xs font-black text-black uppercase tracking-wider flex items-center gap-2">
                 <Filter className="w-4 h-4 text-orange-500" />
                 <span>Filters</span>
               </h2>
@@ -145,7 +145,7 @@ export const ShopPage = () => {
                 <button
                   onClick={() => handleFilterChange('category', '')}
                   className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition ${
-                    !categoryParam ? 'bg-brand-navy text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200/60'
+                    !categoryParam ? 'bg-black text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200/60'
                   }`}
                 >
                   All Categories
@@ -155,7 +155,7 @@ export const ShopPage = () => {
                     key={cat._id}
                     onClick={() => handleFilterChange('category', cat.slug)}
                     className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition flex items-center justify-between ${
-                      categoryParam === cat.slug ? 'bg-brand-navy text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200/60'
+                      categoryParam === cat.slug ? 'bg-black text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200/60'
                     }`}
                   >
                     <span>{cat.name}</span>
@@ -262,7 +262,7 @@ export const ShopPage = () => {
             <div className="w-screen max-w-xs bg-white p-6 space-y-6 flex flex-col justify-between shadow-2xl">
               
               <div className="flex items-center justify-between pb-4 border-b border-slate-200">
-                <h3 className="text-base font-black text-brand-navy">Filter Catalog</h3>
+                <h3 className="text-base font-black text-black">Filter Catalog</h3>
                 <button onClick={() => setIsMobileFiltersOpen(false)} className="p-1 text-slate-500 hover:text-slate-900">
                   <X className="w-5 h-5" />
                 </button>
@@ -284,7 +284,7 @@ export const ShopPage = () => {
                         key={cat._id}
                         onClick={() => { handleFilterChange('category', cat.slug); setIsMobileFiltersOpen(false); }}
                         className={`w-full text-left text-xs py-2 px-3 rounded-lg font-semibold ${
-                          categoryParam === cat.slug ? 'bg-brand-navy text-white' : 'text-slate-700 hover:bg-slate-100'
+                          categoryParam === cat.slug ? 'bg-black text-white' : 'text-slate-700 hover:bg-slate-100'
                         }`}
                       >
                         {cat.name}

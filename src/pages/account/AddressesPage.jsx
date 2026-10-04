@@ -39,7 +39,7 @@ export const AddressesPage = () => {
     <div className="p-6 sm:p-8 bg-slate-50 border border-slate-200 rounded-3xl space-y-6 shadow-sm">
       <div className="flex items-center justify-between pb-4 border-b border-slate-200">
         <div>
-          <h2 className="text-base font-black text-brand-navy uppercase tracking-wider">Saved Addresses</h2>
+          <h2 className="text-base font-black text-black uppercase tracking-wider">Saved Addresses</h2>
           <p className="text-xs text-slate-500">Manage delivery locations in Nepal</p>
         </div>
         {!showAddForm && (
@@ -55,7 +55,7 @@ export const AddressesPage = () => {
 
       {showAddForm && (
         <form onSubmit={handleSaveAddress} className="p-5 bg-white border border-slate-200 rounded-2xl space-y-4 shadow-sm">
-          <h3 className="text-xs font-bold text-brand-navy uppercase tracking-wider">Add Shipping Address</h3>
+          <h3 className="text-xs font-bold text-black uppercase tracking-wider">Add Shipping Address</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>

@@ -59,10 +59,10 @@ export const ProfilePage = () => {
 
   return (
     <div className="space-y-8">
-      
+
       {/* Edit Basic Info */}
       <div className="p-6 sm:p-8 bg-slate-50 border border-slate-200 rounded-3xl space-y-6 shadow-sm">
-        <h2 className="text-base font-black text-brand-navy uppercase tracking-wider">Profile Information</h2>
+        <h2 className="text-base font-black text-black uppercase tracking-wider">Profile Information</h2>
 
         {profileSuccess && (
           <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 flex items-center gap-2">
@@ -124,7 +124,7 @@ export const ProfilePage = () => {
 
       {/* Change Password */}
       <div className="p-6 sm:p-8 bg-slate-50 border border-slate-200 rounded-3xl space-y-6 shadow-sm">
-        <h2 className="text-base font-black text-brand-navy uppercase tracking-wider">Change Password</h2>
+        <h2 className="text-base font-black text-black uppercase tracking-wider">Change Password</h2>
 
         {passwordSuccess && (
           <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 flex items-center gap-2">
@@ -179,12 +179,7 @@ export const ProfilePage = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="px-6 py-2.5 bg-brand-navy hover:bg-navy-700 text-white font-bold text-xs rounded-xl shadow-sm transition"
-          >
-            Update Password
-          </button>
+          <button type="submit" className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-sm transition" > Update Password </button>
         </form>
       </div>
 

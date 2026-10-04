@@ -12,11 +12,11 @@ export const AnnouncementBar = () => {
   const link = settings?.announcementBar?.link || '/shop';
 
   return (
-    <div className="bg-brand-navy text-white text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2 border-b border-navy-700">
-      <Sparkles className="w-3.5 h-3.5 text-orange-400 animate-pulse shrink-0" />
+    <div className="bg-[#E5E7EB] text-black text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2 border-b border-gray-300">
+      <Sparkles className="w-3.5 h-3.5 text-orange-500 animate-pulse shrink-0" />
       <span>{text}</span>
       {link && (
-        <Link to={link} className="underline font-bold text-orange-400 hover:text-orange-300 ml-1 transition">
+        <Link to={link} className="underline font-bold text-orange-600 hover:text-orange-700 ml-1 transition">
           Shop Now
         </Link>
       )}

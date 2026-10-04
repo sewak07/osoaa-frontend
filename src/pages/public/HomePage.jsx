@@ -51,17 +51,17 @@ export const HomePage = () => {
     <div className="space-y-16 lg:space-y-24 pb-20 bg-white">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-brand-navy">
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gray-900">
         
-        {/* Background Image with Navy Gradient Overlay */}
+        {/* Background Image with Neutral Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <img
             src={heroBanner?.desktopImage?.url || 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1800&auto=format&fit=crop&q=80'}
             alt="OSOAA Hero"
             className="w-full h-full object-cover object-center opacity-25"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-brand-navy/80 to-brand-navy/60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/90 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-900/80 to-gray-900/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-900/90 to-transparent" />
         </div>
 
         {/* Content Container */}
@@ -83,7 +83,7 @@ export const HomePage = () => {
               Nutrition.
             </h1>
 
-            <p className="text-base sm:text-lg text-navy-100 leading-relaxed max-w-xl">
+            <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-xl">
               {heroBanner?.subtitle || 'Ultra-pure whey protein isolate, micronized creatine, pre-workout and performance supplements tested with NABL accredited laboratory standards.'}
             </p>
 
@@ -105,7 +105,7 @@ export const HomePage = () => {
             </div>
 
             {/* Trust Highlights under Hero */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-navy-700/80 text-xs text-navy-200">
+            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-700/80 text-xs text-gray-300">
               <div>
                 <p className="text-base font-extrabold text-white">NABL</p>
                 <p className="text-[11px]">Associated Lab Tested</p>
@@ -129,7 +129,7 @@ export const HomePage = () => {
         <div className="flex items-end justify-between mb-8 pb-3 border-b border-slate-100">
           <div>
             <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">Browse by Category</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-brand-navy mt-1">Shop By Goal & Category</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-black mt-1">Shop By Goal & Category</h2>
           </div>
           <Link to="/shop" className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
             <span>View All</span>
@@ -167,7 +167,7 @@ export const HomePage = () => {
               <Flame className="w-4 h-4 fill-current" />
               <span>Trending in Nepal</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-brand-navy">Best Selling Supplements</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-black">Best Selling Supplements</h2>
           </div>
           <Link to="/shop?sortBy=popular" className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
             <span>Explore All</span>
@@ -193,7 +193,7 @@ export const HomePage = () => {
               <Sparkles className="w-4 h-4" />
               <span>Handpicked Formulations</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-brand-navy">Featured Performance Products</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-black">Featured Performance Products</h2>
           </div>
           <Link to="/shop" className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
             <span>View Catalog</span>
@@ -213,7 +213,7 @@ export const HomePage = () => {
         <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">The OSOAA Difference</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-brand-navy">Why Athletes & Fitness Enthusiasts Choose OSOAA</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-black">Why Athletes & Fitness Enthusiasts Choose OSOAA</h2>
             <p className="text-xs sm:text-sm text-slate-600">
               We eliminate counterfeit risks with direct sourcing, rigorous batch testing, and transparent nutritional profiles.
             </p>
@@ -224,7 +224,7 @@ export const HomePage = () => {
               <div className="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-brand-navy">100% Sealed & Authentic</h3>
+              <h3 className="text-base font-bold text-black">100% Sealed & Authentic</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Direct manufacturing and verified distribution ensures you never receive diluted or counterfeit products.
               </p>
@@ -234,7 +234,7 @@ export const HomePage = () => {
               <div className="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center">
                 <Zap className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-brand-navy">Optimal Bioavailability</h3>
+              <h3 className="text-base font-bold text-black">Optimal Bioavailability</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Formulated with premium isolates and micronized particles for rapid absorption, minimal bloating, and maximum recovery.
               </p>
@@ -244,7 +244,7 @@ export const HomePage = () => {
               <div className="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center">
                 <Truck className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-brand-navy">Fast Nationwide Delivery</h3>
+              <h3 className="text-base font-bold text-black">Fast Nationwide Delivery</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Delivering straight to your doorstep across Kathmandu Valley and all major cities in Nepal in 2-4 business days.
               </p>

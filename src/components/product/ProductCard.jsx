@@ -61,7 +61,7 @@ export const ProductCard = ({ product }) => {
                         </span>
                     )}
                     {product.isBestSeller && (
-                        <span className="px-2.5 py-1 bg-brand-navy text-white font-bold text-[10px] tracking-wider uppercase rounded-md shadow-sm">
+                        <span className="px-2.5 py-1 bg-black text-white font-bold text-[10px] tracking-wider uppercase rounded-md shadow-sm">
                             Best Seller
                         </span>
                     )}
@@ -99,7 +99,7 @@ export const ProductCard = ({ product }) => {
                 <div>
                     {/* Category & SubCategory */}
                     <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1">
-                        <span className="text-brand-navy font-bold uppercase tracking-wider">
+                        <span className="text-black font-bold uppercase tracking-wider">
                             {product.subCategory || 'OSOAA'}
                         </span>
                         <span>{product.category?.name || 'Supplements'}</span>
@@ -129,7 +129,7 @@ export const ProductCard = ({ product }) => {
                 {/* Pricing & Add to Cart Action */}
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                     <div>
-                        <div className="text-base font-black text-brand-navy">
+                        <div className="text-base font-black text-black">
                             {formatNpr(product.price)}
                         </div>
                         {product.compareAtPrice > product.price && (
