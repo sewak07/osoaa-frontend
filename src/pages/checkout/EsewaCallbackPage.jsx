@@ -9,9 +9,11 @@ export const EsewaCallbackPage = () => {
 
   const dataParam = searchParams.get('data');
   const failedParam = searchParams.get('failed');
-  const orderId = searchParams.get('orderId');
-  const orderNumber = searchParams.get('orderNumber');
+  const queryOrderId = searchParams.get('orderId');
+  const queryOrderNumber = searchParams.get('orderNumber');
 
+  const [orderId, setOrderId] = useState(queryOrderId || '');
+  const [orderNumber, setOrderNumber] = useState(queryOrderNumber || '');
   const [status, setStatus] = useState('verifying'); // 'verifying' | 'success' | 'failed'
   const [errorMessage, setErrorMessage] = useState('');
   const [actionLoading, setActionLoading] = useState(false);
@@ -19,36 +21,52 @@ export const EsewaCallbackPage = () => {
   useEffect(() => {
     if (failedParam === 'true') {
       setStatus('failed');
-      setErrorMessage('The eSewa transaction was cancelled or encountered a temporary gateway issue.');
+      setErrorMessage('The eSewa transaction was cancelled or encountered a gateway error.');
       return;
     }
 
     if (!dataParam) {
       setStatus('failed');
-      setErrorMessage('No payment callback confirmation received from eSewa.');
+      setErrorMessage('No payment callback data received from eSewa.');
       return;
     }
+
+    let isMounted = true;
 
     const verifyTransaction = async () => {
       try {
         const response = await api.post('/payments/esewa/verify', { data: dataParam });
+        if (!isMounted) return;
+
         if (response.data.success) {
           setStatus('success');
           const order = response.data.data;
+          setOrderId(order.orderId);
+          setOrderNumber(order.orderNumber);
           setTimeout(() => {
             navigate(`/order-success?orderNumber=${order.orderNumber}&orderId=${order.orderId}`);
           }, 2000);
         } else {
           setStatus('failed');
           setErrorMessage(response.data.message || 'Payment verification failed.');
+          if (response.data.orderId) setOrderId(response.data.orderId);
+          if (response.data.orderNumber) setOrderNumber(response.data.orderNumber);
         }
       } catch (err) {
+        if (!isMounted) return;
         setStatus('failed');
-        setErrorMessage(err.customMessage || 'Backend server-to-server payment verification failed.');
+        const errData = err.response?.data;
+        if (errData?.orderId) setOrderId(errData.orderId);
+        if (errData?.orderNumber) setOrderNumber(errData.orderNumber);
+        setErrorMessage(errData?.message || err.customMessage || 'Backend server-to-server payment verification failed.');
       }
     };
 
     verifyTransaction();
+
+    return () => {
+      isMounted = false;
+    };
   }, [dataParam, failedParam, navigate]);
 
   const handleRetryPayment = async () => {

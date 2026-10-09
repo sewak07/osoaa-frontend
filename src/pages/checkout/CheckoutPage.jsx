@@ -123,6 +123,7 @@ export const CheckoutPage = () => {
           input.type = 'hidden';
           input.name = key;
           input.value = value;
+          form.appendChild(input);
         }
 
         document.body.appendChild(form);
