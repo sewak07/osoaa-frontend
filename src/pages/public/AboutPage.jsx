@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShieldCheck, FlaskConical, Target } from 'lucide-react';
-import { NablTrustSection } from '../../components/trust/NablTrustSection';
+import { DftqcTrustSection } from '../../components/trust/DftqcTrustSection';
 
 export const AboutPage = () => {
   return (
@@ -33,9 +33,9 @@ export const AboutPage = () => {
           <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center">
             <FlaskConical className="w-6 h-6" />
           </div>
-          <h3 className="text-lg font-bold text-black">NABL Tested Standards</h3>
+          <h3 className="text-lg font-bold text-black">DFTQC Quality Standards</h3>
           <p className="text-xs text-slate-600 leading-relaxed">
-            We collaborate with NABL-accredited testing facilities to verify protein content, heavy metals safety, and zero banned substance contamination.
+            We adhere to DFTQC food safety and testing guidelines to verify protein content, heavy metals safety, and zero banned substance contamination.
           </p>
         </div>
 
@@ -50,8 +50,8 @@ export const AboutPage = () => {
         </div>
       </div>
 
-      {/* NABL Lab Section */}
-      <NablTrustSection />
+      {/* DFTQC Standards Section */}
+      <DftqcTrustSection />
 
     </div>
   );

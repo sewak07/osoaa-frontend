@@ -146,7 +146,7 @@ export const ContactPage = () => {
             Contact OSOAA Wellness
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Have questions regarding supplement authenticity, NABL lab reports, product dosage recommendations, or order delivery across Nepal? Reach out to our nutrition specialists.
+            Have questions regarding supplement authenticity, DFTQC quality compliance reports, product dosage recommendations, or order delivery across Nepal? Reach out to our nutrition specialists.
           </p>
         </div>
       </section>

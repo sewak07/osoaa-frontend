@@ -273,10 +273,10 @@ export const AdminProductFormPage = () => {
         </div>
 
         {/* Pricing & Stock */}
-        <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+        <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
           <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">2. Pricing & Stock (NPR)</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <label className="text-xs font-bold text-white block mb-1">Base Price (NPR) *</label>
               <input
@@ -326,13 +326,13 @@ export const AdminProductFormPage = () => {
         </div>
 
         {/* Product Images (Cloudinary) */}
-        <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+        <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
           <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">3. Images (Cloudinary)</h2>
 
           {existingImages.length > 0 && (
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
               {existingImages.map((img, idx) => (
-                <div key={idx} className="relative w-24 h-24 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0">
+                <div key={idx} className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0">
                   <img src={img.url} alt="" className="w-full h-full object-cover" />
                   <button
                     type="button"
@@ -347,7 +347,7 @@ export const AdminProductFormPage = () => {
           )}
 
           <div>
-            <label className="block p-6 border-2 border-dashed border-slate-700 hover:border-orange-500 rounded-2xl text-center cursor-pointer transition">
+            <label className="block p-5 sm:p-6 border-2 border-dashed border-slate-700 hover:border-orange-500 rounded-2xl text-center cursor-pointer transition">
               <Upload className="w-6 h-6 text-orange-400 mx-auto mb-2" />
               <span className="text-xs font-bold text-white">Click to upload images</span>
               <p className="text-[10px] text-slate-400 mt-1">JPG, PNG, WEBP up to 5MB each</p>
@@ -360,13 +360,13 @@ export const AdminProductFormPage = () => {
         </div>
 
         {/* Variants Manager */}
-        <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+          <div className="flex items-center justify-between gap-2">
             <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">4. Product Variants (Flavors / Sizes)</h2>
             <button
               type="button"
               onClick={handleAddVariant}
-              className="px-3.5 py-1.5 bg-orange-500/10 hover:bg-orange-500 hover:text-white text-orange-400 text-xs font-bold rounded-xl flex items-center gap-1.5 transition"
+              className="px-3.5 py-1.5 bg-orange-500/10 hover:bg-orange-500 hover:text-white text-orange-400 text-xs font-bold rounded-xl flex items-center gap-1.5 transition shrink-0"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Variant</span>
@@ -374,7 +374,7 @@ export const AdminProductFormPage = () => {
           </div>
 
           {variants.map((v, idx) => (
-            <div key={idx} className="p-4 bg-slate-950 border border-slate-800 rounded-2xl grid grid-cols-1 sm:grid-cols-6 gap-3 items-center">
+            <div key={idx} className="p-3.5 sm:p-4 bg-slate-950 border border-slate-800 rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 items-center">
               <input
                 type="text"
                 placeholder="Variant Name (e.g. Belgian Chocolate / 2kg)"
@@ -406,22 +406,23 @@ export const AdminProductFormPage = () => {
               <button
                 type="button"
                 onClick={() => handleRemoveVariant(idx)}
-                className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl text-xs flex justify-center transition"
+                className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl text-xs flex justify-center items-center gap-1 transition sm:col-span-2 lg:col-span-1"
               >
                 <Trash2 className="w-4 h-4" />
+                <span className="lg:hidden text-xs">Remove Variant</span>
               </button>
             </div>
           ))}
         </div>
 
         {/* Nutritional Facts Table Builder */}
-        <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+          <div className="flex items-center justify-between gap-2">
             <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">5. Nutrition Facts Table</h2>
             <button
               type="button"
               onClick={handleAddNutrition}
-              className="px-3.5 py-1.5 bg-orange-500/10 hover:bg-orange-500 hover:text-white text-orange-400 text-xs font-bold rounded-xl flex items-center gap-1.5 transition"
+              className="px-3.5 py-1.5 bg-orange-500/10 hover:bg-orange-500 hover:text-white text-orange-400 text-xs font-bold rounded-xl flex items-center gap-1.5 transition shrink-0"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Nutrient Row</span>
@@ -429,7 +430,7 @@ export const AdminProductFormPage = () => {
           </div>
 
           {nutrition.map((item, idx) => (
-            <div key={idx} className="p-3 bg-slate-950 border border-slate-800 rounded-2xl grid grid-cols-1 sm:grid-cols-4 gap-3 items-center">
+            <div key={idx} className="p-3 bg-slate-950 border border-slate-800 rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
               <input
                 type="text"
                 placeholder="Nutrient (e.g. Protein)"
@@ -454,19 +455,20 @@ export const AdminProductFormPage = () => {
               <button
                 type="button"
                 onClick={() => handleRemoveNutrition(idx)}
-                className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl text-xs flex justify-center transition"
+                className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl text-xs flex justify-center items-center gap-1 transition"
               >
                 <Trash2 className="w-4 h-4" />
+                <span className="sm:hidden text-xs">Remove Row</span>
               </button>
             </div>
           ))}
         </div>
 
         {/* Form Flags & Status */}
-        <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+        <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
           <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">6. Badges & Publishing Status</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <label className="flex items-center gap-2 cursor-pointer p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs">
               <input
                 type="checkbox"

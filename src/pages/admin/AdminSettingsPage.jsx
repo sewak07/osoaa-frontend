@@ -24,15 +24,15 @@ export const AdminSettingsPage = () => {
   const [codEnabled, setCodEnabled] = useState(true);
   const [esewaEnabled, setEsewaEnabled] = useState(true);
 
-  // NABL Certification
-  const [nablEnabled, setNablEnabled] = useState(true);
-  const [certName, setCertName] = useState('NABL Quality Testing & Compliance');
-  const [labName, setLabName] = useState('Associated NABL Accredited Testing Facility');
-  const [certNumber, setCertNumber] = useState('NABL-TC-8892-2024');
+  // DFTQC Certification
+  const [dftqcEnabled, setDftqcEnabled] = useState(true);
+  const [certName, setCertName] = useState('DFTQC Quality Standards & Compliance');
+  const [labName, setLabName] = useState('DFTQC Compliant Quality Testing Standards');
+  const [certNumber, setCertNumber] = useState('DFTQC-QC-8892-2024');
   const [accreditationScope, setAccreditationScope] = useState('Nutritional Analysis, Purity Verification & Heavy Metals Testing');
-  const [nablDescription, setNablDescription] = useState('OSOAA works in strict association with NABL-accredited laboratory facilities to test each batch for protein authenticity, zero banned substances, and highest purity.');
+  const [dftqcDescription, setDftqcDescription] = useState('OSOAA products follow strict quality testing guidelines aligned with Nepal\'s Department of Food Technology and Quality Control (DFTQC) standards for authentic protein concentration, absence of heavy metals, and pure nutrition.');
   const [trustBadgesText, setTrustBadgesText] = useState(
-    'NABL Laboratory Testing Partner\n100% Genuine & Authentic Batches\nZero Banned Substances\nHeavy Metals Tested & Cleared\nFast Nationwide Delivery Across Nepal'
+    'DFTQC Food Quality Standards Aligned\n100% Genuine & Authentic Batches\nZero Banned Substances\nHeavy Metals Tested & Cleared\nFast Nationwide Delivery Across Nepal'
   );
 
   useEffect(() => {
@@ -55,14 +55,15 @@ export const AdminSettingsPage = () => {
           setCodEnabled(s.paymentSettings?.codEnabled ?? true);
           setEsewaEnabled(s.paymentSettings?.esewaEnabled ?? true);
 
-          if (s.nablCertification) {
-            setNablEnabled(s.nablCertification.enabled ?? true);
-            setCertName(s.nablCertification.certificationName || '');
-            setLabName(s.nablCertification.laboratoryName || '');
-            setCertNumber(s.nablCertification.certificateNumber || '');
-            setAccreditationScope(s.nablCertification.accreditationScope || '');
-            setNablDescription(s.nablCertification.shortDescription || '');
-            setTrustBadgesText(s.nablCertification.trustBadges?.join('\n') || '');
+          const cert = s.dftqcCertification || s.nablCertification;
+          if (cert) {
+            setDftqcEnabled(cert.enabled ?? true);
+            setCertName(cert.certificationName || '');
+            setLabName(cert.laboratoryName || '');
+            setCertNumber(cert.certificateNumber || '');
+            setAccreditationScope(cert.accreditationScope || '');
+            setDftqcDescription(cert.shortDescription || '');
+            setTrustBadgesText(cert.trustBadges?.join('\n') || '');
           }
         }
       } catch (err) {
@@ -100,19 +101,28 @@ export const AdminSettingsPage = () => {
           codEnabled,
           esewaEnabled,
         },
-        nablCertification: {
-          enabled: nablEnabled,
+        dftqcCertification: {
+          enabled: dftqcEnabled,
           certificationName: certName,
           laboratoryName: labName,
           certificateNumber: certNumber,
           accreditationScope,
-          shortDescription: nablDescription,
+          shortDescription: dftqcDescription,
+          trustBadges: trustBadgesText.split('\n').map((b) => b.trim()).filter(Boolean),
+        },
+        nablCertification: {
+          enabled: dftqcEnabled,
+          certificationName: certName,
+          laboratoryName: labName,
+          certificateNumber: certNumber,
+          accreditationScope,
+          shortDescription: dftqcDescription,
           trustBadges: trustBadgesText.split('\n').map((b) => b.trim()).filter(Boolean),
         },
       };
 
       await api.put('/settings', payload);
-      setMessage('Business settings & NABL configuration updated successfully!');
+      setMessage('Business settings & DFTQC configuration updated successfully!');
     } catch (err) {
       setError(err.customMessage || 'Failed to update settings');
     } finally {
@@ -132,9 +142,9 @@ export const AdminSettingsPage = () => {
     <div className="space-y-6 max-w-5xl">
       
       <div>
-        <h1 className="text-2xl font-black text-white">Business & NABL Settings</h1>
+        <h1 className="text-2xl font-black text-white">Business & DFTQC Settings</h1>
         <p className="text-xs text-slate-400 mt-1">
-          Configure business metadata, Nepal delivery charges, payment options, and NABL accreditation details
+          Configure business metadata, Nepal delivery charges, payment options, and DFTQC quality standards details
         </p>
       </div>
 
@@ -155,7 +165,7 @@ export const AdminSettingsPage = () => {
       <form onSubmit={handleSaveSettings} className="space-y-8">
         
         {/* 1. General Business Branding */}
-        <div className="p-6 sm:p-8 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
+        <div className="p-4 sm:p-6 lg:p-8 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
             <Building2 className="w-4 h-4 text-orange-400" />
             <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">
@@ -163,7 +173,7 @@ export const AdminSettingsPage = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="text-xs font-bold text-white block mb-1">Brand Name *</label>
               <input
@@ -185,7 +195,7 @@ export const AdminSettingsPage = () => {
               />
             </div>
 
-            <div>
+            <div className="sm:col-span-2 lg:col-span-1">
               <label className="text-xs font-bold text-white block mb-1">Tagline / Slogan</label>
               <input
                 type="text"
@@ -196,7 +206,7 @@ export const AdminSettingsPage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
             <div>
               <label className="text-xs font-bold text-white block mb-1">Primary Phone</label>
               <input
@@ -217,7 +227,7 @@ export const AdminSettingsPage = () => {
               />
             </div>
 
-            <div>
+            <div className="sm:col-span-2 lg:col-span-1">
               <label className="text-xs font-bold text-white block mb-1">Support Email</label>
               <input
                 type="email"
@@ -227,7 +237,7 @@ export const AdminSettingsPage = () => {
               />
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2 lg:col-span-3">
               <label className="text-xs font-bold text-white block mb-1">Store Address in Nepal</label>
               <input
                 type="text"
@@ -240,7 +250,7 @@ export const AdminSettingsPage = () => {
         </div>
 
         {/* 2. Delivery & Payment Rules */}
-        <div className="p-6 sm:p-8 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
+        <div className="p-4 sm:p-6 lg:p-8 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
             <Truck className="w-4 h-4 text-orange-400" />
             <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">
@@ -301,20 +311,20 @@ export const AdminSettingsPage = () => {
           </div>
         </div>
 
-        {/* 3. NABL Accreditation Configuration */}
-        <div className="p-6 sm:p-8 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        {/* 3. DFTQC Quality Standards Configuration */}
+        <div className="p-4 sm:p-6 lg:p-8 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-800 gap-2">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-orange-400" />
+              <ShieldCheck className="w-4 h-4 text-orange-400 shrink-0" />
               <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">
-                3. NABL Laboratory Accreditation & Quality Trust Section
+                3. DFTQC Quality Standards & Quality Trust Section
               </h2>
             </div>
             <label className="flex items-center gap-2 cursor-pointer text-xs text-white">
               <input
                 type="checkbox"
-                checked={nablEnabled}
-                onChange={(e) => setNablEnabled(e.target.checked)}
+                checked={dftqcEnabled}
+                onChange={(e) => setDftqcEnabled(e.target.checked)}
                 className="rounded border-slate-700 text-orange-500 focus:ring-orange-500"
               />
               <span>Section Visible</span>
@@ -333,7 +343,7 @@ export const AdminSettingsPage = () => {
             </div>
 
             <div>
-              <label className="text-xs font-bold text-white block mb-1">Laboratory Facility Name</label>
+              <label className="text-xs font-bold text-white block mb-1">Quality / Laboratory Standard Name</label>
               <input
                 type="text"
                 value={labName}
@@ -343,7 +353,7 @@ export const AdminSettingsPage = () => {
             </div>
 
             <div>
-              <label className="text-xs font-bold text-white block mb-1">Certificate Reference / Accreditation #</label>
+              <label className="text-xs font-bold text-white block mb-1">Certificate Reference / Standard #</label>
               <input
                 type="text"
                 value={certNumber}
@@ -353,7 +363,7 @@ export const AdminSettingsPage = () => {
             </div>
 
             <div>
-              <label className="text-xs font-bold text-white block mb-1">Accreditation Scope</label>
+              <label className="text-xs font-bold text-white block mb-1">Accreditation / Quality Scope</label>
               <input
                 type="text"
                 value={accreditationScope}
@@ -363,11 +373,11 @@ export const AdminSettingsPage = () => {
             </div>
 
             <div className="sm:col-span-2">
-              <label className="text-xs font-bold text-white block mb-1">Factual Laboratory Testing Description</label>
+              <label className="text-xs font-bold text-white block mb-1">Factual Quality & Testing Standards Description</label>
               <textarea
                 rows={3}
-                value={nablDescription}
-                onChange={(e) => setNablDescription(e.target.value)}
+                value={dftqcDescription}
+                onChange={(e) => setDftqcDescription(e.target.value)}
                 className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:border-orange-500 focus:outline-none"
               />
             </div>

@@ -70,14 +70,14 @@ export const AdminCategoriesPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-white">Categories Management</h1>
           <p className="text-xs text-slate-400 mt-1">Add, edit, or reorganize supplement catalog categories</p>
         </div>
         <button
           onClick={() => handleOpenModal()}
-          className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg transition active:scale-95"
+          className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg transition active:scale-95 self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Add Category</span>

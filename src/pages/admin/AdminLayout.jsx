@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { AdminSidebar } from '../../components/admin/AdminSidebar';
@@ -7,6 +7,12 @@ import { AdminHeader } from '../../components/admin/AdminHeader';
 export const AdminLayout = () => {
   const location = useLocation();
   const { user, isLoading } = useAuthStore();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Close sidebar on route navigation
+  React.useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
 
   if (isLoading) {
     return (
@@ -22,11 +28,11 @@ export const AdminLayout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col md:flex-row text-white antialiased font-sans">
-      <AdminSidebar />
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <AdminHeader />
-        <main className="flex-1 overflow-y-auto p-6 lg:p-8">
+    <div className="min-h-screen bg-slate-950 flex flex-col lg:flex-row text-white antialiased font-sans overflow-x-hidden">
+      <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
+        <AdminHeader onOpenSidebar={() => setSidebarOpen(true)} />
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 max-w-full">
           <Outlet />
         </main>
       </div>

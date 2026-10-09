@@ -326,7 +326,7 @@ export const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-base font-semibold text-slate-800 hover:text-orange-500"
           >
-            About OSOAA & NABL Lab Quality
+            About OSOAA & DFTQC Quality Standards
           </Link>
           <Link
             to="/contact"

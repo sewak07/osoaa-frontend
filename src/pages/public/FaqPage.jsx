@@ -7,7 +7,7 @@ export const FaqPage = () => {
   const faqs = [
     {
       q: 'How do I know OSOAA supplements are 100% authentic?',
-      a: 'All OSOAA products are batch-tracked, factory sealed, and tested in association with NABL-accredited laboratory facilities for verified protein concentration, zero amino spiking, and absence of heavy metals.'
+      a: 'All OSOAA products are batch-tracked, factory sealed, and tested under strict DFTQC quality standards for verified protein concentration, zero amino spiking, and absence of heavy metals.'
     },
     {
       q: 'What payment methods do you accept in Nepal?',

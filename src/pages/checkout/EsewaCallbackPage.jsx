@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2, RefreshCw, Truck } from 'lucide-react';
 import api from '../../services/api';
 
 export const EsewaCallbackPage = () => {
@@ -9,20 +9,23 @@ export const EsewaCallbackPage = () => {
 
   const dataParam = searchParams.get('data');
   const failedParam = searchParams.get('failed');
+  const orderId = searchParams.get('orderId');
+  const orderNumber = searchParams.get('orderNumber');
 
   const [status, setStatus] = useState('verifying'); // 'verifying' | 'success' | 'failed'
   const [errorMessage, setErrorMessage] = useState('');
+  const [actionLoading, setActionLoading] = useState(false);
 
   useEffect(() => {
     if (failedParam === 'true') {
       setStatus('failed');
-      setErrorMessage('The eSewa transaction was cancelled or failed.');
+      setErrorMessage('The eSewa transaction was cancelled or encountered a temporary gateway issue.');
       return;
     }
 
     if (!dataParam) {
       setStatus('failed');
-      setErrorMessage('No payment callback data received from eSewa.');
+      setErrorMessage('No payment callback confirmation received from eSewa.');
       return;
     }
 
@@ -41,12 +44,63 @@ export const EsewaCallbackPage = () => {
         }
       } catch (err) {
         setStatus('failed');
-        setErrorMessage(err.customMessage || 'Backend server-to-server signature verification failed.');
+        setErrorMessage(err.customMessage || 'Backend server-to-server payment verification failed.');
       }
     };
 
     verifyTransaction();
   }, [dataParam, failedParam, navigate]);
+
+  const handleRetryPayment = async () => {
+    if (!orderId) {
+      navigate('/account/orders');
+      return;
+    }
+
+    setActionLoading(true);
+    try {
+      const res = await api.post('/payments/esewa/initiate', { orderId });
+      const paymentPayload = res.data.data;
+
+      if (paymentPayload) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = paymentPayload.paymentUrl;
+
+        for (const [key, value] of Object.entries(paymentPayload.formData)) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = value;
+          form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+    } catch (err) {
+      alert(err.customMessage || 'Failed to re-initiate eSewa payment. Please try Cash on Delivery.');
+      setActionLoading(false);
+    }
+  };
+
+  const handleSwitchToCod = async () => {
+    if (!orderId) {
+      navigate('/account/orders');
+      return;
+    }
+
+    setActionLoading(true);
+    try {
+      const res = await api.post('/payments/switch-to-cod', { orderId });
+      if (res.data.success) {
+        navigate(`/order-success?orderNumber=${orderNumber || res.data.data.orderNumber}&orderId=${orderId}`);
+      }
+    } catch (err) {
+      alert(err.customMessage || 'Failed to switch payment method.');
+      setActionLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-20 text-center bg-white">
@@ -76,25 +130,54 @@ export const EsewaCallbackPage = () => {
 
         {status === 'failed' && (
           <div className="space-y-6">
-            <div className="w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto">
               <AlertCircle className="w-10 h-10" />
             </div>
             <div>
-              <h2 className="text-xl font-black text-brand-navy">Payment Verification Failed</h2>
-              <p className="text-xs text-rose-600 mt-2">{errorMessage}</p>
+              <h2 className="text-xl font-black text-brand-navy">Payment Incomplete</h2>
+              {orderNumber && (
+                <p className="text-xs font-mono font-bold text-slate-700 mt-1">
+                  Order #{orderNumber} (Pending)
+                </p>
+              )}
+              <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+                {errorMessage}
+              </p>
+              <p className="text-[11px] text-slate-500 mt-1">
+                Your order and reserved items are safely saved. You can switch to Cash on Delivery or re-attempt digital payment.
+              </p>
             </div>
-            <div className="flex gap-3">
+
+            <div className="space-y-3">
+              {orderId && (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleSwitchToCod}
+                    disabled={actionLoading}
+                    className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-sm flex items-center justify-center gap-2 transition disabled:opacity-50 active:scale-98"
+                  >
+                    <Truck className="w-4 h-4" />
+                    <span>Switch to Cash on Delivery (COD)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleRetryPayment}
+                    disabled={actionLoading}
+                    className="w-full py-3 px-4 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow-sm flex items-center justify-center gap-2 transition disabled:opacity-50 active:scale-98"
+                  >
+                    <RefreshCw className={`w-4 h-4 ${actionLoading ? 'animate-spin' : ''}`} />
+                    <span>Retry eSewa Payment</span>
+                  </button>
+                </>
+              )}
+
               <Link
                 to="/account/orders"
-                className="flex-1 py-3 bg-brand-navy hover:bg-navy-700 text-white text-xs font-bold rounded-xl shadow-sm"
+                className="block w-full py-2.5 text-xs text-slate-600 hover:text-slate-900 font-semibold transition"
               >
-                View Orders
-              </Link>
-              <Link
-                to="/checkout"
-                className="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow-orange-sm"
-              >
-                Retry Checkout
+                View in My Orders &rarr;
               </Link>
             </div>
           </div>

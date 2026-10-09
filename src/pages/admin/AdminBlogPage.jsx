@@ -148,8 +148,8 @@ export const AdminBlogPage = () => {
       </div>
 
       {/* Stats Summary Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 bg-slate-900 border border-slate-800 rounded-2xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="p-4 sm:p-5 bg-slate-900 border border-slate-800 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Total Content</span>
             <BookOpen className="w-4 h-4 text-orange-400" />
@@ -158,7 +158,7 @@ export const AdminBlogPage = () => {
           <p className="text-[11px] text-slate-500 mt-1">{stats.recipesCount || 0} recipes included</p>
         </div>
 
-        <div className="p-5 bg-slate-900 border border-slate-800 rounded-2xl">
+        <div className="p-4 sm:p-5 bg-slate-900 border border-slate-800 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Published Live</span>
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
@@ -167,7 +167,7 @@ export const AdminBlogPage = () => {
           <p className="text-[11px] text-slate-500 mt-1">Visible on website</p>
         </div>
 
-        <div className="p-5 bg-slate-900 border border-slate-800 rounded-2xl">
+        <div className="p-4 sm:p-5 bg-slate-900 border border-slate-800 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Drafts & Scheduled</span>
             <Clock className="w-4 h-4 text-amber-400" />
@@ -176,7 +176,7 @@ export const AdminBlogPage = () => {
           <p className="text-[11px] text-slate-500 mt-1">Pending publication</p>
         </div>
 
-        <div className="p-5 bg-slate-900 border border-slate-800 rounded-2xl">
+        <div className="p-4 sm:p-5 bg-slate-900 border border-slate-800 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Total Read Views</span>
             <TrendingUp className="w-4 h-4 text-sky-400" />
@@ -187,7 +187,7 @@ export const AdminBlogPage = () => {
       </div>
 
       {/* Filters & Search Toolbar */}
-      <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
         
         {/* Search */}
         <div className="w-full md:w-80 flex items-center gap-2 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl">
@@ -202,11 +202,11 @@ export const AdminBlogPage = () => {
         </div>
 
         {/* Filter Dropdowns */}
-        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
           <select
             value={categoryFilter}
             onChange={(e) => { setCategoryFilter(e.target.value); setPage(1); }}
-            className="px-3 py-2 bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl focus:outline-none focus:border-orange-500"
+            className="w-full sm:w-auto px-3 py-2 bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl focus:outline-none focus:border-orange-500"
           >
             <option value="all">All Categories</option>
             <option value="nepali-blog">Nepali Blog (नेपाली ब्लग)</option>
@@ -217,7 +217,7 @@ export const AdminBlogPage = () => {
           <select
             value={statusFilter}
             onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-            className="px-3 py-2 bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl focus:outline-none focus:border-orange-500"
+            className="w-full sm:w-auto px-3 py-2 bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl focus:outline-none focus:border-orange-500"
           >
             <option value="all">All Statuses</option>
             <option value="published">Published</option>
@@ -231,7 +231,7 @@ export const AdminBlogPage = () => {
       {/* Posts Table */}
       <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-xs min-w-[850px]">
             <thead className="bg-slate-950 text-white uppercase font-bold border-b border-slate-800">
               <tr>
                 <th className="p-4">Post & Excerpt</th>

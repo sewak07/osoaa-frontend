@@ -34,8 +34,8 @@ export const Footer = () => {
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-black">NABL Tested</h4>
-              <p className="text-xs text-gray-700">Verified lab testing</p>
+              <h4 className="text-sm font-bold text-black">DFTQC Standards</h4>
+              <p className="text-xs text-gray-700">Quality tested standards</p>
             </div>
           </div>
 

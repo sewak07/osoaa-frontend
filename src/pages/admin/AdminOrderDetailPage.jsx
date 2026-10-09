@@ -106,20 +106,20 @@ export const AdminOrderDetailPage = () => {
         <div className="lg:col-span-7 space-y-6">
           
           {/* Items */}
-          <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+          <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
             <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">Ordered Products</h2>
             <div className="divide-y divide-slate-800 overflow-hidden">
               {order.items?.map((item, idx) => (
-                <div key={idx} className="py-3 flex items-center justify-between gap-4 text-xs">
-                  <div className="flex items-center gap-3">
-                    <img src={item.image} alt="" className="w-10 h-10 object-cover rounded-lg bg-slate-950" />
-                    <div>
-                      <p className="font-bold text-white">{item.name}</p>
-                      {item.variantName && <p className="text-[10px] text-orange-400">{item.variantName}</p>}
+                <div key={idx} className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <img src={item.image} alt="" className="w-10 h-10 object-cover rounded-lg bg-slate-950 shrink-0" />
+                    <div className="min-w-0">
+                      <p className="font-bold text-white truncate">{item.name}</p>
+                      {item.variantName && <p className="text-[10px] text-orange-400 truncate">{item.variantName}</p>}
                       <p className="text-[10px] text-slate-400">Qty: {item.quantity} × {formatNpr(item.price)}</p>
                     </div>
                   </div>
-                  <span className="font-bold text-white">{formatNpr(item.subtotal)}</span>
+                  <span className="font-bold text-white self-end sm:self-auto shrink-0">{formatNpr(item.subtotal)}</span>
                 </div>
               ))}
             </div>
@@ -131,7 +131,7 @@ export const AdminOrderDetailPage = () => {
           </div>
 
           {/* Customer & Shipping */}
-          <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-3 text-xs">
+          <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-3 text-xs">
             <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">Delivery & Customer Info</h2>
             <p className="font-bold text-white text-sm">{order.shippingAddress?.fullName}</p>
             <p className="text-slate-300">Phone: <strong className="text-white">{order.shippingAddress?.phone}</strong></p>
@@ -152,7 +152,7 @@ export const AdminOrderDetailPage = () => {
 
         {/* Right Column: Status & Fulfillment Actions */}
         <div className="lg:col-span-5 space-y-6">
-          <form onSubmit={handleSaveChanges} className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
+          <form onSubmit={handleSaveChanges} className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4 shadow-xl">
             <h2 className="text-xs font-bold text-orange-400 uppercase tracking-wider">Fulfillment Actions</h2>
 
             <div>

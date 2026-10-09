@@ -326,33 +326,33 @@ export const AdminBlogFormPage = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-3 self-end sm:self-auto">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => setPreviewOpen(true)}
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs rounded-xl border border-slate-800 flex items-center gap-1.5 transition"
+            className="flex-1 sm:flex-none px-3.5 sm:px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs rounded-xl border border-slate-800 flex items-center justify-center gap-1.5 transition"
           >
             <Eye className="w-4 h-4 text-orange-400" />
-            <span>Live Preview</span>
+            <span>Preview</span>
           </button>
 
           <button
             type="button"
             onClick={(e) => handleSubmit(e, 'draft')}
             disabled={loading}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition disabled:opacity-50"
+            className="flex-1 sm:flex-none px-3.5 sm:px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition disabled:opacity-50"
           >
-            Save Draft
+            Draft
           </button>
 
           <button
             type="button"
             onClick={(e) => handleSubmit(e, 'published')}
             disabled={loading}
-            className="px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-orange-500/20 flex items-center gap-2 transition disabled:opacity-50 active:scale-95"
+            className="w-full sm:w-auto px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 transition disabled:opacity-50 active:scale-95"
           >
             <Save className="w-4 h-4" />
-            <span>{loading ? 'Saving...' : 'Publish Post'}</span>
+            <span>{loading ? 'Saving...' : 'Publish'}</span>
           </button>
         </div>
       </div>
@@ -865,38 +865,42 @@ export const AdminBlogFormPage = () => {
 
             <div className="space-y-3">
               {ingredients.map((ing, idx) => (
-                <div key={idx} className="flex items-center gap-3 bg-slate-950 p-2.5 rounded-2xl border border-slate-800">
-                  <span className="text-xs font-mono text-slate-500 px-2">{idx + 1}</span>
-                  <input
-                    type="text"
-                    placeholder="Ingredient name (e.g. OSOAA 100% Whey Protein)"
-                    value={ing.item}
-                    onChange={(e) => handleIngredientChange(idx, 'item', e.target.value)}
-                    className="flex-1 bg-transparent text-xs text-white placeholder-slate-500 focus:outline-none"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Quantity (e.g. 1 scoop / 33g)"
-                    value={ing.quantity}
-                    onChange={(e) => handleIngredientChange(idx, 'quantity', e.target.value)}
-                    className="w-40 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveIngredient(idx)}
-                    disabled={ingredients.length === 1}
-                    className="p-1.5 text-slate-500 hover:text-rose-400 disabled:opacity-30 transition"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <span className="text-xs font-mono text-slate-500 px-1 shrink-0">{idx + 1}</span>
+                    <input
+                      type="text"
+                      placeholder="Ingredient name (e.g. OSOAA 100% Whey Protein)"
+                      value={ing.item}
+                      onChange={(e) => handleIngredientChange(idx, 'item', e.target.value)}
+                      className="w-full bg-transparent text-xs text-white placeholder-slate-500 focus:outline-none"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
+                    <input
+                      type="text"
+                      placeholder="Quantity (e.g. 1 scoop / 33g)"
+                      value={ing.quantity}
+                      onChange={(e) => handleIngredientChange(idx, 'quantity', e.target.value)}
+                      className="w-full sm:w-44 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveIngredient(idx)}
+                      disabled={ingredients.length === 1}
+                      className="p-1.5 text-slate-500 hover:text-rose-400 disabled:opacity-30 transition shrink-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Dynamic Instructions Builder */}
-          <div className="p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3 gap-2">
               <div>
                 <h3 className="text-xs font-bold text-white uppercase tracking-wider">
                   Step-by-Step Instructions
@@ -906,7 +910,7 @@ export const AdminBlogFormPage = () => {
               <button
                 type="button"
                 onClick={handleAddInstruction}
-                className="px-3 py-1.5 bg-orange-500/20 hover:bg-orange-500 text-orange-400 hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+                className="px-3 py-1.5 bg-orange-500/20 hover:bg-orange-500 text-orange-400 hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Step</span>
@@ -916,9 +920,9 @@ export const AdminBlogFormPage = () => {
             <div className="space-y-4">
               {instructions.map((inst, idx) => (
                 <div key={idx} className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center justify-center">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      <span className="w-6 h-6 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center justify-center shrink-0">
                         {inst.step}
                       </span>
                       <input
@@ -926,14 +930,14 @@ export const AdminBlogFormPage = () => {
                         placeholder="Step Title (e.g. Blend and Mix)"
                         value={inst.title}
                         onChange={(e) => handleInstructionChange(idx, 'title', e.target.value)}
-                        className="bg-transparent text-xs font-bold text-white placeholder-slate-500 focus:outline-none w-64"
+                        className="bg-transparent text-xs font-bold text-white placeholder-slate-500 focus:outline-none w-full min-w-0"
                       />
                     </div>
                     <button
                       type="button"
                       onClick={() => handleRemoveInstruction(idx)}
                       disabled={instructions.length === 1}
-                      className="p-1 text-slate-500 hover:text-rose-400 disabled:opacity-30 transition"
+                      className="p-1.5 text-slate-500 hover:text-rose-400 disabled:opacity-30 transition shrink-0"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

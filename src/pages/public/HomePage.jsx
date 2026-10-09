@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import api from '../../services/api';
 import { ProductCard } from '../../components/product/ProductCard';
-import { NablTrustSection } from '../../components/trust/NablTrustSection';
+import { DftqcTrustSection } from '../../components/trust/DftqcTrustSection';
 import { useSettingsStore } from '../../store/settingsStore';
 
 export const HomePage = () => {
@@ -76,24 +76,30 @@ export const HomePage = () => {
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-              Fuel Your Potential with{' '}
-              <span className="text-orange-400">
-                100% Authentic
-              </span>{' '}
-              Nutrition.
+              {heroBanner?.title ? (
+                heroBanner.title
+              ) : (
+                <>
+                  Fuel Your Potential with{' '}
+                  <span className="text-orange-400">
+                    100% Authentic
+                  </span>{' '}
+                  Nutrition.
+                </>
+              )}
             </h1>
 
             <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-xl">
-              {heroBanner?.subtitle || 'Ultra-pure whey protein isolate, micronized creatine, pre-workout and performance supplements tested with NABL accredited laboratory standards.'}
+              {heroBanner?.subtitle || 'Ultra-pure whey protein isolate, micronized creatine, pre-workout and performance supplements tested under DFTQC quality testing standards.'}
             </p>
 
             {/* Hero CTAs */}
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <Link
-                to="/shop"
+                to={heroBanner?.ctaLink || '/shop'}
                 className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-black text-sm rounded-xl shadow-orange-md flex items-center gap-2 transition-all active:scale-95"
               >
-                <span>Shop Best Sellers</span>
+                <span>{heroBanner?.ctaText || 'Shop Best Sellers'}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
@@ -107,8 +113,8 @@ export const HomePage = () => {
             {/* Trust Highlights under Hero */}
             <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-700/80 text-xs text-gray-300">
               <div>
-                <p className="text-base font-extrabold text-white">NABL</p>
-                <p className="text-[11px]">Associated Lab Tested</p>
+                <p className="text-base font-extrabold text-white">DFTQC</p>
+                <p className="text-[11px]">Quality Standards Aligned</p>
               </div>
               <div>
                 <p className="text-base font-extrabold text-white">100% Purity</p>
@@ -182,8 +188,8 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* 4. NABL ACCREDITED LAB TRUST SECTION */}
-      <NablTrustSection />
+      {/* 4. DFTQC QUALITY STANDARDS TRUST SECTION */}
+      <DftqcTrustSection />
 
       {/* 5. FEATURED / NEW ARRIVALS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

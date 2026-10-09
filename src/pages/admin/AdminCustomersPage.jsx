@@ -56,7 +56,7 @@ export const AdminCustomersPage = () => {
 
       <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-xs min-w-[720px]">
             <thead className="bg-slate-950 text-white uppercase font-bold border-b border-slate-800">
               <tr>
                 <th className="p-4">Customer</th>

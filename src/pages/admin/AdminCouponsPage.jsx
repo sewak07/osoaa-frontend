@@ -58,14 +58,14 @@ export const AdminCouponsPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-white">Discount Coupons</h1>
           <p className="text-xs text-slate-400 mt-1">Create promotional codes, percentage discounts, and order thresholds</p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg transition active:scale-95"
+          className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg transition active:scale-95 self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Add Coupon</span>
@@ -74,7 +74,7 @@ export const AdminCouponsPage = () => {
 
       <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-xs min-w-[720px]">
             <thead className="bg-slate-950 text-white uppercase font-bold border-b border-slate-800">
               <tr>
                 <th className="p-4">Coupon Code</th>

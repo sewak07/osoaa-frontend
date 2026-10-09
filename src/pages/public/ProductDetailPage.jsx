@@ -357,7 +357,7 @@ export const ProductDetailPage = () => {
             </div>
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
               <Award className="w-5 h-5 text-orange-500 mx-auto mb-1" />
-              <span className="font-semibold text-slate-800">NABL Tested</span>
+              <span className="font-semibold text-slate-800">DFTQC Standards</span>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
               <Truck className="w-5 h-5 text-orange-500 mx-auto mb-1" />

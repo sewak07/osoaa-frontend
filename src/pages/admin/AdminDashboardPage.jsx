@@ -118,35 +118,37 @@ export const AdminDashboardPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Recent Orders Table */}
-        <div className="lg:col-span-8 p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+        <div className="lg:col-span-8 p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
           <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-            <h2 className="text-sm font-bold text-white uppercase tracking-wider">Recent Customer Orders</h2>
+            <h2 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Recent Customer Orders</h2>
             <Link to="/admin/orders" className="text-xs text-orange-400 hover:underline font-semibold">
-              View All Orders
+              View All
             </Link>
           </div>
 
-          <div className="divide-y divide-slate-800 overflow-x-auto">
+          <div className="divide-y divide-slate-800">
             {recentOrders?.length === 0 ? (
               <p className="p-4 text-xs text-slate-400 text-center">No orders recorded yet.</p>
             ) : (
               recentOrders?.map((ord) => (
-                <div key={ord._id} className="py-3.5 flex items-center justify-between gap-4 text-xs">
-                  <div>
+                <div key={ord._id} className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center justify-between sm:justify-start gap-3">
                     <span className="font-bold text-white font-mono">#{ord.orderNumber}</span>
-                    <p className="text-slate-400 text-[11px]">{ord.customer?.name || 'Customer'}</p>
+                    <p className="text-slate-400 text-[11px] truncate max-w-[140px]">{ord.customer?.name || 'Customer'}</p>
                   </div>
-                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                    ord.orderStatus === 'DELIVERED' ? 'bg-emerald-500/20 text-emerald-400' :
-                    ord.orderStatus === 'CANCELLED' ? 'bg-rose-500/20 text-rose-400' :
-                    'bg-amber-500/20 text-amber-400'
-                  }`}>
-                    {ord.orderStatus}
-                  </span>
-                  <span className="font-bold text-white font-mono">{formatNpr(ord.pricing?.grandTotal)}</span>
-                  <Link to={`/admin/orders/${ord._id}`} className="text-orange-400 hover:underline font-semibold">
-                    Manage
-                  </Link>
+                  <div className="flex items-center justify-between sm:justify-end gap-3">
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                      ord.orderStatus === 'DELIVERED' ? 'bg-emerald-500/20 text-emerald-400' :
+                      ord.orderStatus === 'CANCELLED' ? 'bg-rose-500/20 text-rose-400' :
+                      'bg-amber-500/20 text-amber-400'
+                    }`}>
+                      {ord.orderStatus}
+                    </span>
+                    <span className="font-bold text-white font-mono">{formatNpr(ord.pricing?.grandTotal)}</span>
+                    <Link to={`/admin/orders/${ord._id}`} className="text-orange-400 hover:text-orange-300 hover:underline font-semibold px-2 py-1 bg-slate-950 rounded-lg border border-slate-800">
+                      Manage
+                    </Link>
+                  </div>
                 </div>
               ))
             )}
@@ -154,8 +156,8 @@ export const AdminDashboardPage = () => {
         </div>
 
         {/* Order Status Breakdown */}
-        <div className="lg:col-span-4 p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
-          <h2 className="text-sm font-bold text-white uppercase tracking-wider pb-4 border-b border-slate-800">
+        <div className="lg:col-span-4 p-4 sm:p-6 bg-slate-900 border border-slate-800 rounded-3xl space-y-4">
+          <h2 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider pb-4 border-b border-slate-800">
             Status Breakdown
           </h2>
 
