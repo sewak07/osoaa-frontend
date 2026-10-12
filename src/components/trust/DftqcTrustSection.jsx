@@ -9,7 +9,7 @@ export const DftqcTrustSection = () => {
   if (dftqc?.enabled === false) return null;
 
   const certName = dftqc?.certificationName || 'DFTQC Quality Standards & Compliance';
-  const labName = dftqc?.laboratoryName || 'DFTQC Compliant Quality Testing Standards';
+  const labName = dftqc?.laboratoryName || 'DFTQC Quality Guidelines Aligned';
   const certNumber = dftqc?.certificateNumber || '';
   const description = dftqc?.shortDescription || 'OSOAA products follow strict quality testing guidelines aligned with Nepal\'s Department of Food Technology and Quality Control (DFTQC) standards for authentic protein concentration, absence of heavy metals, and pure nutrition.';
   const badges = dftqc?.trustBadges?.length > 0 ? dftqc.trustBadges : [
@@ -29,17 +29,17 @@ export const DftqcTrustSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Text & Accreditation Description */}
+          {/* Left Text & Quality Standards Description */}
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-gray-300 text-orange-600 text-xs font-bold uppercase tracking-wider shadow-sm">
               <FlaskConical className="w-4 h-4" />
-              <span>Quality Assurance & Testing Standards</span>
+              <span>Quality Assurance & Standards</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-black tracking-tight leading-tight">
               Quality You Can Trust. <br />
               <span className="text-orange-600">
-                Tested Under DFTQC Quality Standards.
+                Aligned with DFTQC Food Quality Standards.
               </span>
             </h2>
 
@@ -57,19 +57,19 @@ export const DftqcTrustSection = () => {
               ))}
             </div>
 
-            {/* Official Lab Info Footer */}
+            {/* Quality Standard Reference Info Footer */}
             <div className="p-4 rounded-xl bg-gray-200 border border-gray-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <p className="text-xs text-orange-600 font-bold uppercase tracking-wider">Quality Standard</p>
                 <p className="text-sm font-semibold text-black">{labName}</p>
                 {certNumber && (
-                  <p className="text-[11px] text-gray-600 font-mono mt-0.5">Cert Ref: {certNumber}</p>
+                  <p className="text-[11px] text-gray-600 font-mono mt-0.5">Reference: {certNumber}</p>
                 )}
               </div>
 
               <div className="flex items-center gap-2 text-xs font-bold text-white bg-orange-500 px-3.5 py-2 rounded-xl shadow-orange-sm">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Verified Standards</span>
+                <span>Quality Compliance</span>
               </div>
             </div>
 

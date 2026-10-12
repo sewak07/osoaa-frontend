@@ -4,7 +4,8 @@ import {
   CreditCard,
   MapPin,
   AlertCircle,
-  Lock
+  Lock,
+  Truck
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { useCartStore } from '../../store/cartStore';
@@ -16,8 +17,8 @@ import api from '../../services/api';
 export const CheckoutPage = () => {
   const navigate = useNavigate();
   const { user } = useAuthStore();
-  const { items, getSubtotal, coupon, clearCart, getGrandTotal } = useCartStore();
-  const { settings } = useSettingsStore();
+  const { items, getSubtotal, coupon, clearCart } = useCartStore();
+  const { settings, fetchPublicSettings } = useSettingsStore();
 
   const [shippingAddress, setShippingAddress] = useState({
     fullName: user?.name || '',
@@ -52,6 +53,13 @@ export const CheckoutPage = () => {
     }
   }, [user]);
 
+  // Ensure settings are loaded
+  useEffect(() => {
+    if (!settings?.deliverySettings?.districtCharges) {
+      fetchPublicSettings();
+    }
+  }, [settings, fetchPublicSettings]);
+
   // Redirect if cart is empty
   useEffect(() => {
     if (items.length === 0) {
@@ -60,11 +68,24 @@ export const CheckoutPage = () => {
   }, [items, navigate]);
 
   const subtotal = getSubtotal();
-  const deliveryFee = settings?.deliverySettings?.standardDeliveryFee || 150;
-  const freeThreshold = settings?.deliverySettings?.freeDeliveryThreshold || 3500;
-  const isFreeDelivery = subtotal >= freeThreshold;
-  const effectiveDeliveryFee = isFreeDelivery ? 0 : deliveryFee;
-  const grandTotal = getGrandTotal(effectiveDeliveryFee);
+  const couponDiscount = coupon?.discountAmount || 0;
+  const discountedSubtotal = Math.max(0, subtotal - couponDiscount);
+
+  // Dynamic district delivery fee calculation
+  const districtCharges = settings?.deliverySettings?.districtCharges || {};
+  const selectedDistrict = shippingAddress.district?.trim();
+  const rawFee = selectedDistrict ? districtCharges[selectedDistrict] : undefined;
+
+  const isFeeConfigured =
+    rawFee !== undefined &&
+    rawFee !== null &&
+    rawFee !== '' &&
+    !isNaN(Number(rawFee)) &&
+    Number(rawFee) >= 0;
+
+  const deliveryFee = isFeeConfigured ? Number(rawFee) : null;
+  // Delivery fee is charged strictly ONCE per order
+  const grandTotal = isFeeConfigured ? (discountedSubtotal + deliveryFee) : discountedSubtotal;
 
   const availableDistricts = NEPAL_DISTRICTS_BY_PROVINCE[shippingAddress.province] || [];
 
@@ -89,6 +110,11 @@ export const CheckoutPage = () => {
 
     if (!shippingAddress.fullName || !shippingAddress.phone || !shippingAddress.municipality || !shippingAddress.ward || !shippingAddress.streetAddress) {
       setErrorMessage('Please fill in all required shipping address fields.');
+      return;
+    }
+
+    if (!isFeeConfigured) {
+      setErrorMessage(`Delivery is currently unavailable for ${selectedDistrict}. No delivery fee has been configured for this district.`);
       return;
     }
 
@@ -159,6 +185,18 @@ export const CheckoutPage = () => {
         </div>
       )}
 
+      {!isFeeConfigured && (
+        <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl text-xs text-amber-800 flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+          <div>
+            <p className="font-bold">Delivery Fee Not Configured</p>
+            <p>
+              Delivery is currently unavailable for <strong>{selectedDistrict}</strong> (no delivery fee configured). Please select a different delivery district or contact support.
+            </p>
+          </div>
+        </div>
+      )}
+
       <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
         {/* Left Column: Shipping & Payment Options */}
@@ -212,7 +250,9 @@ export const CheckoutPage = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1.5">District *</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                  District * {isFeeConfigured && <span className="text-emerald-600 font-normal">({formatNpr(deliveryFee)} delivery)</span>}
+                </label>
                 <select
                   value={shippingAddress.district}
                   onChange={(e) => setShippingAddress({ ...shippingAddress, district: e.target.value })}
@@ -388,13 +428,16 @@ export const CheckoutPage = () => {
                 </div>
               )}
 
-              <div className="flex justify-between">
-                <span>Delivery Fee</span>
+              <div className="flex justify-between items-center">
+                <span className="flex items-center gap-1.5">
+                  <Truck className="w-3.5 h-3.5 text-orange-500" />
+                  <span>Delivery ({selectedDistrict})</span>
+                </span>
                 <span>
-                  {effectiveDeliveryFee === 0 ? (
-                    <strong className="text-emerald-700">FREE</strong>
+                  {isFeeConfigured ? (
+                    <strong className="text-slate-900 font-mono">{formatNpr(deliveryFee)}</strong>
                   ) : (
-                    formatNpr(effectiveDeliveryFee)
+                    <span className="text-rose-600 font-bold">Unavailable</span>
                   )}
                 </span>
               </div>
@@ -407,11 +450,13 @@ export const CheckoutPage = () => {
 
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isFeeConfigured}
               className="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-black text-sm rounded-2xl shadow-orange-md flex items-center justify-center gap-2 transition disabled:opacity-50 active:scale-95"
             >
               {isSubmitting ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : !isFeeConfigured ? (
+                <span>Delivery Unavailable for {selectedDistrict}</span>
               ) : (
                 <>
                   <Lock className="w-4 h-4" />

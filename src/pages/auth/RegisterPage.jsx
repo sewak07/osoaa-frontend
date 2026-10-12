@@ -52,7 +52,7 @@ export const RegisterPage = () => {
   return (
     <div className="min-h-[75vh] flex items-center justify-center px-4 py-16 bg-white">
       <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
-        
+
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-1.5">
             <span className="font-display font-black text-3xl tracking-wider text-brand-navy">
@@ -78,7 +78,7 @@ export const RegisterPage = () => {
               <input
                 type="text"
                 required
-                placeholder="e.g. Ramesh Shrestha"
+                placeholder="Your name"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full pl-10 pr-3.5 py-3 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -93,7 +93,7 @@ export const RegisterPage = () => {
               <input
                 type="email"
                 required
-                placeholder="ramesh@gmail.com"
+                placeholder="e.g. name@gmail.com"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="w-full pl-10 pr-3.5 py-3 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"

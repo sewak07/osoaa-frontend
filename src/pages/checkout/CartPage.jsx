@@ -26,12 +26,8 @@ export const CartPage = () => {
   const [couponLoading, setCouponLoading] = useState(false);
 
   const subtotal = getSubtotal();
-  const deliveryFee = settings?.deliverySettings?.standardDeliveryFee || 150;
-  const freeThreshold = settings?.deliverySettings?.freeDeliveryThreshold || 3500;
-  
-  const isFreeDelivery = subtotal >= freeThreshold;
-  const effectiveDeliveryFee = isFreeDelivery ? 0 : deliveryFee;
-  const grandTotal = getGrandTotal(effectiveDeliveryFee);
+  const couponDiscount = coupon?.discountAmount || 0;
+  const discountedSubtotal = Math.max(0, subtotal - couponDiscount);
 
   const handleApplyCoupon = async (e) => {
     e.preventDefault();
@@ -98,27 +94,10 @@ export const CartPage = () => {
         {/* Left Column: Cart Items List */}
         <div className="lg:col-span-8 space-y-4">
           
-          {/* Free Delivery Bar Banner */}
-          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between gap-4">
-            {isFreeDelivery ? (
-              <div className="flex items-center gap-2 text-xs font-bold text-emerald-700">
-                <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>🎉 You qualify for FREE Nationwide Delivery across Nepal!</span>
-              </div>
-            ) : (
-              <div className="w-full text-xs text-slate-700 space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span>Add <strong className="text-orange-600 font-bold">{formatNpr(freeThreshold - subtotal)}</strong> more for <strong className="text-brand-navy">FREE Delivery</strong></span>
-                  <span className="font-bold text-orange-600">{Math.round((subtotal / freeThreshold) * 100)}%</span>
-                </div>
-                <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                  <div 
-                    className="bg-orange-500 h-full transition-all duration-300"
-                    style={{ width: `${Math.min(100, (subtotal / freeThreshold) * 100)}%` }}
-                  />
-                </div>
-              </div>
-            )}
+          {/* Delivery Info Banner */}
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-3 text-xs text-slate-700">
+            <Sparkles className="w-4 h-4 text-orange-500 shrink-0" />
+            <span>🚚 Delivery fee is determined once per order based on your delivery district across Nepal.</span>
           </div>
 
           {/* Items Table / Cards */}
@@ -252,20 +231,14 @@ export const CartPage = () => {
                 </div>
               )}
 
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <span>Nationwide Delivery</span>
-                <span>
-                  {effectiveDeliveryFee === 0 ? (
-                    <strong className="text-emerald-700 uppercase">FREE</strong>
-                  ) : (
-                    formatNpr(effectiveDeliveryFee)
-                  )}
-                </span>
+                <span className="text-slate-500 font-medium text-[11px]">Calculated at checkout (by district)</span>
               </div>
 
               <div className="pt-3 border-t border-slate-200 flex justify-between items-baseline text-sm">
-                <span className="font-bold text-slate-900">Grand Total (NPR)</span>
-                <span className="text-2xl font-black text-brand-navy">{formatNpr(grandTotal)}</span>
+                <span className="font-bold text-slate-900">Total Subtotal (NPR)</span>
+                <span className="text-2xl font-black text-brand-navy">{formatNpr(discountedSubtotal)}</span>
               </div>
             </div>
 

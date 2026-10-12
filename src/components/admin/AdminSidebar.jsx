@@ -30,7 +30,7 @@ export const AdminSidebar = ({ isOpen = false, onClose = () => {} }) => {
     { name: 'Customer Reviews', path: '/admin/reviews', icon: MessageSquare },
     { name: 'Discount Coupons', path: '/admin/coupons', icon: Tag },
     { name: 'Hero Banners', path: '/admin/banners', icon: Image },
-    { name: 'Business & NABL Settings', path: '/admin/settings', icon: Settings },
+    { name: 'Business & DFTQC Settings', path: '/admin/settings', icon: Settings },
   ];
 
   const sidebarContent = (

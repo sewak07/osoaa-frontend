@@ -53,8 +53,15 @@ import { AdminBannersPage } from './pages/admin/AdminBannersPage';
 import { AdminSettingsPage } from './pages/admin/AdminSettingsPage';
 import { AdminBlogPage } from './pages/admin/AdminBlogPage';
 import { AdminBlogFormPage } from './pages/admin/AdminBlogFormPage';
+import { useAuthStore } from './store/authStore';
 
 function App() {
+  const { checkAuth } = useAuthStore();
+
+  React.useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   return (
     <Routes>
       {/* Customer & Public Routes (Wrapped with RootLayout) */}

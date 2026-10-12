@@ -41,6 +41,28 @@ export const AdminBannersPage = () => {
     fetchBanners();
   }, []);
 
+  // Prevent background scrolling while modal is open
+  useEffect(() => {
+    if (showModal) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [showModal]);
+
+  // Keyboard accessibility: Escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && showModal && !saving) {
+        closeModal();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showModal, saving]);
+
   const openCreateModal = () => {
     setEditingBanner(null);
     setForm(initialFormState);
@@ -275,178 +297,197 @@ export const AdminBannersPage = () => {
 
       {/* Modal: Create & Edit Hero Slide */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm overflow-y-auto">
-          <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-5 my-8">
-            
-            {/* Modal Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <div className="flex items-center gap-2">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-sm overflow-hidden"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !saving) closeModal();
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="banner-modal-title"
+        >
+          <div
+            className="w-full max-w-lg md:max-w-xl lg:max-w-2xl max-h-[90vh] max-h-[90dvh] flex flex-col bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            {/* Modal Header (Pinned at top) */}
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-800 shrink-0 bg-slate-900/90 backdrop-blur-md">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-2">
                 {editingBanner ? (
-                  <div className="p-2 rounded-xl bg-orange-500/20 text-orange-400">
+                  <div className="p-2 rounded-xl bg-orange-500/20 text-orange-400 shrink-0">
                     <Edit2 className="w-4 h-4" />
                   </div>
                 ) : (
-                  <div className="p-2 rounded-xl bg-orange-500/20 text-orange-400">
+                  <div className="p-2 rounded-xl bg-orange-500/20 text-orange-400 shrink-0">
                     <Plus className="w-4 h-4" />
                   </div>
                 )}
-                <div>
-                  <h3 className="text-base font-bold text-white">
+                <div className="min-w-0">
+                  <h3 id="banner-modal-title" className="text-sm sm:text-base font-bold text-white truncate">
                     {editingBanner ? 'Edit Hero Slide' : 'Create Hero Slide'}
                   </h3>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px] text-slate-400 truncate hidden xs:block">
                     {editingBanner ? 'Update slide text, links, status, and artwork' : 'Add a new promotional banner for the homepage'}
                   </p>
                 </div>
               </div>
               <button
+                type="button"
                 onClick={closeModal}
-                className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition"
+                disabled={saving}
+                aria-label="Close modal"
+                className="p-1.5 sm:p-2 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800 transition shrink-0 disabled:opacity-50"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Error in modal */}
-            {errorMessage && (
-              <div className="p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
-                <span>{errorMessage}</span>
-              </div>
-            )}
+            {/* Form wrapping body and footer */}
+            <form onSubmit={handleSave} className="flex flex-col flex-1 min-h-0 overflow-hidden">
 
-            {/* Form */}
-            <form onSubmit={handleSave} className="space-y-4">
-              
-              {/* Title */}
-              <div>
-                <label className="text-xs font-bold text-white block mb-1">Headline Title *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Fuel Your Potential with 100% Authentic Nutrition"
-                  value={form.title}
-                  onChange={(e) => setForm({ ...form, title: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none"
-                />
-              </div>
+              {/* Scrollable Form Body */}
+              <div className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 py-4 sm:py-5 space-y-4">
 
-              {/* Subtitle */}
-              <div>
-                <label className="text-xs font-bold text-white block mb-1">Subtitle / Supporting Statement</label>
-                <textarea
-                  rows={2}
-                  placeholder="e.g. Ultra-pure whey protein isolate, micronized creatine, pre-workout tested under DFTQC standards."
-                  value={form.subtitle}
-                  onChange={(e) => setForm({ ...form, subtitle: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none"
-                />
-              </div>
-
-              {/* Badge & Display Order */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-bold text-white block mb-1">Promotional Badge</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. DFTQC Quality Standards"
-                    value={form.badge}
-                    onChange={(e) => setForm({ ...form, badge: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-bold text-white block mb-1">Display Order #</label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={form.displayOrder}
-                    onChange={(e) => setForm({ ...form, displayOrder: parseInt(e.target.value, 10) || 0 })}
-                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono placeholder-slate-500 focus:border-orange-500 focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* CTA Button Text & Link */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-bold text-white block mb-1">CTA Button Text</label>
-                  <input
-                    type="text"
-                    placeholder="Shop Now"
-                    value={form.ctaText}
-                    onChange={(e) => setForm({ ...form, ctaText: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-bold text-white block mb-1">CTA Destination Link</label>
-                  <input
-                    type="text"
-                    placeholder="/shop or /shop?category=protein"
-                    value={form.ctaLink}
-                    onChange={(e) => setForm({ ...form, ctaLink: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono placeholder-slate-500 focus:border-orange-500 focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Image Upload & Current Preview */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-white block">
-                  Hero Image {editingBanner ? '(Leave empty to keep existing image)' : '*'}
-                </label>
-                
-                {imagePreview && (
-                  <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-950 border border-slate-800 mb-2">
-                    <img
-                      src={imagePreview}
-                      alt="Banner Preview"
-                      className="w-full h-full object-cover"
-                    />
-                    <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-white">
-                      {desktopImage ? 'New Selected Artwork' : 'Current Artwork'}
-                    </span>
+                {/* Error in modal */}
+                {errorMessage && (
+                  <div className="p-3 sm:p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                    <span className="break-words leading-relaxed">{errorMessage}</span>
                   </div>
                 )}
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-orange-500 file:text-white hover:file:bg-orange-600 cursor-pointer"
-                />
-              </div>
-
-              {/* Active Toggle */}
-              <div className="pt-2">
-                <label className="flex items-center gap-2 cursor-pointer text-xs text-white">
+                {/* Title */}
+                <div>
+                  <label className="text-xs font-bold text-white block mb-1.5">Headline Title *</label>
                   <input
-                    type="checkbox"
-                    checked={form.isActive}
-                    onChange={(e) => setForm({ ...form, isActive: e.target.checked })}
-                    className="rounded border-slate-700 text-orange-500 focus:ring-orange-500 w-4 h-4"
+                    type="text"
+                    required
+                    placeholder="e.g. Fuel Your Potential with 100% Authentic Nutrition"
+                    value={form.title}
+                    onChange={(e) => setForm({ ...form, title: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none transition"
                   />
-                  <span className="font-semibold">Slide Active (Visible on public storefront)</span>
-                </label>
+                </div>
+
+                {/* Subtitle */}
+                <div>
+                  <label className="text-xs font-bold text-white block mb-1.5">Subtitle / Supporting Statement</label>
+                  <textarea
+                    rows={2}
+                    placeholder="e.g. Ultra-pure whey protein isolate, micronized creatine, pre-workout tested under DFTQC standards."
+                    value={form.subtitle}
+                    onChange={(e) => setForm({ ...form, subtitle: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none transition resize-y min-h-[60px]"
+                  />
+                </div>
+
+                {/* Badge & Display Order */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <label className="text-xs font-bold text-white block mb-1.5">Promotional Badge</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. DFTQC Quality Standards"
+                      value={form.badge}
+                      onChange={(e) => setForm({ ...form, badge: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold text-white block mb-1.5">Display Order #</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={form.displayOrder}
+                      onChange={(e) => setForm({ ...form, displayOrder: parseInt(e.target.value, 10) || 0 })}
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono placeholder-slate-500 focus:border-orange-500 focus:outline-none transition"
+                    />
+                  </div>
+                </div>
+
+                {/* CTA Button Text & Link */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <label className="text-xs font-bold text-white block mb-1.5">CTA Button Text</label>
+                    <input
+                      type="text"
+                      placeholder="Shop Now"
+                      value={form.ctaText}
+                      onChange={(e) => setForm({ ...form, ctaText: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold text-white block mb-1.5">CTA Destination Link</label>
+                    <input
+                      type="text"
+                      placeholder="/shop or /shop?category=protein"
+                      value={form.ctaLink}
+                      onChange={(e) => setForm({ ...form, ctaLink: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono placeholder-slate-500 focus:border-orange-500 focus:outline-none transition"
+                    />
+                  </div>
+                </div>
+
+                {/* Image Upload & Current Preview */}
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-white block">
+                    Hero Image {editingBanner ? '(Leave empty to keep existing image)' : '*'}
+                  </label>
+                  
+                  {imagePreview && (
+                    <div className="relative aspect-video max-h-44 sm:max-h-52 w-full rounded-xl overflow-hidden bg-slate-950 border border-slate-800">
+                      <img
+                        src={imagePreview}
+                        alt="Banner Preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-[10px] font-bold text-white shadow-md">
+                        {desktopImage ? 'New Selected Artwork' : 'Current Artwork'}
+                      </span>
+                    </div>
+                  )}
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="w-full text-xs text-slate-400 file:mr-3 sm:file:mr-4 file:py-2 file:px-3 sm:file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-orange-500 file:text-white hover:file:bg-orange-600 cursor-pointer transition max-w-full"
+                  />
+                </div>
+
+                {/* Active Toggle */}
+                <div className="pt-1">
+                  <label className="flex items-start sm:items-center gap-2.5 cursor-pointer text-xs text-white select-none">
+                    <input
+                      type="checkbox"
+                      checked={form.isActive}
+                      onChange={(e) => setForm({ ...form, isActive: e.target.checked })}
+                      className="mt-0.5 sm:mt-0 rounded border-slate-700 text-orange-500 focus:ring-orange-500 w-4 h-4 shrink-0"
+                    />
+                    <span className="font-semibold leading-tight">Slide Active (Visible on public storefront)</span>
+                  </label>
+                </div>
+
               </div>
 
-              {/* Form Actions */}
-              <div className="flex gap-3 pt-3 border-t border-slate-800">
+              {/* Pinned Modal Footer */}
+              <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 px-4 sm:px-6 py-3.5 sm:py-4 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 shrink-0 pb-[max(0.875rem,env(safe-area-inset-bottom))]">
                 <button
                   type="button"
                   onClick={closeModal}
                   disabled={saving}
-                  className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold rounded-xl transition"
+                  className="w-full sm:w-auto px-5 py-2.5 sm:py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold rounded-xl transition text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-orange-500/20 transition active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-2.5 sm:py-3 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-orange-500/20 transition active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2 text-center"
                 >
                   {saving ? (
                     <>

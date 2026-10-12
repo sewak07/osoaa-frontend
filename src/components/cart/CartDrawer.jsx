@@ -13,9 +13,6 @@ export const CartDrawer = () => {
   if (!isDrawerOpen) return null;
 
   const subtotal = getSubtotal();
-  const freeDeliveryThreshold = settings?.deliverySettings?.freeDeliveryThreshold || 3500;
-  const remainingForFreeDelivery = Math.max(0, freeDeliveryThreshold - subtotal);
-  const freeDeliveryProgress = Math.min(100, Math.round((subtotal / freeDeliveryThreshold) * 100));
 
   const handleCheckoutClick = () => {
     closeDrawer();
@@ -51,26 +48,10 @@ export const CartDrawer = () => {
             </button>
           </div>
 
-          {/* Free Delivery Bar */}
-          <div className="px-6 py-3 bg-slate-50 border-b border-slate-200">
-            {remainingForFreeDelivery === 0 ? (
-              <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-bold">
-                <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>🎉 Congratulations! You have unlocked FREE Nationwide Delivery.</span>
-              </div>
-            ) : (
-              <div>
-                <p className="text-xs text-slate-700 mb-1.5">
-                  Add <strong className="text-orange-600 font-bold">{formatNpr(remainingForFreeDelivery)}</strong> more for <strong className="text-black">FREE Delivery</strong>
-                </p>
-                <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                  <div 
-                    className="bg-orange-500 h-full transition-all duration-300"
-                    style={{ width: `${freeDeliveryProgress}%` }}
-                  />
-                </div>
-              </div>
-            )}
+          {/* Delivery Note */}
+          <div className="px-6 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center gap-2 text-xs text-slate-600">
+            <Sparkles className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+            <span>Delivery fee is calculated at checkout based on your district in Nepal.</span>
           </div>
 
           {/* Items List */}

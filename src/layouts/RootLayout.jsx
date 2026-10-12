@@ -9,14 +9,13 @@ import { useSettingsStore } from '../store/settingsStore';
 import { useWishlistStore } from '../store/wishlistStore';
 
 export const RootLayout = () => {
-  const { user, checkAuth } = useAuthStore();
+  const { user } = useAuthStore();
   const { fetchPublicSettings } = useSettingsStore();
   const { fetchWishlist, clearWishlist } = useWishlistStore();
 
   useEffect(() => {
-    checkAuth();
     fetchPublicSettings();
-  }, [checkAuth, fetchPublicSettings]);
+  }, [fetchPublicSettings]);
 
   useEffect(() => {
     if (user) {

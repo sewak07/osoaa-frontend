@@ -18,8 +18,8 @@ export const FaqPage = () => {
       a: 'Inside Kathmandu Valley (Kathmandu, Lalitpur, Bhaktapur): Delivery takes 1–2 business days. Outside Kathmandu across all 7 provinces: Delivery typically takes 2–4 business days via our courier partners.'
     },
     {
-      q: 'How do I qualify for Free Nationwide Delivery?',
-      a: 'Orders above Rs. 3,500 automatically qualify for Free Delivery across all regions in Nepal.'
+      q: 'How are delivery charges calculated?',
+      a: 'Delivery charges are calculated based on your selected district in Nepal and applied only once per order, regardless of product quantity.'
     },
     {
       q: 'Can I track my order online?',

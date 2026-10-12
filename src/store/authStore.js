@@ -5,16 +5,18 @@ export const useAuthStore = create((set, get) => ({
   user: null,
   token: localStorage.getItem('osoaa_token') || null,
   isLoading: true,
+  isCheckingAuth: false,
   error: null,
 
   // Check current session on app boot
   checkAuth: async () => {
-    set({ isLoading: true, error: null });
+    if (get().isCheckingAuth) return;
+    set({ isCheckingAuth: true, isLoading: true, error: null });
     try {
       const response = await api.get('/auth/me');
-      set({ user: response.data.user, isLoading: false });
+      set({ user: response.data.user, isLoading: false, isCheckingAuth: false });
     } catch (err) {
-      set({ user: null, token: null, isLoading: false });
+      set({ user: null, token: null, isLoading: false, isCheckingAuth: false });
       localStorage.removeItem('osoaa_token');
     }
   },

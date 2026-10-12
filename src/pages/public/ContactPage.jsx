@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Send, 
-  CheckCircle2, 
-  AlertCircle, 
-  Clock, 
-  MessageSquare, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  Clock,
+  MessageSquare,
   Sparkles,
   ShieldCheck,
   ExternalLink,
@@ -154,7 +154,7 @@ export const ContactPage = () => {
       {/* Main Content Grid */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
+
           {/* Left Column: Verified Business Information & Trust Badges */}
           <aside className="lg:col-span-5 space-y-6">
             <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
@@ -180,9 +180,9 @@ export const ContactPage = () => {
                         <span className="text-xs font-bold text-black block">Official Address</span>
                         <p className="text-xs text-slate-600 leading-relaxed">{address}</p>
                         {mapsUrl && (
-                          <a 
-                            href={mapsUrl} 
-                            target="_blank" 
+                          <a
+                            href={mapsUrl}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-[11px] font-bold text-orange-600 hover:text-orange-700 hover:underline pt-1"
                           >
@@ -227,8 +227,8 @@ export const ContactPage = () => {
                       </div>
                       <div className="space-y-0.5">
                         <span className="text-xs font-bold text-black block">Support Email</span>
-                        <a 
-                          href={`mailto:${email}`} 
+                        <a
+                          href={`mailto:${email}`}
                           className="text-xs text-orange-600 hover:text-orange-700 font-semibold break-all hover:underline"
                         >
                           {email}
@@ -249,10 +249,10 @@ export const ContactPage = () => {
                   <span className="text-xs font-bold text-black block mb-2.5">Official Social Channels</span>
                   <div className="flex items-center gap-2">
                     {socialData.facebook && (
-                      <a 
-                        href={socialData.facebook} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href={socialData.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition shadow-sm"
                         aria-label="Visit OSOAA Facebook page"
                       >
@@ -260,10 +260,10 @@ export const ContactPage = () => {
                       </a>
                     )}
                     {socialData.instagram && (
-                      <a 
-                        href={socialData.instagram} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href={socialData.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition shadow-sm"
                         aria-label="Visit OSOAA Instagram profile"
                       >
@@ -271,10 +271,10 @@ export const ContactPage = () => {
                       </a>
                     )}
                     {socialData.youtube && (
-                      <a 
-                        href={socialData.youtube} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href={socialData.youtube}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition shadow-sm"
                         aria-label="Visit OSOAA YouTube channel"
                       >
@@ -292,7 +292,7 @@ export const ContactPage = () => {
                   <span>Quality & Authenticity Guaranteed</span>
                 </div>
                 <p className="text-[11px] text-gray-800 leading-relaxed">
-                  Every batch of OSOAA supplements undergoes rigorous testing in accredited facilities for purity, potency, and zero banned substances.
+                  Every batch of OSOAA supplements follows strict quality testing guidelines aligned with DFTQC food safety standards for verified purity and authentic nutrition.
                 </p>
               </div>
 
@@ -302,7 +302,7 @@ export const ContactPage = () => {
           {/* Right Column: Contact Us Form */}
           <section className="lg:col-span-7" aria-labelledby="contact-form-heading">
             <div className="p-6 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
-              
+
               <div className="space-y-1">
                 <h2 id="contact-form-heading" className="text-xl font-black text-black">
                   Send Us a Message
@@ -314,7 +314,7 @@ export const ContactPage = () => {
 
               {/* Error Alert */}
               {errorMessage && (
-                <div 
+                <div
                   role="alert"
                   className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs text-rose-800 flex items-start gap-3 animate-in fade-in"
                 >
@@ -328,14 +328,14 @@ export const ContactPage = () => {
 
               {/* Success View */}
               {successResponse ? (
-                <div 
+                <div
                   role="status"
                   className="p-8 sm:p-10 text-center space-y-5 bg-white rounded-2xl border border-emerald-200 shadow-sm animate-in fade-in zoom-in-95"
                 >
                   <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border-2 border-emerald-200 shadow-inner">
                     <CheckCircle2 className="w-9 h-9" />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <h3 className="text-xl font-black text-black">
                       Message Received Successfully!
@@ -361,7 +361,7 @@ export const ContactPage = () => {
               ) : (
                 /* Interactive Form */
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">
-                  
+
                   {/* Name & Email Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Full Name */}
@@ -375,12 +375,11 @@ export const ContactPage = () => {
                         type="text"
                         required
                         aria-required="true"
-                        placeholder="e.g. Aarav Sharma"
+                        placeholder="Your name"
                         value={form.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
-                        className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${
-                          validationErrors.name ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
-                        }`}
+                        className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${validationErrors.name ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
+                          }`}
                       />
                       {validationErrors.name && (
                         <p className="mt-1 text-[11px] text-rose-600 font-medium">{validationErrors.name}</p>
@@ -401,9 +400,8 @@ export const ContactPage = () => {
                         placeholder="name@example.com"
                         value={form.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
-                        className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${
-                          validationErrors.email ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
-                        }`}
+                        className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${validationErrors.email ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
+                          }`}
                       />
                       {validationErrors.email && (
                         <p className="mt-1 text-[11px] text-rose-600 font-medium">{validationErrors.email}</p>
@@ -443,9 +441,8 @@ export const ContactPage = () => {
                         placeholder="e.g. Whey Protein Dosage or Order Inquiry"
                         value={form.subject}
                         onChange={(e) => handleInputChange('subject', e.target.value)}
-                        className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${
-                          validationErrors.subject ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
-                        }`}
+                        className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${validationErrors.subject ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
+                          }`}
                       />
                       {validationErrors.subject && (
                         <p className="mt-1 text-[11px] text-rose-600 font-medium">{validationErrors.subject}</p>
@@ -467,9 +464,8 @@ export const ContactPage = () => {
                       placeholder="Please write your questions, dietary requirements, or specific order details here..."
                       value={form.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
-                      className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${
-                        validationErrors.message ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
-                      }`}
+                      className={`w-full px-3.5 py-3 bg-white border rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 shadow-sm transition ${validationErrors.message ? 'border-rose-400 focus:ring-rose-500' : 'border-slate-300 focus:ring-orange-500'
+                        }`}
                     />
                     <div className="flex items-center justify-between mt-1">
                       {validationErrors.message ? (

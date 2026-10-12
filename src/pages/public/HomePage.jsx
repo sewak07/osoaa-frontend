@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  Sparkles, 
-  ShieldCheck, 
-  Zap, 
-  Flame, 
+import {
+  ArrowRight,
+  Sparkles,
+  ShieldCheck,
+  Zap,
+  Flame,
   Truck
 } from 'lucide-react';
 import api from '../../services/api';
@@ -49,10 +49,10 @@ export const HomePage = () => {
 
   return (
     <div className="space-y-16 lg:space-y-24 pb-20 bg-white">
-      
+
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gray-900">
-        
+      <section className="relative min-h-[520px] sm:min-h-[580px] lg:min-h-[75vh] flex items-center justify-center overflow-hidden bg-gray-900">
+
         {/* Background Image with Neutral Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -65,17 +65,17 @@ export const HomePage = () => {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
-          <div className="max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-6 duration-700">
-            
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-24 w-full">
+          <div className="max-w-2xl space-y-4 sm:space-y-6 animate-in fade-in slide-in-from-bottom-6 duration-700">
+
             {/* Top Tagline Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-orange-400 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-orange-400" />
-              <span>{heroBanner?.badge || 'A Journey of Wellness • Nepal'}</span>
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/10 border border-white/20 text-orange-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider backdrop-blur-md max-w-full">
+              <Sparkles className="w-3.5 h-3.5 text-orange-400 shrink-0" />
+              <span className="truncate">{heroBanner?.badge || 'DFTQC TESTED QUALITY'}</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] break-words">
               {heroBanner?.title ? (
                 heroBanner.title
               ) : (
@@ -89,40 +89,40 @@ export const HomePage = () => {
               )}
             </h1>
 
-            <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed max-w-xl">
               {heroBanner?.subtitle || 'Ultra-pure whey protein isolate, micronized creatine, pre-workout and performance supplements tested under DFTQC quality testing standards.'}
             </p>
 
             {/* Hero CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
               <Link
                 to={heroBanner?.ctaLink || '/shop'}
-                className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-black text-sm rounded-xl shadow-orange-md flex items-center gap-2 transition-all active:scale-95"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 bg-orange-500 hover:bg-orange-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-orange-md flex items-center justify-center gap-2 transition-all active:scale-95 text-center"
               >
                 <span>{heroBanner?.ctaText || 'Shop Best Sellers'}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 shrink-0" />
               </Link>
               <Link
                 to="/shop?category=protein"
-                className="px-7 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-sm rounded-xl backdrop-blur-md transition-all"
+                className="px-6 sm:px-7 py-3.5 sm:py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-xs sm:text-sm rounded-xl backdrop-blur-md transition-all text-center"
               >
                 Explore Whey Protein
               </Link>
             </div>
 
             {/* Trust Highlights under Hero */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-700/80 text-xs text-gray-300">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-6 sm:pt-8 border-t border-gray-700/80 text-xs text-gray-300">
               <div>
-                <p className="text-base font-extrabold text-white">DFTQC</p>
-                <p className="text-[11px]">Quality Standards Aligned</p>
+                <p className="text-xs sm:text-base font-extrabold text-white">DFTQC</p>
+                <p className="text-[10px] sm:text-[11px] leading-tight text-gray-400">Quality Standards Aligned</p>
               </div>
               <div>
-                <p className="text-base font-extrabold text-white">100% Purity</p>
-                <p className="text-[11px]">Zero Banned Substances</p>
+                <p className="text-xs sm:text-base font-extrabold text-white">100% Purity</p>
+                <p className="text-[10px] sm:text-[11px] leading-tight text-gray-400">Zero Banned Substances</p>
               </div>
               <div>
-                <p className="text-base font-extrabold text-white">Fast Delivery</p>
-                <p className="text-[11px]">Across all 7 Provinces</p>
+                <p className="text-xs sm:text-base font-extrabold text-white">Fast Delivery</p>
+                <p className="text-[10px] sm:text-[11px] leading-tight text-gray-400">Across all 7 Provinces</p>
               </div>
             </div>
 

@@ -6,13 +6,20 @@ import { AdminHeader } from '../../components/admin/AdminHeader';
 
 export const AdminLayout = () => {
   const location = useLocation();
-  const { user, isLoading } = useAuthStore();
+  const { user, isLoading, checkAuth } = useAuthStore();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Close sidebar on route navigation
   React.useEffect(() => {
     setSidebarOpen(false);
   }, [location.pathname]);
+
+  // Ensure auth check is executed for admin routes
+  React.useEffect(() => {
+    if (isLoading) {
+      checkAuth();
+    }
+  }, [isLoading, checkAuth]);
 
   if (isLoading) {
     return (

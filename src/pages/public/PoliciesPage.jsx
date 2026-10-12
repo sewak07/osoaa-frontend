@@ -17,141 +17,191 @@ export const PoliciesPage = () => {
         <p>• Inside Kathmandu Valley: 1–2 business days.</p>
         <p>• Outside Kathmandu Valley (Major cities & districts across all 7 provinces): 2–4 business days.</p>
         <h3 className="text-base font-bold text-black mt-4">2. Shipping Charges</h3>
-        <p>• Standard Delivery Fee: Rs. 150</p>
-        <p>• Orders above Rs. 3,500 automatically qualify for <strong className="text-orange-600">Free Nationwide Delivery</strong>.</p>
+        <p>• Delivery charges are determined by the customer's selected district in Nepal and charged once per order regardless of item quantity.</p>
         <h3 className="text-base font-bold text-black mt-4">3. Packaging & Tamper-Proof Seals</h3>
         <p>All items are shipped in sturdy, tamper-evident packaging. Please inspect the outer seal before accepting Cash on Delivery parcels.</p>
       </div>
     );
   } else if (path.includes('return-policy')) {
     title = 'Return & Refund Policy';
+
     content = (
       <div className="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
         <p>
-          Thanks for shopping at <strong>www.osoaa.com.np</strong>.
-        </p>
-
-        <p>
-          If you are not entirely satisfied with your purchase, we're here to help.
-        </p>
-
-        <h3 className="text-base font-bold text-black mt-6">
-          CANCELLATION POLICY
-        </h3>
-
-        <h4 className="font-bold text-black mt-4">
-          Cancellation Before Dispatch
-        </h4>
-
-        <p>
-          If the order or the item(s) that you want to cancel have not been shipped
-          yet, you can call us on 9812345678 from Sunday to
-          Friday between 10 a.m. and 6 p.m.
-        </p>
-
-        <p>
-          In such cases, the order will be cancelled, and the money will be refunded
-          to you within 7 business days after the cancellation request is duly
-          processed by us.
-        </p>
-
-        <h4 className="font-bold text-black mt-4">
-          Cancellation After Dispatch
-        </h4>
-
-        <p>
-          Cancellation will be entertained only upon receipt of a defective or
-          incorrect product and appropriate proof being shared with the customer
-          care team.
-        </p>
-
-        <h4 className="font-bold text-black mt-4">
-          Discount Vouchers
-        </h4>
-
-        <p>
-          Discount vouchers are intended for one-time use only and shall be treated
-          as such even if you cancel the order.
+          At <strong>OSOAA Wellness &amp; Nutrition</strong>, we are committed to
+          providing quality products and a reliable shopping experience. Please
+          read our return, refund, and replacement policy carefully.
         </p>
 
         <h3 className="text-base font-bold text-black mt-6">
-          RETURNS
+          RETURN POLICY
         </h3>
 
+        <h4 className="font-bold text-black mt-4">
+          Return Eligibility
+        </h4>
+
         <p>
-          You have 3 calendar days to return an item from the date you received it.
+          For hygiene, safety, and product-quality reasons, products cannot be
+          returned once their original seal has been broken, removed, opened,
+          or tampered with.
         </p>
 
         <p>
-          To be eligible for a return, your item must be unused and in the same
-          condition as when you received it.
+          To be eligible for a return, the product must be unused and in its
+          original condition, with the original seal, packaging, and labels
+          intact.
         </p>
 
         <p>
-          Your item must be in the original packaging with all labels intact.
+          Customers must provide valid proof of purchase, such as an order
+          confirmation or receipt, when requesting a return.
+        </p>
+
+        <h4 className="font-bold text-black mt-4">
+          Broken or Tampered Seals
+        </h4>
+
+        <p>
+          Products with broken, removed, or tampered original seals are not
+          eligible for return due to a change of mind, personal preference,
+          or a decision not to use the product.
         </p>
 
         <p>
-          Your item needs to have a receipt or proof of purchase.
+          This restriction does not exclude remedies required by applicable law
+          for products that are defective, unsafe, counterfeit, or incorrectly
+          supplied.
+        </p>
+
+        <h4 className="font-bold text-black mt-4">
+          Damaged, Defective, or Incorrect Products
+        </h4>
+
+        <p>
+          If your order arrives damaged, defective, or different from the product
+          you ordered, please contact OSOAA promptly at{" "}
+          <a
+            href="mailto:osoaanepal@gmail.com"
+            className="text-orange-600 hover:underline"
+          >
+            osoaanepal@gmail.com
+          </a>{" "}
+          with your order number and clear photographs or videos showing the
+          product and its packaging.
+        </p>
+
+        <p>
+          After reviewing your request, we will inform you of the appropriate
+          resolution, which may include a replacement, return, or refund,
+          subject to verification and applicable law.
         </p>
 
         <h3 className="text-base font-bold text-black mt-6">
-          REFUNDS
+          REFUND POLICY
         </h3>
 
+        <h4 className="font-bold text-black mt-4">
+          Refund Approval
+        </h4>
+
         <p>
-          Once we receive your package, after a general inspection, we shall notify
-          you of the receipt of the package in our warehouse.
+          Once an authorized return is received, our team will inspect the
+          product and verify its condition, original seal, packaging, and
+          eligibility under this policy.
         </p>
 
         <p>
-          Further, the item will be verified for any damage, return conditions, and
-          applicable clauses mentioned in the return policy. We will notify you
-          about the status of the item received in our warehouse.
+          We will notify you of the inspection outcome and whether your refund
+          request has been approved.
+        </p>
+
+        <h4 className="font-bold text-black mt-4">
+          Refund Processing
+        </h4>
+
+        <p>
+          If your refund is approved, it will be initiated through the original
+          payment method where possible, or through another mutually agreed
+          payment method.
         </p>
 
         <p>
-          If your return is approved, we will initiate a refund to your debit card,
-          credit card, bank account, or the original method of payment, as
-          applicable.
-        </p>
-
-        <p>
-          You will receive the refund within 3 days of approval from OSOAA.
-          Depending on your bank or payment provider's policies, the returned amount
-          may take additional time to reflect in your account.
+          The time required for the refund to appear in your account may vary
+          depending on your bank or payment provider. For Cash on Delivery
+          (COD) orders, our team will coordinate an appropriate refund method
+          if a refund is approved.
         </p>
 
         <h3 className="text-base font-bold text-black mt-6">
-          SHIPPING
+          REPLACEMENT POLICY
+        </h3>
+
+        <p>
+          If you receive a damaged, defective, or incorrect product, OSOAA will
+          review your claim and, where appropriate, arrange a replacement or
+          another suitable resolution.
+        </p>
+
+        <p>
+          Please retain the original packaging and provide supporting evidence
+          when submitting your claim. Do not return an item before receiving
+          instructions from our team.
+        </p>
+
+        <h3 className="text-base font-bold text-black mt-6">
+          RETURN SHIPPING
         </h3>
 
         <h4 className="font-bold text-black mt-4">
-          Product Received in Good Condition
+          Customer-Initiated Returns
         </h4>
 
         <p>
-          The customer will be responsible for bearing all shipping costs incurred
-          during the item return procedure when the product is received in good
-          condition and the return is not due to an error on the part of OSOAA.
+          For approved returns unrelated to an error by OSOAA, the customer
+          may be responsible for applicable return shipping costs. Any charges
+          will be communicated before the return is arranged, subject to
+          applicable law.
         </p>
 
         <h4 className="font-bold text-black mt-4">
-          Product Received in Bad Condition
+          Damaged, Defective, or Incorrect Products
         </h4>
 
         <p>
-          OSOAA will bear the cost of return shipping if the product is received
-          damaged or defective.
+          Where a claim is verified and a return or replacement is approved
+          because OSOAA supplied an incorrect product or the product arrived
+          damaged or defective, OSOAA will bear the applicable return shipping
+          costs.
         </p>
 
-        <h4 className="font-bold text-black mt-4">
-          Wrong Product
-        </h4>
+        <h3 className="text-base font-bold text-black mt-6">
+          HOW TO REQUEST A RETURN OR REFUND
+        </h3>
 
         <p>
-          OSOAA will bear the cost of return shipping if an incorrect product is
-          delivered.
+          Contact our team at{" "}
+          <a
+            href="mailto:osoaanepal@gmail.com"
+            className="text-orange-600 hover:underline"
+          >
+            osoaanepal@gmail.com
+          </a>{" "}
+          with your order number, the reason for your request, and supporting
+          photographs or videos where applicable. Our team will review your
+          request and explain the next steps.
+        </p>
+
+        <h3 className="text-base font-bold text-black mt-6">
+          POLICY COMPLIANCE
+        </h3>
+
+        <p>
+          OSOAA reserves the right to verify return and refund requests and
+          reject fraudulent or unsupported claims. This policy will be applied
+          in accordance with applicable consumer-protection laws in Nepal.
+          Nothing in this policy is intended to limit consumer rights that
+          cannot legally be excluded.
         </p>
 
         <h3 className="text-base font-bold text-black mt-6">
@@ -159,18 +209,23 @@ export const PoliciesPage = () => {
         </h3>
 
         <p>
-          If you have any questions about how to return your item, please contact us
-          by email at{' '}
+          If you have questions about our return, refund, or replacement policy,
+          please contact OSOAA at{" "}
           <a
             href="mailto:osoaanepal@gmail.com"
-            className="text-orange-600 font-semibold hover:underline"
+            className="text-orange-600 hover:underline"
           >
             osoaanepal@gmail.com
-          </a>
-          .
+          </a>.
+        </p>
+
+        <p>
+          <strong>OSOAA Wellness &amp; Nutrition</strong>
+          <br />
+          <strong>A Journey of Wellness</strong>
         </p>
       </div>
-    );
+    )
   } else if (path.includes('privacy-policy')) {
     title = 'Privacy Policy';
     content = (
