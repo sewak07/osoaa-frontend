@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import { useSettingsStore } from '../../store/settingsStore';
 import api from '../../services/api';
+import { SEO } from '../../components/seo/SEO';
+import { buildStoreSchema } from '../../utils/seoSchemas';
 
 export const ContactPage = () => {
   const { settings } = useSettingsStore();
@@ -133,8 +135,21 @@ export const ContactPage = () => {
     setForm({ name: '', email: '', phone: '', subject: '', message: '' });
   };
 
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: 'Contact Us', item: '/contact' },
+  ];
+
   return (
     <div className="bg-white min-h-[80vh]">
+      <SEO
+        title="Contact Us | Supplement Inquiries & Support Nepal"
+        description="Contact OSOAA Nepal. Get in touch with our team for authentic fitness supplements inquiries, nationwide courier tracking, and support in Nepal."
+        canonical="/contact"
+        breadcrumbs={breadcrumbs}
+        jsonLd={buildStoreSchema()}
+      />
+
       {/* Header Banner */}
       <section className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200/80 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">

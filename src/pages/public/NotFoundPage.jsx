@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home } from 'lucide-react';
+import { SEO } from '../../components/seo/SEO';
 
 export const NotFoundPage = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-20 text-center bg-white">
+      <SEO
+        title="404 - Page Not Found"
+        description="The requested page could not be found on OSOAA Nepal."
+        noindex={true}
+      />
       <div className="max-w-md space-y-6">
         <div className="text-8xl font-black text-black font-display">404</div>
         <h1 className="text-2xl font-bold text-slate-900">Page Not Found</h1>

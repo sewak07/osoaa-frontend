@@ -21,6 +21,8 @@ import { formatBlogDate, getCategoryMeta } from '../../utils/blogUtils';
 import { RichTextContent } from '../../components/blog/RichTextContent';
 import { RecipeDetailsView } from '../../components/blog/RecipeDetailsView';
 import { BlogCard } from '../../components/blog/BlogCard';
+import { SEO } from '../../components/seo/SEO';
+import { buildArticleSchema, buildRecipeSchema } from '../../utils/seoSchemas';
 
 export const BlogDetailsPage = () => {
   const { slug } = useParams();
@@ -99,6 +101,11 @@ export const BlogDetailsPage = () => {
   if (error || !post) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center bg-slate-50 px-4">
+        <SEO
+          title="Article Not Found"
+          description="The requested article or recipe could not be found."
+          noindex={true}
+        />
         <div className="max-w-md w-full bg-white border border-slate-200 rounded-3xl p-10 text-center shadow-lg space-y-4">
           <div className="w-14 h-14 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto">
             <BookOpen className="w-7 h-7" />
@@ -122,40 +129,36 @@ export const BlogDetailsPage = () => {
   const categoryMeta = getCategoryMeta(post.category);
   const isRecipe = post.category === 'recipes' || post.contentType?.includes('recipe');
 
-  // JSON-LD structured schema for SEO
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': isRecipe ? 'Recipe' : 'BlogPosting',
-    headline: post.seoTitle || post.title,
-    description: post.seoDescription || post.excerpt,
-    image: post.featuredImage?.url || undefined,
-    datePublished: post.publishedAt || post.createdAt,
-    dateModified: post.updatedAt,
-    author: {
-      '@type': 'Person',
-      name: post.author?.name || 'OSOAA Nutrition Team',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'OSOAA Wellness & Nutrition Nepal',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${window.location.origin}/logo.png`,
-      },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': window.location.href,
-    },
-  };
+  const structuredSchema = isRecipe ? buildRecipeSchema(post) : buildArticleSchema(post);
+
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: 'Blog', item: '/blog' },
+    { name: categoryMeta.label, item: `/blog?category=${encodeURIComponent(post.category)}` },
+    { name: post.title, item: `/blog/${encodeURIComponent(post.slug)}` },
+  ];
+
+  const keywordsString = Array.isArray(post.seoKeywords) && post.seoKeywords.length > 0
+    ? post.seoKeywords.join(', ')
+    : undefined;
 
   return (
     <article className="min-h-screen bg-white text-slate-800 pb-20">
-      
-      {/* Schema.org Script Tag */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      <SEO
+        title={post.seoTitle || post.title}
+        description={post.seoDescription || post.excerpt}
+        keywords={keywordsString}
+        canonical={`/blog/${post.slug}`}
+        ogImage={post.featuredImage?.url}
+        ogType="article"
+        breadcrumbs={breadcrumbs}
+        jsonLd={structuredSchema}
+        articleMeta={{
+          publishedTime: post.publishedAt || post.createdAt,
+          modifiedTime: post.updatedAt,
+          section: categoryMeta.label,
+          author: post.author?.name || 'OSOAA Nutrition Team',
+        }}
       />
 
       {/* Breadcrumb & Navigation Bar */}

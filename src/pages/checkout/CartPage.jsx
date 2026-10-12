@@ -5,6 +5,7 @@ import { useCartStore } from '../../store/cartStore';
 import { useSettingsStore } from '../../store/settingsStore';
 import { formatNpr } from '../../utils/currency';
 import api from '../../services/api';
+import { SEO } from '../../components/seo/SEO';
 
 export const CartPage = () => {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ export const CartPage = () => {
         <div className="w-20 h-20 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto text-slate-400">
           <ShoppingBag className="w-10 h-10" />
         </div>
+        <SEO title="Shopping Cart" noindex={true} />
         <h1 className="text-2xl sm:text-3xl font-black text-brand-navy">Your Cart is Currently Empty</h1>
         <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto">
           Explore our authentic range of whey proteins, micronized creatine, pre-workouts, and fitness accessories.
@@ -74,6 +76,7 @@ export const CartPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 bg-white min-h-[75vh]">
+      <SEO title="Shopping Cart" noindex={true} />
       
       {/* Header */}
       <div className="flex items-center justify-between pb-6 border-b border-slate-200">

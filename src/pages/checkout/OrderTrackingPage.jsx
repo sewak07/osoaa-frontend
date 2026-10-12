@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Truck, CheckCircle2, AlertCircle, MapPin } from 'lucide-react';
 import api from '../../services/api';
+import { SEO } from '../../components/seo/SEO';
 
 export const OrderTrackingPage = () => {
   const [orderNumber, setOrderNumber] = useState('');
@@ -30,6 +31,7 @@ export const OrderTrackingPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12 bg-white min-h-[75vh]">
+      <SEO title="Track Your Order" noindex={true} />
       
       <div className="text-center max-w-xl mx-auto space-y-3">
         <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center mx-auto mb-2">

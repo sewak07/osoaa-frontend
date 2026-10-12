@@ -12,6 +12,8 @@ import api from '../../services/api';
 import { ProductCard } from '../../components/product/ProductCard';
 import { DftqcTrustSection } from '../../components/trust/DftqcTrustSection';
 import { useSettingsStore } from '../../store/settingsStore';
+import { SEO } from '../../components/seo/SEO';
+import { buildOrganizationSchema, buildWebSiteSchema } from '../../utils/seoSchemas';
 
 export const HomePage = () => {
   const { settings } = useSettingsStore();
@@ -47,8 +49,19 @@ export const HomePage = () => {
 
   const heroBanner = banners.length > 0 ? banners[0] : null;
 
+  const homepageSchemas = React.useMemo(() => {
+    return [buildOrganizationSchema(), buildWebSiteSchema()];
+  }, []);
+
   return (
     <div className="space-y-16 lg:space-y-24 pb-20 bg-white">
+      <SEO
+        title="100% Authentic Whey Protein & Fitness Supplements in Nepal"
+        description="Shop lab-tested authentic OSOAA whey protein isolate, micronized creatine monohydrate, pre-workout, and sports nutrition in Nepal with fast nationwide delivery."
+        canonical="/"
+        ogImage={heroBanner?.desktopImage?.url}
+        jsonLd={homepageSchemas}
+      />
 
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[520px] sm:min-h-[580px] lg:min-h-[75vh] flex items-center justify-center overflow-hidden bg-gray-900">

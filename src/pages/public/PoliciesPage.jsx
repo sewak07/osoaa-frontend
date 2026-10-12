@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { SEO } from '../../components/seo/SEO';
 
 export const PoliciesPage = () => {
   const location = useLocation();
@@ -252,8 +253,26 @@ export const PoliciesPage = () => {
     );
   }
 
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: title, item: path },
+  ];
+
+  const policyDescriptions = {
+    'Shipping & Delivery Policy': 'Official shipping, logistics, and nationwide delivery timelines across Nepal for OSOAA fitness nutrition and supplements.',
+    'Return & Refund Policy': 'Official return, replacement, and refund policies for authentic sealed supplements purchased on OSOAA Nepal.',
+    'Privacy Policy': 'Our data protection, confidentiality, and customer privacy terms at OSOAA Nepal.',
+    'Terms & Conditions': 'Official terms and conditions governing purchases and usage of the OSOAA Nepal e-commerce platform.',
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 bg-white min-h-[75vh]">
+      <SEO
+        title={title}
+        description={policyDescriptions[title] || `${title} for OSOAA Nepal.`}
+        canonical={path}
+        breadcrumbs={breadcrumbs}
+      />
       <div className="border-b border-slate-200 pb-4">
         <h1 className="text-3xl font-black text-black">{title}</h1>
       </div>

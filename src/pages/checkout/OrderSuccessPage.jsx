@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle2, Package, Home } from 'lucide-react';
 import api from '../../services/api';
 import { formatNpr } from '../../utils/currency';
+import { SEO } from '../../components/seo/SEO';
 
 export const OrderSuccessPage = () => {
   const [searchParams] = useSearchParams();
@@ -21,6 +22,7 @@ export const OrderSuccessPage = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 text-center space-y-8 bg-white">
+      <SEO title="Order Confirmed" noindex={true} />
       
       <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 space-y-6 shadow-sm">
         <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">

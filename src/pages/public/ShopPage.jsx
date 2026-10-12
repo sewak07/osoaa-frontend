@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Filter, SlidersHorizontal, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import api from '../../services/api';
 import { ProductCard } from '../../components/product/ProductCard';
+import { SEO } from '../../components/seo/SEO';
 
 export const ShopPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -76,8 +77,35 @@ export const ShopPage = () => {
     setSearchParams(newParams);
   };
 
+  const activeCategory = categories.find((c) => c.slug === categoryParam);
+
+  const pageTitle = activeCategory
+    ? `${activeCategory.name} Supplements in Nepal`
+    : keywordParam
+    ? `Search: "${keywordParam}"`
+    : 'Shop Authentic Nutrition & Fitness Supplements';
+
+  const pageDescription = activeCategory?.description
+    ? activeCategory.description
+    : activeCategory
+    ? `Buy genuine ${activeCategory.name} in Nepal. Batch-tested quality standards, 100% genuine products, and fast nationwide delivery.`
+    : 'Browse Nepal\'s premier collection of genuine whey protein, micronized creatine, pre-workouts, and sports nutrition supplements.';
+
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: 'Shop', item: '/shop' },
+    ...(activeCategory ? [{ name: activeCategory.name, item: `/shop?category=${encodeURIComponent(activeCategory.slug)}` }] : []),
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 bg-white min-h-[75vh]">
+      <SEO
+        title={pageTitle}
+        description={pageDescription}
+        canonical={categoryParam ? `/shop?category=${encodeURIComponent(categoryParam)}` : '/shop'}
+        noindex={Boolean(keywordParam)}
+        breadcrumbs={breadcrumbs}
+      />
       
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">

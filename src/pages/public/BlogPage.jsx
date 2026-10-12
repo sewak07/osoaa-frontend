@@ -17,6 +17,7 @@ import { blogService } from '../../services/blogService';
 import { BlogCard } from '../../components/blog/BlogCard';
 import { FeaturedBlogSection } from '../../components/blog/FeaturedBlogSection';
 import { BLOG_CATEGORIES } from '../../utils/blogUtils';
+import { SEO } from '../../components/seo/SEO';
 
 export const BlogPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -122,8 +123,20 @@ export const BlogPage = () => {
     setSearchParams(params);
   };
 
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: 'Blog', item: '/blog' },
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20">
+      <SEO
+        title="Fitness, Nutrition & Healthy Recipes Hub"
+        description="Explore science-backed fitness tips, nutrition advice, workout guidelines, and delicious high-protein recipes crafted for Nepal."
+        canonical="/blog"
+        noindex={Boolean(currentKeyword)}
+        breadcrumbs={breadcrumbs}
+      />
       
       {/* Hero Header */}
       <section className="bg-[#E5E7EB] text-black pt-14 pb-16 relative overflow-hidden">

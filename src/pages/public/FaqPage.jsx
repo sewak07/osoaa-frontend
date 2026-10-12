@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { SEO } from '../../components/seo/SEO';
+import { buildFaqSchema } from '../../utils/seoSchemas';
 
 export const FaqPage = () => {
   const [openIdx, setOpenIdx] = useState(0);
@@ -27,8 +29,21 @@ export const FaqPage = () => {
     }
   ];
 
+  const faqSchema = buildFaqSchema(faqs);
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: 'Frequently Asked Questions', item: '/faq' },
+  ];
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12 bg-white min-h-[75vh]">
+      <SEO
+        title="Frequently Asked Questions (FAQ) | Supplements Nepal"
+        description="Find answers to common questions regarding supplement authenticity, DFTQC testing, delivery timelines across Nepal, and payment methods."
+        canonical="/faq"
+        breadcrumbs={breadcrumbs}
+        jsonLd={faqSchema}
+      />
       <div className="text-center space-y-3">
         <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">Help Center</span>
         <h1 className="text-3xl sm:text-4xl font-black text-black">Frequently Asked Questions</h1>

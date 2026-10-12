@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { AlertCircle, CheckCircle2, RefreshCw, Truck } from 'lucide-react';
 import api from '../../services/api';
+import { SEO } from '../../components/seo/SEO';
 
 export const EsewaCallbackPage = () => {
   const [searchParams] = useSearchParams();
@@ -122,6 +123,7 @@ export const EsewaCallbackPage = () => {
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-20 text-center bg-white">
+      <SEO title="Payment Verification" noindex={true} />
       <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
         
         {status === 'verifying' && (

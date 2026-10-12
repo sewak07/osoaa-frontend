@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Mail, ShieldCheck, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
+import { SEO } from '../../components/seo/SEO';
 
 export const VerifyOtpPage = () => {
   const [searchParams] = useSearchParams();
@@ -122,6 +123,7 @@ export const VerifyOtpPage = () => {
 
   return (
     <div className="min-h-[75vh] flex items-center justify-center px-4 py-16 bg-white">
+      <SEO title="Verify Account OTP" noindex={true} />
       <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
         
         <div className="text-center space-y-2">

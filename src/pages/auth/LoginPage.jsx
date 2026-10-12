@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
+import { SEO } from '../../components/seo/SEO';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export const LoginPage = () => {
 
   return (
     <div className="min-h-[75vh] flex items-center justify-center px-4 py-16 bg-white">
+      <SEO title="Sign In" noindex={true} />
       <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-6">
         
         <div className="text-center space-y-2">

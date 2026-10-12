@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { 
-  Star, 
-  Heart, 
-  ShoppingBag, 
-  Check, 
-  ShieldCheck, 
-  Truck, 
-  Plus, 
-  Minus, 
+import {
+  Star,
+  Heart,
+  ShoppingBag,
+  Check,
+  ShieldCheck,
+  Truck,
+  Plus,
+  Minus,
   Award,
   ChevronRight
 } from 'lucide-react';
@@ -18,6 +18,8 @@ import { useCartStore } from '../../store/cartStore';
 import { useWishlistStore } from '../../store/wishlistStore';
 import { useAuthStore } from '../../store/authStore';
 import { ProductCard } from '../../components/product/ProductCard';
+import { SEO } from '../../components/seo/SEO';
+import { buildProductSchema } from '../../utils/seoSchemas';
 
 export const ProductDetailPage = () => {
   const { slug } = useParams();
@@ -156,9 +158,41 @@ export const ProductDetailPage = () => {
     }
   };
 
+  // These are ordinary calculations, not React hooks. Keep them below the
+  // loading and product-not-found returns so the Rules of Hooks are respected.
+  const productSchema = buildProductSchema(product, selectedVariant);
+
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: 'Shop', item: '/shop' },
+    ...(product.category?.name
+      ? [{
+        name: product.category.name,
+        item: `/shop?category=${encodeURIComponent(product.category.slug || '')}`,
+      }]
+      : []),
+    {
+      name: product.name,
+      item: `/product/${encodeURIComponent(product.slug || slug)}`,
+    },
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16 bg-white">
-      
+      <SEO
+        title={`${product.name} | Buy Authentic in Nepal`}
+        description={product.shortDescription || `${product.name} from OSOAA Wellness & Nutrition. View product details, pricing, and availability in Nepal.`}
+        canonical={`/product/${product.slug}`}
+        ogImage={selectedImage}
+        ogType="product"
+        breadcrumbs={breadcrumbs}
+        jsonLd={productSchema}
+        productMeta={{
+          price: currentPrice,
+          availability: currentStock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        }}
+      />
+
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-slate-500">
         <Link to="/" className="hover:text-orange-600 font-medium">Home</Link>
@@ -172,7 +206,7 @@ export const ProductDetailPage = () => {
 
       {/* Main Product Layout: Gallery + Purchasing Info */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
+
         {/* Left Column: Image Gallery */}
         <div className="lg:col-span-6 space-y-4">
           <div className="relative aspect-square rounded-3xl overflow-hidden bg-slate-50 border border-slate-200 shadow-sm">
@@ -195,11 +229,10 @@ export const ProductDetailPage = () => {
                 <button
                   key={idx}
                   onClick={() => setSelectedImage(img.url)}
-                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 shrink-0 transition ${
-                    selectedImage === img.url ? 'border-orange-500 shadow-orange-sm' : 'border-slate-200 opacity-70 hover:opacity-100'
-                  }`}
+                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 shrink-0 transition ${selectedImage === img.url ? 'border-orange-500 shadow-orange-sm' : 'border-slate-200 opacity-70 hover:opacity-100'
+                    }`}
                 >
-                  <img src={img.url} alt="" className="w-full h-full object-cover" />
+                  <img src={img.url} alt={`${product.name} view ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -222,9 +255,9 @@ export const ProductDetailPage = () => {
             <div className="flex items-center gap-3 mt-3">
               <div className="flex items-center text-amber-500">
                 {[...Array(5)].map((_, i) => (
-                  <Star 
-                    key={i} 
-                    className={`w-4 h-4 ${i < Math.round(product.ratingAverage || 5) ? 'fill-current' : 'text-slate-300'}`} 
+                  <Star
+                    key={i}
+                    className={`w-4 h-4 ${i < Math.round(product.ratingAverage || 5) ? 'fill-current' : 'text-slate-300'}`}
                   />
                 ))}
               </div>
@@ -270,11 +303,10 @@ export const ProductDetailPage = () => {
                   <button
                     key={v._id}
                     onClick={() => setSelectedVariant(v)}
-                    className={`px-4 py-2.5 rounded-xl text-xs font-bold border transition ${
-                      selectedVariant?._id === v._id
+                    className={`px-4 py-2.5 rounded-xl text-xs font-bold border transition ${selectedVariant?._id === v._id
                         ? 'bg-black border-black text-white shadow-sm'
                         : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                    }`}
+                      }`}
                   >
                     {v.variantName}
                   </button>
@@ -331,9 +363,8 @@ export const ProductDetailPage = () => {
               {/* Wishlist Button */}
               <button
                 onClick={() => toggleWishlist(product._id)}
-                className={`p-3.5 rounded-xl border transition shadow-sm ${
-                  inWishlist ? 'bg-rose-500 border-rose-500 text-white' : 'bg-white border-slate-200 text-slate-600 hover:text-rose-500'
-                }`}
+                className={`p-3.5 rounded-xl border transition shadow-sm ${inWishlist ? 'bg-rose-500 border-rose-500 text-white' : 'bg-white border-slate-200 text-slate-600 hover:text-rose-500'
+                  }`}
               >
                 <Heart className={`w-5 h-5 ${inWishlist ? 'fill-current' : ''}`} />
               </button>
@@ -371,18 +402,17 @@ export const ProductDetailPage = () => {
 
       {/* Tabs Section */}
       <div className="pt-8 border-t border-slate-200 space-y-8">
-        
+
         {/* Tab Headers */}
         <div className="flex border-b border-slate-200 gap-8 overflow-x-auto">
           {['description', 'nutrition', 'usage', 'reviews'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-4 text-sm font-bold uppercase tracking-wider border-b-2 transition whitespace-nowrap ${
-                activeTab === tab
+              className={`pb-4 text-sm font-bold uppercase tracking-wider border-b-2 transition whitespace-nowrap ${activeTab === tab
                   ? 'border-orange-500 text-orange-600'
                   : 'border-transparent text-slate-500 hover:text-slate-800'
-              }`}
+                }`}
             >
               {tab === 'description' && 'Product Details'}
               {tab === 'nutrition' && 'Nutritional Facts & Ingredients'}

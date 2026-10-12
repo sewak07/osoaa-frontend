@@ -13,6 +13,7 @@ import { useSettingsStore } from '../../store/settingsStore';
 import { formatNpr } from '../../utils/currency';
 import { NEPAL_PROVINCES, NEPAL_DISTRICTS_BY_PROVINCE } from '../../constants/nepalAddresses';
 import api from '../../services/api';
+import { SEO } from '../../components/seo/SEO';
 
 export const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -168,6 +169,7 @@ export const CheckoutPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 bg-white min-h-[80vh]">
+      <SEO title="Secure Checkout" noindex={true} />
 
       {/* Header */}
       <div className="pb-6 border-b border-slate-200">

@@ -1,10 +1,24 @@
 import React from 'react';
 import { ShieldCheck, FlaskConical, Target } from 'lucide-react';
 import { DftqcTrustSection } from '../../components/trust/DftqcTrustSection';
+import { SEO } from '../../components/seo/SEO';
+import { buildOrganizationSchema } from '../../utils/seoSchemas';
 
 export const AboutPage = () => {
+  const breadcrumbs = [
+    { name: 'Home', item: '/' },
+    { name: 'About OSOAA', item: '/about' },
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16 bg-white min-h-[75vh]">
+      <SEO
+        title="About Us | Authenticity & Quality Standards"
+        description="Learn about OSOAA Nepal's commitment to 100% authentic fitness nutrition, strict DFTQC testing standards, and nationwide supplement delivery."
+        canonical="/about"
+        breadcrumbs={breadcrumbs}
+        jsonLd={buildOrganizationSchema()}
+      />
       
       {/* Hero Intro */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
