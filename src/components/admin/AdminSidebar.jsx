@@ -27,6 +27,7 @@ export const AdminSidebar = ({ isOpen = false, onClose = () => {} }) => {
     { name: 'Orders & Fulfillment', path: '/admin/orders', icon: ShoppingBag },
     { name: 'Customers & Users', path: '/admin/customers', icon: Users },
     { name: 'Categories', path: '/admin/categories', icon: Layers },
+    { name: 'Brands Management', path: '/admin/brands', icon: Award },
     { name: 'Customer Reviews', path: '/admin/reviews', icon: MessageSquare },
     { name: 'Discount Coupons', path: '/admin/coupons', icon: Tag },
     { name: 'Hero Banners', path: '/admin/banners', icon: Image },
@@ -41,10 +42,10 @@ export const AdminSidebar = ({ isOpen = false, onClose = () => {} }) => {
         <div className="flex items-center justify-between px-2">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-orange-500 text-white font-black font-display text-sm shadow-md shadow-orange-500/30">
-              ADM
+              NP
             </div>
             <div>
-              <h2 className="font-bold text-white text-sm">OSOAA Admin</h2>
+              <h2 className="font-bold text-white text-sm">Nepal Protein Admin</h2>
               <p className="text-[10px] text-orange-400 font-mono font-medium">Production Portal</p>
             </div>
           </div>

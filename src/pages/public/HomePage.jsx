@@ -20,22 +20,25 @@ export const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestSellers, setBestSellers] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [banners, setBanners] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        const [featRes, bestRes, catRes, banRes] = await Promise.all([
+        const [featRes, bestRes, catRes, brandRes, banRes] = await Promise.all([
           api.get('/products/featured'),
           api.get('/products/best-sellers'),
           api.get('/categories'),
+          api.get('/brands'),
           api.get('/banners'),
         ]);
 
         setFeaturedProducts(featRes.data.data || []);
         setBestSellers(bestRes.data.data || []);
         setCategories(catRes.data.data || []);
+        setBrands(brandRes.data.data || []);
         setBanners(banRes.data.data || []);
       } catch (err) {
         console.error('Failed to load homepage data:', err);
@@ -56,8 +59,8 @@ export const HomePage = () => {
   return (
     <div className="space-y-16 lg:space-y-24 pb-20 bg-white">
       <SEO
-        title="100% Authentic Whey Protein & Fitness Supplements in Nepal"
-        description="Shop lab-tested authentic OSOAA whey protein isolate, micronized creatine monohydrate, pre-workout, and sports nutrition in Nepal with fast nationwide delivery."
+        title="100% Authentic Whey Protein & Fitness Supplements in Nepal | Nepal Protein"
+        description="Shop authentic sports nutrition, whey protein isolate, micronized creatine monohydrate, pre-workout, and fitness supplements in Nepal from verified brands including OSOAA at Nepal Protein. Fast nationwide delivery."
         canonical="/"
         ogImage={heroBanner?.desktopImage?.url}
         jsonLd={homepageSchemas}
@@ -70,7 +73,7 @@ export const HomePage = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={heroBanner?.desktopImage?.url || 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1800&auto=format&fit=crop&q=80'}
-            alt="OSOAA Hero"
+            alt="Nepal Protein Hero"
             className="w-full h-full object-cover object-center opacity-25"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-900/80 to-gray-900/60" />
@@ -178,6 +181,43 @@ export const HomePage = () => {
         </div>
       </section>
 
+      {/* 2.5 FEATURED BRANDS SECTION */}
+      {brands.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-8 pb-3 border-b border-slate-100">
+            <div>
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">Genuine Multi-Brand Catalog</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-black mt-1">Shop By Brand</h2>
+            </div>
+            <Link to="/brands" className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
+              <span>View All Brands</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {brands.map((b) => (
+              <Link
+                key={b._id}
+                to={`/brands/${b.slug}`}
+                className="group p-4 rounded-2xl bg-white border border-slate-200 hover:border-orange-400 hover:shadow-brand flex flex-col items-center text-center space-y-2.5 transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="w-14 h-14 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2 group-hover:scale-105 transition-transform overflow-hidden">
+                  {b.logo?.url ? (
+                    <img src={b.logo.url} alt={b.name} className="w-full h-full object-contain" />
+                  ) : (
+                    <span className="font-display font-black text-base text-slate-800">{b.name.slice(0, 2).toUpperCase()}</span>
+                  )}
+                </div>
+                <h3 className="text-xs font-bold text-slate-800 group-hover:text-orange-600 transition truncate max-w-full">
+                  {b.name}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* 3. BEST SELLERS SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-8 pb-3 border-b border-slate-100">
@@ -227,14 +267,14 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* 6. WHY CHOOSE OSOAA */}
+      {/* 6. WHY CHOOSE NEPAL PROTEIN */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">The OSOAA Difference</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-black">Why Athletes & Fitness Enthusiasts Choose OSOAA</h2>
+            <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">The Nepal Protein Standard</span>
+            <h2 className="text-2xl sm:text-3xl font-black text-black">Why Athletes & Fitness Enthusiasts Choose Nepal Protein</h2>
             <p className="text-xs sm:text-sm text-slate-600">
-              We eliminate counterfeit risks with direct sourcing, rigorous batch testing, and transparent nutritional profiles.
+              We eliminate counterfeit risks with multi-brand direct sourcing, certified manufacturer partnerships, and transparent nutritional profiles.
             </p>
           </div>
 

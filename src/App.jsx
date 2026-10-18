@@ -9,6 +9,8 @@ import { AdminLayout } from './pages/admin/AdminLayout';
 // Public Pages
 import { HomePage } from './pages/public/HomePage';
 import { ShopPage } from './pages/public/ShopPage';
+import { BrandsPage } from './pages/public/BrandsPage';
+import { BrandDetailPage } from './pages/public/BrandDetailPage';
 import { ProductDetailPage } from './pages/public/ProductDetailPage';
 import { AboutPage } from './pages/public/AboutPage';
 import { ContactPage } from './pages/public/ContactPage';
@@ -47,6 +49,7 @@ import { AdminOrdersPage } from './pages/admin/AdminOrdersPage';
 import { AdminOrderDetailPage } from './pages/admin/AdminOrderDetailPage';
 import { AdminCustomersPage } from './pages/admin/AdminCustomersPage';
 import { AdminCategoriesPage } from './pages/admin/AdminCategoriesPage';
+import { AdminBrandsPage } from './pages/admin/AdminBrandsPage';
 import { AdminReviewsPage } from './pages/admin/AdminReviewsPage';
 import { AdminCouponsPage } from './pages/admin/AdminCouponsPage';
 import { AdminBannersPage } from './pages/admin/AdminBannersPage';
@@ -68,6 +71,9 @@ function App() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<HomePage />} />
         <Route path="shop" element={<ShopPage />} />
+        <Route path="brands" element={<BrandsPage />} />
+        <Route path="brands/:slug" element={<BrandDetailPage />} />
+        <Route path="brand/:slug" element={<BrandDetailPage />} />
         <Route path="product/:slug" element={<ProductDetailPage />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="blog/:slug" element={<BlogDetailsPage />} />
@@ -122,6 +128,7 @@ function App() {
         <Route path="orders/:id" element={<AdminOrderDetailPage />} />
         <Route path="customers" element={<AdminCustomersPage />} />
         <Route path="categories" element={<AdminCategoriesPage />} />
+        <Route path="brands" element={<AdminBrandsPage />} />
         <Route path="reviews" element={<AdminReviewsPage />} />
         <Route path="coupons" element={<AdminCouponsPage />} />
         <Route path="banners" element={<AdminBannersPage />} />

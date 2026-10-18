@@ -7,14 +7,14 @@ import { buildOrganizationSchema } from '../../utils/seoSchemas';
 export const AboutPage = () => {
   const breadcrumbs = [
     { name: 'Home', item: '/' },
-    { name: 'About OSOAA', item: '/about' },
+    { name: 'About Nepal Protein', item: '/about' },
   ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16 bg-white min-h-[75vh]">
       <SEO
-        title="About Us | Authenticity & Quality Standards"
-        description="Learn about OSOAA Nepal's commitment to 100% authentic fitness nutrition, strict DFTQC testing standards, and nationwide supplement delivery."
+        title="About Us | Authenticity & Multi-Brand Quality Standards"
+        description="Learn about Nepal Protein's commitment to 100% authentic fitness nutrition, trusted multi-brand sports supplements including OSOAA, strict DFTQC testing standards, and nationwide supplement delivery."
         canonical="/about"
         breadcrumbs={breadcrumbs}
         jsonLd={buildOrganizationSchema()}
@@ -22,12 +22,12 @@ export const AboutPage = () => {
       
       {/* Hero Intro */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">About OSOAA</span>
+        <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">About Nepal Protein</span>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black tracking-tight">
-          A Journey of Wellness & Authentic Nutrition in Nepal.
+          Nepal's Premier Destination for Authentic Nutrition & Supplements.
         </h1>
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-          Founded to eliminate counterfeit risks in Nepal's fitness community, OSOAA provides pure, tested, and reliable sports supplements backed by rigorous laboratory standards.
+          Founded to eliminate counterfeit risks across Nepal's fitness community, Nepal Protein provides 100% genuine sports supplements from trusted world-class manufacturers—including OSOAA—backed by verified laboratory and quality standards.
         </p>
       </div>
 

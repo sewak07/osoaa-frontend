@@ -17,8 +17,8 @@ import { useSettingsStore } from '../../store/settingsStore';
 export const Footer = () => {
   const { settings } = useSettingsStore();
 
-  const brandName = settings?.businessName || 'OSOAA';
-  const tagline = settings?.tagline || 'A Journey of Wellness';
+  const brandName = settings?.businessName || 'Nepal Protein';
+  const tagline = settings?.tagline || 'Authentic Sports Nutrition';
   const phone = settings?.contact?.phone || '';
   const email = settings?.contact?.email || '';
   const address = settings?.contact?.address || '';
@@ -85,7 +85,7 @@ export const Footer = () => {
               {tagline}
             </p>
             <p className="text-xs text-gray-800 leading-relaxed max-w-sm">
-              Nepal's trusted wellness & sports nutrition brand. Delivering ultra-pure whey protein, micronized creatine, pre-workout, and fitness gear formulated for peak health and athletic excellence.
+              Nepal's trusted sports nutrition &amp; fitness supplements store. Delivering ultra-pure whey protein, micronized creatine, pre-workout, and fitness supplements from authentic brands including OSOAA with fast nationwide delivery.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a href={settings?.socialLinks?.facebook || 'https://facebook.com'} target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-gray-300 hover:bg-orange-500 text-black hover:text-white transition" aria-label="Facebook">
@@ -121,7 +121,8 @@ export const Footer = () => {
               <li><Link to="/blog?category=nepali-blog" className="text-gray-700 hover:text-orange-600 transition">नेपाली स्वास्थ्य ब्लग (Nepali)</Link></li>
               <li><Link to="/blog?category=recipes" className="text-gray-700 hover:text-orange-600 transition">Healthy Protein Recipes</Link></li>
               <li><Link to="/order-tracking" className="text-gray-700 hover:text-orange-600 transition">Track Your Order</Link></li>
-              <li><Link to="/about" className="text-gray-700 hover:text-orange-600 transition">About OSOAA</Link></li>
+              <li><Link to="/brands" className="text-gray-700 hover:text-orange-600 transition">Our Brands</Link></li>
+              <li><Link to="/about" className="text-gray-700 hover:text-orange-600 transition">About Us</Link></li>
               <li><Link to="/contact" className="text-gray-700 hover:text-orange-600 transition">Contact Us</Link></li>
               <li><Link to="/faq" className="text-gray-700 hover:text-orange-600 transition">Frequently Asked Questions</Link></li>
               <li><Link to="/shipping-policy" className="text-gray-700 hover:text-orange-600 transition">Shipping Policy</Link></li>
@@ -171,7 +172,7 @@ export const Footer = () => {
 
         {/* Bottom Disclaimer & Copyright */}
         <div className="pt-8 border-t border-gray-300 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-600">
-          <p>© {new Date().getFullYear()} {brandName} Nepal. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {brandName}. All rights reserved.</p>
           <p className="text-center md:text-right">
             Pricing displayed in Nepalese Rupees (NPR). All supplements laboratory batch-tested.
           </p>

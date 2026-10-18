@@ -97,12 +97,12 @@ export const ProductCard = ({ product }) => {
             {/* Product Information Body */}
             <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
                 <div>
-                    {/* Category & SubCategory */}
-                    <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1">
-                        <span className="text-black font-bold uppercase tracking-wider">
-                            {product.subCategory || 'OSOAA'}
+                    {/* Brand & Category */}
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1 gap-2">
+                        <span className="text-orange-600 font-bold uppercase tracking-wider truncate">
+                            {product.brand?.name || product.subCategory || 'OSOAA'}
                         </span>
-                        <span>{product.category?.name || 'Supplements'}</span>
+                        <span className="truncate shrink-0 text-slate-500">{product.category?.name || 'Supplements'}</span>
                     </div>
 
                     {/* Product Title */}

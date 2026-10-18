@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Filter, SlidersHorizontal, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useSearchParams, Link } from 'react-router-dom';
+import { Filter, SlidersHorizontal, X, ChevronLeft, ChevronRight, Award, Check } from 'lucide-react';
 import api from '../../services/api';
 import { ProductCard } from '../../components/product/ProductCard';
 import { SEO } from '../../components/seo/SEO';
@@ -10,12 +10,14 @@ export const ShopPage = () => {
 
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, pages: 1, total: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
   // Filters state from URL query params
   const categoryParam = searchParams.get('category') || '';
+  const brandParam = searchParams.get('brand') || '';
   const keywordParam = searchParams.get('keyword') || '';
   const sortByParam = searchParams.get('sortBy') || 'newest';
   const minPriceParam = searchParams.get('minPrice') || '';
@@ -23,12 +25,16 @@ export const ShopPage = () => {
   const inStockParam = searchParams.get('inStock') || '';
   const pageParam = parseInt(searchParams.get('page') || '1', 10);
 
-  // Load Categories
+  // Load Categories and Brands
   useEffect(() => {
     const fetchMetadata = async () => {
       try {
-        const catRes = await api.get('/categories');
+        const [catRes, brandRes] = await Promise.all([
+          api.get('/categories'),
+          api.get('/brands'),
+        ]);
         setCategories(catRes.data.data || []);
+        setBrands(brandRes.data.data || []);
       } catch (err) {
         console.error('Failed to load filter metadata:', err);
       }
@@ -78,22 +84,34 @@ export const ShopPage = () => {
   };
 
   const activeCategory = categories.find((c) => c.slug === categoryParam);
+  const activeBrand = brands.find((b) => b.slug === brandParam);
 
-  const pageTitle = activeCategory
-    ? `${activeCategory.name} Supplements in Nepal`
-    : keywordParam
-    ? `Search: "${keywordParam}"`
-    : 'Shop Authentic Nutrition & Fitness Supplements';
+  // Dynamic SEO metadata
+  let pageTitle = 'Shop Authentic Nutrition & Fitness Supplements | Nepal Protein';
+  if (activeBrand && activeCategory) {
+    pageTitle = `${activeBrand.name} ${activeCategory.name} Supplements | Nepal Protein`;
+  } else if (activeBrand) {
+    pageTitle = `${activeBrand.name} Supplements in Nepal | Nepal Protein`;
+  } else if (activeCategory) {
+    pageTitle = `${activeCategory.name} Supplements in Nepal | Nepal Protein`;
+  } else if (keywordParam) {
+    pageTitle = `Search: "${keywordParam}" | Nepal Protein`;
+  }
 
-  const pageDescription = activeCategory?.description
+  const pageDescription = activeBrand?.description
+    ? activeBrand.description
+    : activeCategory?.description
     ? activeCategory.description
+    : activeBrand
+    ? `Shop authentic ${activeBrand.name} fitness supplements at Nepal Protein with guaranteed authenticity and nationwide delivery across Nepal.`
     : activeCategory
-    ? `Buy genuine ${activeCategory.name} in Nepal. Batch-tested quality standards, 100% genuine products, and fast nationwide delivery.`
-    : 'Browse Nepal\'s premier collection of genuine whey protein, micronized creatine, pre-workouts, and sports nutrition supplements.';
+    ? `Buy genuine ${activeCategory.name} in Nepal. Batch-tested quality standards, 100% genuine products, and fast nationwide delivery at Nepal Protein.`
+    : "Browse Nepal's premier collection of genuine whey protein, micronized creatine, pre-workouts, and multi-brand sports nutrition supplements at Nepal Protein.";
 
   const breadcrumbs = [
     { name: 'Home', item: '/' },
     { name: 'Shop', item: '/shop' },
+    ...(activeBrand ? [{ name: activeBrand.name, item: `/brands/${encodeURIComponent(activeBrand.slug)}` }] : []),
     ...(activeCategory ? [{ name: activeCategory.name, item: `/shop?category=${encodeURIComponent(activeCategory.slug)}` }] : []),
   ];
 
@@ -102,19 +120,33 @@ export const ShopPage = () => {
       <SEO
         title={pageTitle}
         description={pageDescription}
-        canonical={categoryParam ? `/shop?category=${encodeURIComponent(categoryParam)}` : '/shop'}
+        canonical={
+          brandParam
+            ? `/shop?brand=${encodeURIComponent(brandParam)}`
+            : categoryParam
+            ? `/shop?category=${encodeURIComponent(categoryParam)}`
+            : '/shop'
+        }
         noindex={Boolean(keywordParam)}
         breadcrumbs={breadcrumbs}
       />
-      
+
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
           <h1 className="text-2xl sm:text-3xl font-black text-black">
-            {categoryParam ? `Category: ${categoryParam.replace(/-/g, ' ')}` : keywordParam ? `Search: "${keywordParam}"` : 'All Products'}
+            {activeBrand && activeCategory
+              ? `${activeBrand.name} — ${activeCategory.name}`
+              : activeBrand
+              ? `${activeBrand.name} Products`
+              : activeCategory
+              ? `Category: ${activeCategory.name}`
+              : keywordParam
+              ? `Search: "${keywordParam}"`
+              : 'All Products'}
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Showing {products.length} of {pagination.total} genuine wellness & sports supplements
+            Showing {products.length} of {pagination.total} genuine wellness &amp; sports supplements at Nepal Protein
           </p>
         </div>
 
@@ -145,18 +177,55 @@ export const ShopPage = () => {
         </div>
       </div>
 
+      {/* Active Filter Chips */}
+      {(brandParam || categoryParam || inStockParam || keywordParam) && (
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xs text-slate-500 font-medium">Active filters:</span>
+          {activeBrand && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold rounded-full">
+              <span>Brand: {activeBrand.name}</span>
+              <button onClick={() => handleFilterChange('brand', '')} className="hover:text-orange-950">
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </span>
+          )}
+          {activeCategory && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 border border-slate-200 text-slate-800 text-xs font-bold rounded-full">
+              <span>Category: {activeCategory.name}</span>
+              <button onClick={() => handleFilterChange('category', '')} className="hover:text-black">
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </span>
+          )}
+          {inStockParam === 'true' && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 border border-slate-200 text-slate-800 text-xs font-bold rounded-full">
+              <span>In Stock Only</span>
+              <button onClick={() => handleFilterChange('inStock', '')} className="hover:text-black">
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </span>
+          )}
+          <button
+            onClick={handleClearFilters}
+            className="text-xs text-orange-600 hover:underline font-bold ml-2"
+          >
+            Clear all
+          </button>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        
+
         {/* Desktop Filters Sidebar */}
         <aside className="hidden lg:block space-y-6">
           <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-6">
-            
+
             <div className="flex items-center justify-between pb-4 border-b border-slate-200">
               <h2 className="text-xs font-black text-black uppercase tracking-wider flex items-center gap-2">
                 <Filter className="w-4 h-4 text-orange-500" />
                 <span>Filters</span>
               </h2>
-              {(categoryParam || keywordParam || minPriceParam || maxPriceParam || inStockParam) && (
+              {(brandParam || categoryParam || keywordParam || minPriceParam || maxPriceParam || inStockParam) && (
                 <button
                   onClick={handleClearFilters}
                   className="text-xs text-orange-600 hover:underline font-bold"
@@ -166,10 +235,44 @@ export const ShopPage = () => {
               )}
             </div>
 
-            {/* Categories */}
+            {/* Brands Filter */}
             <div className="space-y-3">
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                <Award className="w-3.5 h-3.5 text-orange-500" />
+                <span>Brands</span>
+              </h3>
+              <div className="space-y-1.5 max-h-56 overflow-y-auto pr-2">
+                <button
+                  onClick={() => handleFilterChange('brand', '')}
+                  className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition ${
+                    !brandParam ? 'bg-black text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200/60'
+                  }`}
+                >
+                  All Brands
+                </button>
+                {brands.map((b) => (
+                  <button
+                    key={b._id}
+                    onClick={() => handleFilterChange('brand', b.slug)}
+                    className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition flex items-center justify-between ${
+                      brandParam === b.slug ? 'bg-black text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200/60'
+                    }`}
+                  >
+                    <span>{b.name}</span>
+                    {b.productCount !== undefined && (
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${brandParam === b.slug ? 'bg-orange-500 text-white' : 'bg-slate-200 text-slate-600'}`}>
+                        {b.productCount}
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Categories Filter */}
+            <div className="space-y-3 pt-4 border-t border-slate-200">
               <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider">Categories</h3>
-              <div className="space-y-1.5 max-h-64 overflow-y-auto pr-2">
+              <div className="space-y-1.5 max-h-56 overflow-y-auto pr-2">
                 <button
                   onClick={() => handleFilterChange('category', '')}
                   className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition ${
@@ -221,12 +324,17 @@ export const ShopPage = () => {
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="p-12 text-center bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
-              <p className="text-base font-bold text-slate-900">No products found matching your filters.</p>
-              <p className="text-xs text-slate-500">Try adjusting your keyword, category, or clear existing filters.</p>
+            <div className="p-12 sm:p-16 text-center rounded-3xl bg-slate-50 border border-slate-200 space-y-4">
+              <div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto">
+                <Filter className="w-6 h-6" />
+              </div>
+              <h2 className="text-xl font-bold text-black">No matching supplements found</h2>
+              <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+                We couldn't find any products matching your current brand or filter combination. Try clearing some filters or exploring our other authentic brands.
+              </p>
               <button
                 onClick={handleClearFilters}
-                className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-orange-sm"
+                className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-orange-sm transition"
               >
                 Reset All Filters
               </button>
@@ -241,7 +349,7 @@ export const ShopPage = () => {
 
           {/* Pagination Controls */}
           {pagination.pages > 1 && (
-            <div className="flex items-center justify-center gap-2 pt-6 border-t border-slate-200">
+            <div className="flex items-center justify-center gap-2 pt-6 border-t border-slate-100">
               <button
                 onClick={() => handlePageChange(pagination.page - 1)}
                 disabled={pagination.page <= 1}
@@ -251,19 +359,19 @@ export const ShopPage = () => {
                 <ChevronLeft className="w-4 h-4" />
               </button>
 
-              {[...Array(pagination.pages)].map((_, i) => {
-                const pageNum = i + 1;
+              {[...Array(pagination.pages)].map((_, idx) => {
+                const pageNumber = idx + 1;
                 return (
                   <button
-                    key={pageNum}
-                    onClick={() => handlePageChange(pageNum)}
-                    className={`w-9 h-9 rounded-xl text-xs font-bold transition ${
-                      pagination.page === pageNum
-                        ? 'bg-orange-500 text-white shadow-orange-sm'
-                        : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm'
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={`w-9 h-9 rounded-xl text-xs font-bold transition shadow-sm ${
+                      pagination.page === pageNumber
+                        ? 'bg-black text-white'
+                        : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
                     }`}
                   >
-                    {pageNum}
+                    {pageNumber}
                   </button>
                 );
               })}
@@ -288,7 +396,7 @@ export const ShopPage = () => {
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setIsMobileFiltersOpen(false)} />
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
             <div className="w-screen max-w-xs bg-white p-6 space-y-6 flex flex-col justify-between shadow-2xl">
-              
+
               <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                 <h3 className="text-base font-black text-black">Filter Catalog</h3>
                 <button onClick={() => setIsMobileFiltersOpen(false)} className="p-1 text-slate-500 hover:text-slate-900">
@@ -297,13 +405,47 @@ export const ShopPage = () => {
               </div>
 
               <div className="flex-1 overflow-y-auto space-y-6">
-                {/* Categories */}
+                {/* Brands */}
                 <div className="space-y-2">
+                  <h4 className="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-orange-500" />
+                    <span>Brands</span>
+                  </h4>
+                  <div className="space-y-1">
+                    <button
+                      onClick={() => { handleFilterChange('brand', ''); setIsMobileFiltersOpen(false); }}
+                      className={`w-full text-left text-xs py-2 px-3 rounded-lg font-semibold ${
+                        !brandParam ? 'bg-black text-white' : 'text-slate-700 hover:bg-slate-100'
+                      }`}
+                    >
+                      All Brands
+                    </button>
+                    {brands.map((b) => (
+                      <button
+                        key={b._id}
+                        onClick={() => { handleFilterChange('brand', b.slug); setIsMobileFiltersOpen(false); }}
+                        className={`w-full text-left text-xs py-2 px-3 rounded-lg font-semibold flex items-center justify-between ${
+                          brandParam === b.slug ? 'bg-black text-white' : 'text-slate-700 hover:bg-slate-100'
+                        }`}
+                      >
+                        <span>{b.name}</span>
+                        {b.productCount !== undefined && (
+                          <span className="text-[10px] opacity-80">{b.productCount}</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Categories */}
+                <div className="space-y-2 pt-4 border-t border-slate-100">
                   <h4 className="text-xs font-bold text-slate-800 uppercase">Categories</h4>
                   <div className="space-y-1">
                     <button
                       onClick={() => { handleFilterChange('category', ''); setIsMobileFiltersOpen(false); }}
-                      className="w-full text-left text-xs py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
+                      className={`w-full text-left text-xs py-2 px-3 rounded-lg font-semibold ${
+                        !categoryParam ? 'bg-black text-white' : 'text-slate-700 hover:bg-slate-100'
+                      }`}
                     >
                       All Categories
                     </button>
@@ -320,14 +462,38 @@ export const ShopPage = () => {
                     ))}
                   </div>
                 </div>
+
+                {/* Stock Toggle */}
+                <div className="pt-4 border-t border-slate-100">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={inStockParam === 'true'}
+                      onChange={(e) => {
+                        handleFilterChange('inStock', e.target.checked ? 'true' : '');
+                        setIsMobileFiltersOpen(false);
+                      }}
+                      className="rounded border-slate-300 text-orange-500 focus:ring-orange-500"
+                    />
+                    <span className="text-xs font-bold text-slate-700">In Stock Items Only</span>
+                  </label>
+                </div>
               </div>
 
-              <button
-                onClick={() => setIsMobileFiltersOpen(false)}
-                className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-orange-sm"
-              >
-                Apply Filters
-              </button>
+              <div className="space-y-2 pt-4 border-t border-slate-200">
+                <button
+                  onClick={() => { handleClearFilters(); setIsMobileFiltersOpen(false); }}
+                  className="w-full py-2.5 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl hover:bg-slate-200 transition"
+                >
+                  Clear All Filters
+                </button>
+                <button
+                  onClick={() => setIsMobileFiltersOpen(false)}
+                  className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-orange-sm"
+                >
+                  Apply Filters
+                </button>
+              </div>
 
             </div>
           </div>

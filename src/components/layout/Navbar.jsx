@@ -45,8 +45,8 @@ export const Navbar = () => {
     navigate('/');
   };
 
-  const brandName = settings?.businessName || 'OSOAA';
-  const tagline = settings?.tagline || 'A Journey of Wellness';
+  const brandName = settings?.businessName || 'Nepal Protein';
+  const tagline = settings?.tagline || 'Authentic Fitness Supplements';
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
@@ -94,6 +94,7 @@ export const Navbar = () => {
             >
               Shop All
             </Link>
+
             <Link
               to="/shop?category=protein"
               className={`text-sm font-semibold transition pb-1 border-b-2 ${location.search.includes('category=protein') ? 'text-orange-500 border-orange-500' : 'text-slate-700 border-transparent hover:text-orange-500'
@@ -101,13 +102,7 @@ export const Navbar = () => {
             >
               Proteins
             </Link>
-            <Link
-              to="/shop?category=creatine"
-              className={`text-sm font-semibold transition pb-1 border-b-2 ${location.search.includes('category=creatine') ? 'text-orange-500 border-orange-500' : 'text-slate-700 border-transparent hover:text-orange-500'
-                }`}
-            >
-              Creatine
-            </Link>
+
             <Link
               to="/blog"
               className={`text-sm font-semibold transition pb-1 border-b-2 ${location.pathname === '/blog' ? 'text-orange-500 border-orange-500' : 'text-slate-700 border-transparent hover:text-orange-500'
@@ -120,7 +115,7 @@ export const Navbar = () => {
               className={`text-sm font-semibold transition pb-1 border-b-2 ${location.pathname === '/about' ? 'text-orange-500 border-orange-500' : 'text-slate-700 border-transparent hover:text-orange-500'
                 }`}
             >
-              About OSOAA
+              About Us
             </Link>
             <Link
               to="/contact"
@@ -296,6 +291,13 @@ export const Navbar = () => {
             Shop All Products
           </Link>
           <Link
+            to="/brands"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="block text-base font-semibold text-slate-800 hover:text-orange-500"
+          >
+            Browse Brands
+          </Link>
+          <Link
             to="/shop?category=protein"
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-base font-semibold text-slate-800 hover:text-orange-500"
@@ -328,7 +330,7 @@ export const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-base font-semibold text-slate-800 hover:text-orange-500"
           >
-            About OSOAA & DFTQC Quality Standards
+            About Us & Quality Standards
           </Link>
           <Link
             to="/contact"

@@ -165,6 +165,12 @@ export const ProductDetailPage = () => {
   const breadcrumbs = [
     { name: 'Home', item: '/' },
     { name: 'Shop', item: '/shop' },
+    ...(product.brand?.name
+      ? [{
+        name: product.brand.name,
+        item: `/brands/${encodeURIComponent(product.brand.slug || '')}`,
+      }]
+      : []),
     ...(product.category?.name
       ? [{
         name: product.category.name,
@@ -180,8 +186,8 @@ export const ProductDetailPage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16 bg-white">
       <SEO
-        title={`${product.name} | Buy Authentic in Nepal`}
-        description={product.shortDescription || `${product.name} from OSOAA Wellness & Nutrition. View product details, pricing, and availability in Nepal.`}
+        title={`${product.name} | Buy Authentic in Nepal | Nepal Protein`}
+        description={product.shortDescription || `${product.name} available at Nepal Protein. Authentic sports nutrition with fast nationwide delivery in Nepal.`}
         canonical={`/product/${product.slug}`}
         ogImage={selectedImage}
         ogType="product"
@@ -194,14 +200,22 @@ export const ProductDetailPage = () => {
       />
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-slate-500">
+      <nav className="flex items-center gap-2 text-xs text-slate-500 flex-wrap">
         <Link to="/" className="hover:text-orange-600 font-medium">Home</Link>
         <ChevronRight className="w-3 h-3 text-slate-400" />
         <Link to="/shop" className="hover:text-orange-600 font-medium">Shop</Link>
+        {product.brand && (
+          <>
+            <ChevronRight className="w-3 h-3 text-slate-400" />
+            <Link to={`/brands/${product.brand.slug}`} className="hover:text-orange-600 font-medium text-orange-600">
+              {product.brand.name}
+            </Link>
+          </>
+        )}
         <ChevronRight className="w-3 h-3 text-slate-400" />
         <Link to={`/shop?category=${product.category?.slug}`} className="hover:text-orange-600 font-medium">{product.category?.name}</Link>
         <ChevronRight className="w-3 h-3 text-slate-400" />
-        <span className="text-slate-800 font-semibold truncate">{product.name}</span>
+        <span className="text-slate-800 font-semibold truncate max-w-xs">{product.name}</span>
       </nav>
 
       {/* Main Product Layout: Gallery + Purchasing Info */}
@@ -242,9 +256,19 @@ export const ProductDetailPage = () => {
         {/* Right Column: Buying Controls */}
         <div className="lg:col-span-6 space-y-6">
           <div>
-            <div className="flex items-center justify-between text-xs text-black font-bold uppercase tracking-wider mb-2">
-              <span>{product.category?.name || 'OSOAA'}</span>
-              <span className="text-slate-400 font-mono text-[11px]">SKU: {selectedVariant?.sku || product.sku}</span>
+            <div className="flex items-center justify-between text-xs text-black font-bold uppercase tracking-wider mb-2 gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
+                {product.brand && (
+                  <Link
+                    to={`/brands/${product.brand.slug}`}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold hover:bg-orange-100 transition"
+                  >
+                    <span>Brand: {product.brand.name}</span>
+                  </Link>
+                )}
+                <span className="text-slate-600">{product.category?.name || 'Supplements'}</span>
+              </div>
+              <span className="text-slate-400 font-mono text-[11px] shrink-0">SKU: {selectedVariant?.sku || product.sku}</span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl font-black text-black leading-tight">

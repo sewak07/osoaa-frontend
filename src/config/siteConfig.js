@@ -1,8 +1,8 @@
 /**
- * Centralized SEO & Site Configuration for OSOAA Nepal.
+ * Centralized SEO & Site Configuration for Nepal Protein.
  * 
  * Production URL must be provided via the VITE_SITE_URL environment variable
- * without a trailing slash (e.g. VITE_SITE_URL=https://osoaa.com.np).
+ * without a trailing slash (e.g. VITE_SITE_URL=https://your-domain.com).
  * 
  * Never hardcodes an assumed production domain.
  */
@@ -12,14 +12,14 @@ const rawSiteUrl = import.meta.env.VITE_SITE_URL || '';
 export const SITE_URL = rawSiteUrl ? rawSiteUrl.replace(/\/+$/, '') : '';
 
 export const siteConfig = {
-  name: 'OSOAA Nepal',
-  tagline: 'A Journey of Wellness',
-  defaultTitle: 'OSOAA Nepal | Whey Protein & Sports Nutrition Supplements',
-  titleTemplate: '%s | OSOAA Nepal',
+  name: 'Nepal Protein',
+  tagline: 'Authentic Sports Nutrition & Fitness Supplements',
+  defaultTitle: 'Nepal Protein | Whey Protein & Sports Nutrition Supplements in Nepal',
+  titleTemplate: '%s | Nepal Protein',
   defaultDescription:
-    'Shop authentic OSOAA whey protein isolate, micronized creatine, pre-workout, and sports nutrition supplements in Nepal. Quality-tested standards with fast nationwide delivery.',
+    'Nepal\'s trusted sports nutrition store. Shop authentic whey protein isolate, micronized creatine, pre-workout, and fitness supplements from top brands including OSOAA with fast nationwide delivery.',
   defaultKeywords:
-    'OSOAA Nepal, OSOAA whey protein, OSOAA protein powder, OSOAA supplements Nepal, buy OSOAA whey protein in Nepal, sports nutrition Nepal, creatine Nepal, gym supplements Kathmandu',
+    'Nepal Protein, OSOAA Nepal, whey protein Nepal, protein powder Kathmandu, buy whey protein Nepal, sports nutrition Nepal, creatine Nepal, gym supplements Kathmandu, authentic supplements Nepal',
   locale: 'en_NP',
   currency: 'NPR',
   social: {

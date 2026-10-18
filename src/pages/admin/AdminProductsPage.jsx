@@ -80,6 +80,7 @@ export const AdminProductsPage = () => {
               <tr>
                 <th className="p-4">Product</th>
                 <th className="p-4">SKU</th>
+                <th className="p-4">Brand</th>
                 <th className="p-4">Category</th>
                 <th className="p-4">Price (NPR)</th>
                 <th className="p-4">Stock</th>
@@ -90,11 +91,11 @@ export const AdminProductsPage = () => {
             <tbody className="divide-y divide-slate-800/80 text-slate-300">
               {loading ? (
                 <tr>
-                  <td colSpan="7" className="p-8 text-center text-slate-400">Loading catalog items...</td>
+                  <td colSpan="8" className="p-8 text-center text-slate-400">Loading catalog items...</td>
                 </tr>
               ) : products.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="p-8 text-center text-slate-400">No products found.</td>
+                  <td colSpan="8" className="p-8 text-center text-slate-400">No products found.</td>
                 </tr>
               ) : (
                 products.map((p) => {
@@ -115,6 +116,11 @@ export const AdminProductsPage = () => {
                         </div>
                       </td>
                       <td className="p-4 font-mono text-[11px] text-slate-400">{p.sku}</td>
+                      <td className="p-4">
+                        <span className="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] font-bold text-orange-400 border border-slate-700">
+                          {p.brand?.name || 'OSOAA'}
+                        </span>
+                      </td>
                       <td className="p-4 text-slate-200">{p.category?.name || '-'}</td>
                       <td className="p-4 font-bold text-white">{formatNpr(p.price)}</td>
                       <td className="p-4">

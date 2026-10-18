@@ -1,9 +1,11 @@
-# OSOAA Nepal - Production Robots.txt Fallback
+# Nepal Protein - Production Robots.txt Fallback
 # Dynamic sitemap & robots are also served by Express API at /sitemap.xml and /robots.txt
 
 User-agent: *
 Allow: /
 Allow: /shop
+Allow: /brands/
+Allow: /brand/
 Allow: /product/
 Allow: /blog/
 Allow: /about

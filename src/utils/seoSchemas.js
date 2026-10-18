@@ -8,7 +8,7 @@ export const buildOrganizationSchema = () => {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: siteConfig.name,
-    alternateName: 'OSOAA Nutrition & Wellness Nepal',
+    alternateName: 'Nepal Protein Sports Nutrition & Supplements',
     url: getCanonicalUrl('/'),
     logo: getCanonicalUrl('/favicon.svg'),
     description: siteConfig.defaultDescription,
@@ -49,7 +49,7 @@ export const buildWebSiteSchema = () => {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: siteConfig.name,
-    alternateName: 'OSOAA',
+    alternateName: 'Nepal Protein',
     url: siteUrl,
     potentialAction: {
       '@type': 'SearchAction',
@@ -90,7 +90,7 @@ export const buildProductSchema = (product, selectedVariant = null) => {
     mpn: product.sku || product._id,
     brand: {
       '@type': 'Brand',
-      name: 'OSOAA',
+      name: product.brand?.name || 'OSOAA',
     },
     offers: {
       '@type': 'Offer',
@@ -149,7 +149,7 @@ export const buildArticleSchema = (post) => {
     },
     author: {
       '@type': 'Person',
-      name: post.author?.name || 'OSOAA Nutrition Team',
+      name: post.author?.name || 'Nepal Protein Editorial Team',
       jobTitle: post.author?.role || 'Wellness & Fitness Editorial',
     },
     publisher: {
@@ -273,5 +273,20 @@ export const buildStoreSchema = () => {
         closes: '19:00',
       },
     ],
+  };
+};
+
+/**
+ * Build Schema.org Brand structured data for individual brand pages
+ */
+export const buildBrandSchema = (brand) => {
+  if (!brand) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Brand',
+    name: brand.name,
+    description: brand.description || '',
+    url: getCanonicalUrl(`/brands/${brand.slug}`),
+    logo: brand.logo?.url || undefined,
   };
 };

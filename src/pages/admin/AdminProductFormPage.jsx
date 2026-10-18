@@ -9,6 +9,7 @@ export const AdminProductFormPage = () => {
   const isEdit = Boolean(id);
 
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(isEdit);
   const [error, setError] = useState('');
@@ -17,6 +18,7 @@ export const AdminProductFormPage = () => {
   const [form, setForm] = useState({
     name: '',
     sku: '',
+    brand: '',
     category: '',
     subCategory: '',
     shortDescription: '',
@@ -43,8 +45,12 @@ export const AdminProductFormPage = () => {
   useEffect(() => {
     const fetchMetadata = async () => {
       try {
-        const catRes = await api.get('/categories');
+        const [catRes, brandRes] = await Promise.all([
+          api.get('/categories'),
+          api.get('/brands?includeInactive=true')
+        ]);
         setCategories(catRes.data.data || []);
+        setBrands(brandRes.data.data || []);
 
         if (isEdit) {
           const prodRes = await api.get(`/products/${id}`);
@@ -52,6 +58,7 @@ export const AdminProductFormPage = () => {
           setForm({
             name: p.name || '',
             sku: p.sku || '',
+            brand: p.brand?._id || p.brand || '',
             category: p.category?._id || p.category || '',
             subCategory: p.subCategory || '',
             shortDescription: p.shortDescription || '',
@@ -222,6 +229,27 @@ export const AdminProductFormPage = () => {
                 onChange={(e) => setForm({ ...form, sku: e.target.value.toUpperCase() })}
                 className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono focus:border-orange-500 focus:outline-none"
               />
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-white block mb-1">
+                Manufacturer Brand <span className="text-orange-400 font-normal">(Multi-Brand System)</span>
+              </label>
+              <select
+                value={form.brand}
+                onChange={(e) => setForm({ ...form, brand: e.target.value })}
+                className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:border-orange-500 focus:outline-none"
+              >
+                <option value="">Default Brand (OSOAA)</option>
+                {brands.map((b) => (
+                  <option key={b._id} value={b._id}>
+                    {b.name}{!b.isActive ? ' (Inactive)' : ''}
+                  </option>
+                ))}
+              </select>
+              <p className="text-[10px] text-slate-400 mt-1">
+                Assign to OSOAA or another authentic partner brand.
+              </p>
             </div>
 
             <div>
